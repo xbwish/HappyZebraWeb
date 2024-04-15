@@ -262,7 +262,6 @@ const serviceList = [
         title: coreShopLang("我的余额"),
         link: "/member/balance",
         icon: CoreshopIconBalance
-
     },
     {
         title: coreShopLang("我的发票"),

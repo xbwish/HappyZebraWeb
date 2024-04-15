@@ -36,7 +36,7 @@
                       ({{$t('送')}} {{ item.products.points }}{{ config.pointShowName }})
                     </span>
                   </p>
-                  <Stepper v-model="item.nums" theme="round" button-size="22" integer @minus="handleSubtract(item.productId!)"  @plus="handleAdd(item.productId!)"/>
+                  <Stepper v-model="item.nums" theme="round" button-size="22" integer min="0" @minus="handleSubtract(item.productId!)"  @plus="handleAdd(item.productId!)"/>
                 </div>
               </div>
             </div>
@@ -155,8 +155,13 @@ const handleSelect = (id: number) => {
 };
 
 // 商品数量减
-const   handleSubtract = (id: number) => {
-  cartStore.setReduceProductNumber(id, 1);
+const handleSubtract = async (id: number) => {
+  const current = cartState.cartList.find(item => item.productId === id)
+  await cartStore.setReduceProductNumber(id, 1);
+  
+  if ((current?.nums || 0) <= 0 && current?.id) {
+    cartStore.setDeleteCartItem(current.id || 0);
+  }
 };
 // 商品添加
 const handleAdd = (id: number) => {
@@ -185,7 +190,6 @@ const handleGoHome = () => {
 };
 
 const onBeforeClose = (event: { name: number; position: string }): Promise<boolean> => {
-  console.log(event)
   if (["cell", "outside"].includes(event.position)) {
     return Promise.resolve(true);
   }

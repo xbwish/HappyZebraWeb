@@ -21,7 +21,7 @@
               </NIcon>
             </nuxt-link>
           </li>
-          <li>
+          <!-- <li>
             <nuxt-link to="/member/balance/withdrawCash" >
               <div class="cs-display-flex">
                 <NIcon color="#292B2E" :size="20">
@@ -33,7 +33,7 @@
                 <CoreshopIconChevronRight28Regular />
               </NIcon>
             </nuxt-link>
-          </li>
+          </li> -->
           <li>
             <nuxt-link to="/member/balance/detail">
               <div class="cs-display-flex">

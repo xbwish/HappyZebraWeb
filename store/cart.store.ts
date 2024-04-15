@@ -68,7 +68,7 @@ export const useCartStore = defineStore('productCart', {
 
         async setReduceProductNumber(id: number, quantity: number) {
             const cartItem: ProductItem = this.cartList.find(x => x.productId === id)!;
-            const nums: number = Math.max(1, cartItem.nums! - Math.max(0, quantity));
+            const nums: number = Math.max(0, cartItem.nums! - Math.max(0, quantity));
             await cartService.cartSetCartProductNum({ id, nums });
 
             this.cartList = this.cartList.map(item => {

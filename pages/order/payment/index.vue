@@ -289,6 +289,25 @@ const balancepayToPay = async (data: { [key: string]: any }) => {
    }, 1000);
 };
 
+// 缘界支付
+const ecpayToPay = async (data: { [key: string]: any }) => {
+  const payResult: Result<any> = await queryPay(data);
+  if (!payResult.status) {
+    paymentButtonDisable = false;
+    showToast(payResult.msg);
+    return;
+  }
+  closeToast();
+  useMemberStore().setBalance();
+   showSuccessToast({message:payResult.msg,duration:2000});
+   setTimeout(() => {
+   closeToast();
+   return navigateTo(`/order/payment/result?id=${payResult.data.paymentId}&type=${PaymentTypeEnum.balancepay}`, {
+        replace: true,
+      });
+   }, 1000);
+};
+
 /** 微信支付 */
 const wechatpay = async (data: { [key: string]: any }) => {
   const queryPayResult: Result<any> = await queryPay(data);
@@ -443,6 +462,15 @@ const handlerPay = async () => {
       duration: 0,
     });
     balancepayToPay(data);
+    return;
+  }
+  // 缘界支付
+  if (PaymentTypeEnum.ecpay === paymentState.selectPayType) {
+    showLoadingToast({
+      message: coreShopLang("支付中"),
+      duration: 0,
+    });
+    ecpayToPay(data);
     return;
   }
   /** 微信支付 */

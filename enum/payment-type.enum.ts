@@ -8,4 +8,6 @@ export enum PaymentTypeEnum {
     offline = 3,
     /** 余额支付 */
     balancepay = 4,
+    /** 缘界支付 */
+    ecpay = 5,
 }

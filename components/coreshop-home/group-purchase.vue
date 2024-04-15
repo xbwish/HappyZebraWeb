@@ -1,25 +1,25 @@
 <template>
-    <div class="coreshop-padding-10 coreshop-margin-10 coreshop-bg-white coreshop-border-radius-trbl-18" v-if="props.coreshopData?.parameters?.list?.length">
-        <div class="coreshop-flex coreshop-align-center coreshop-flex-direction-row coreshop-justify-between coreshop-min-height-30">
-           
-            <div class="coreshop-font-16 coreshop-text-black coreshop-font-weight-bold" style="display: flex;align-items: center;"> <img src="@/public/images/hot-tuangou.png" style="margin-right: 4px;" width="18" height="18"/>{{props.coreshopData.parameters.title}}</div>
+    <div class="coreshop-padding-10 coreshop-bg-orange coreshop-margin-10 coreshop-border-radius-trbl-18" v-if="props.coreshopData?.parameters?.list?.length">
+        <div class="coreshop-flex coreshop-align-center coreshop-flex-direction-row coreshop-justify-between coreshop-min-height-25">
+            <div class="coreshop-font-16 coreshop-text-black coreshop-text-white coreshop-font-weight-bold" style="display: flex;align-items: center;"> <img src="@/public/images/hot-tuangou.png" style="margin-right: 4px;" width="18" height="18"/>{{props.coreshopData.parameters.title}}</div>
             <div class="coreshop-flex coreshop-align-center" @click="onGoGroupPurchase()"> 
-                <span>查看更多</span>
-                <CoreshopIconArrowDoubleRight class="arrow-right-double"></CoreshopIconArrowDoubleRight>
+                <span class='coreshop-font-10'>查看更多</span>
+                <CoreshopIconArrowDoubleRight class="arrow-right-double coreshop-text-white"></CoreshopIconArrowDoubleRight>
            </div>
         </div>
-        <div class="coreshop-divider">
+        <!-- <div class="coreshop-divider">
             <div class="complete"></div>
-        </div>
-        <div class="coreshop-flex-direction coreshop-margin-bottom-10 coreshop-text-black" v-for="(item, key) in props.coreshopData?.parameters?.list ||[]" :key="item.id">
-            <div class="coreshop-flex">
+        </div> -->
+        <div class="coreshop-text-black coreshop-margin-top-12 coreshop-flex" style='display: grid;column-gap: 10px;grid-template-columns: repeat(3, minmax(0, 1fr));'>
+            <div class="coreshop-padding-left-6 coreshop-padding-right-6 coreshop-flex coreshop-flex-direction-column coreshop-bg-white coreshop-border-radius-6 coreshop-padding-bottom-10" style="grid-column: span 1 / span 1;box-sizing: border-box;" v-for="(item, key) in props.coreshopData?.parameters?.list ||[]" :key="item.id">
                 <div>
-                    <NImage class="good-thumbnail" :width="96" :height="96" :src="item.goodThumbnail"   object-fit="cover" :preview-disabled="true"></NImage>
+                    <NImage class="good-thumbnail" width="100%" :src="item.goodThumbnail"  object-fit="cover" :preview-disabled="true"></NImage>
                 </div>
-                <div class="coreshop-flex coreshop-flex-direction coreshop-padding-left-10 coreshop-percent-100">
-                    <div class="coreshop-font-15 u-line-2 coreshop-text-black">{{ item.name }}</div>
-                    <div class="coreshop-font-11 coreshop-padding-top-5 coreshop-padding-bottom-3 u-line-2 coreshop-text-brown">{{ item.goodName }}</div>
-                    <div style="color: #D33123;" class="coreshop-flex coreshop-align-center coreshop-flex-direction-row coreshop-justify-start coreshop-min-height-30" v-if="(item.startStatus == 1) && item.timestamp">
+                <div class="coreshop-padding-left-5 coreshop-padding-right-5 coreshop-percent-100" style='box-sizing: border-box;'>
+                    <div class="coreshop-font-13 coreshop-text-bold u-line-2 coreshop-text-black">{{ item.name }}</div>
+                    <div class="coreshop-display-inline-block coreshop-padding-top-2 coreshop-padding-bottom-2 coreshop-padding-left-4 coreshop-padding-right-4 coreshop-font-8 tag coreshop-bg-black coreshop-border-radius-4">{{$t("限购")}}{{ item.maxNums }}{{$t("份")}}</div>
+                    <!-- <div class="coreshop-font-11 coreshop-padding-top-5 coreshop-padding-bottom-3 u-line-2 coreshop-text-brown">{{ item.goodName }}</div> -->
+                    <!-- <div style="color: #D33123;" class="coreshop-flex coreshop-align-center coreshop-flex-direction-row coreshop-justify-start coreshop-min-height-30" v-if="(item.startStatus == 1) && item.timestamp">
                         <div class="coreshop-font-12">{{$t("仅剩")}}：</div>
                         <NCountdown :duration="item.timestamp * 1000" :active="true" :render="renderCountdown"></NCountdown>
                     </div>
@@ -30,15 +30,15 @@
                     <div class="coreshop-flex coreshop-align-center coreshop-flex-direction-row coreshop-justify-start coreshop-min-height-30" v-if="(item.startStatus == 2) && item.timestamp">
                         <div class="coreshop-font-12">{{$t("已结束")}}：</div>
                         <NCountdown :duration="item.timestamp * 1000" :active="true" :render="renderCountdown"></NCountdown>
-                    </div>
-                    <div class="coreshop-flex coreshop-justify-between coreshop-flex-direction-row coreshop-align-center">
-                        <div class="coreshop-flex coreshop-align-center">
-                            <div class="coreshop-font-14 coreshop-text-red" style="font-weight: bold;">NT${{item.price}}</div>
-                            <div class="coreshop-font-xs coreshop-text-through coreshop-margin-left-5" style="font-size: 10px;color:#989FA9;">{{item.mktPrice}}元</div>
+                    </div> -->
+                    <div class="coreshop-flex coreshop-justify-between coreshop-flex-direction-column">
+                        <div class="coreshop-flex coreshop-align-center coreshop-margin-top-3 coreshop-margin-bottom-4">
+                            <div class="coreshop-font-12 coreshop-text-red">NT$<span class="coreshop-font-17 coreshop-text-bold">{{item.price}}</span></div>
+                            <div class="coreshop-font-10 coreshop-text-through coreshop-margin-left-5" style="color:#989FA9;">¥{{item.mktPrice}}</div>
                         </div>
-                        <div class="coreshop-groupPurchase-btn" v-if="item.startStatus == 1" @click="onGoGroupBuyingDetail(item.id)">{{$t("立即团")}}</div>
-                        <div class="coreshop-groupPurchase-btn" v-if="item.startStatus == 0">{{$t("即将开始")}}</div>
-                        <div class="coreshop-buy-btn-disabled" v-if="item.startStatus == 2">{{$t("已结束")}}</div>
+                        <div class="coreshop-groupPurchase-btn" style="width: 100%;" v-if="item.startStatus == 1" @click="onGoGroupBuyingDetail(item.id)">{{$t("立即下单")}}</div>
+                        <div class="coreshop-groupPurchase-btn" style="width: 100%;" v-if="item.startStatus == 0">{{$t("即将开始")}}</div>
+                        <div class="coreshop-buy-btn-disabled" style="width: 100%;" v-if="item.startStatus == 2">{{$t("已结束")}}</div>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { CountdownProps, NImage,NCountdown } from 'naive-ui';
 import { NavLinkTypeEnum } from '@/enum';
-  
+
 interface GroupPurchase{
     coreshopData:{
         parameters:{
@@ -70,11 +70,14 @@ interface GroupPurchase{
                 mktPrice:number;
                 id:number;
                 startStatus:number;
+                maxNums: number;
             }>
         }
     }
 }
 const props= withDefaults(defineProps<GroupPurchase>(),{})
+
+console.log(props, 'props')
 
 const onGoGroupPurchase=()=>{
     linkTypeNavigate(NavLinkTypeEnum.urlLink, '/pages/activity/groupBuying/list/list');

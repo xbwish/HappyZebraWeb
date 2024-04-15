@@ -19,7 +19,6 @@
 <script setup lang="ts">
 import { GoodConfig } from '@/model';
 const props = withDefaults(defineProps<{ coreshopData?: GoodConfig }>(), {});
-console.log(props.coreshopData)
 </script>
 
 <style scoped lang="scss">

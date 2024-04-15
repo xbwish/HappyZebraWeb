@@ -7,7 +7,7 @@
                     <span class="cs-m-r-5">{{ item.nickName }}</span>
                     <NRate readonly :default-value="item.score" size="small" />
                 </div>
-                <div class="cs-font-size-14" v-if="!item.sellerContent">
+                <div class="cs-font-size-14">
                     {{ item.contentBody }}
                 </div>
                 <div class="cs-font-size-12 cs-color-gray">{{ item.createTime }} <br> {{ item.addon || '' }}</div>
