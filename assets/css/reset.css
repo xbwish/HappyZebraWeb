@@ -1,0 +1,111 @@
+/*======== 全局 ========*/
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+p,
+blockquote,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 12px;
+    font-family: "Microsoft YaHei", "微软雅黑";
+    /* background-color: #f6f6f6; */
+    background: #EEF3F7;
+}
+
+fieldset,
+img {
+    border: 0;
+    vertical-align: middle;
+}
+
+ol,
+ul,
+li {
+    list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+}
+
+em {
+    font-style: normal;
+}
+
+button,
+select,
+textarea {
+    outline: none;
+}
+a{
+    color: #000;
+}
+/*禁用了文本的拖拉，尤其在谷歌下*/
+textarea {
+    resize: none;
+}
+
+/*======== Link ========*/
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #f60;
+    text-decoration: none;
+}
+input[type=number] {
+    -moz-appearance:textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+.clr:after {
+    content: "";
+    display: table;
+    clear: both
+}
+
+.clr {
+    *zoom: 1;
+}
+.no-more{
+    text-align: center;
+    padding: 0.3rem 0;
+    font-size: 0.35rem;
+}
+

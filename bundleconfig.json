@@ -1,0 +1,26 @@
+[
+  {
+    "outputFileName": "public/lib/fontawesome/css/all.min.css",
+    "inputFiles": [
+      "public/lib/fontawesome/css/all.css"
+    ]
+  },
+  {
+    "outputFileName": "public/lib/fontawesome/css/solid.min.css",
+    "inputFiles": [
+      "public/lib/fontawesome/css/solid.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/lib/fontawesome/css/all.min.css",
+    "inputFiles": [
+      "assets/lib/fontawesome/css/all.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/lib/fontawesome/css/solid.min.css",
+    "inputFiles": [
+      "assets/lib/fontawesome/css/solid.css"
+    ]
+  }
+]

@@ -1,0 +1,193 @@
+// 此文件为主题变量，这些变量目前只能通过uni.scss引入才有效，另外由于
+// uni.scss中引入的样式会同时混入到全局样式文件和单独每一个页面的样式中，造成微信程序包太大，
+// 故uni.scss只建议放scss变量名相关样式，其他的样式可以通过main.js或者App.vue引入
+
+//通用顶部状态栏加导航颜色
+$core-common-navbar-background-color: #e54d42;
+
+$core-main-color: #303133;
+$core-content-color: #606266;
+$core-tips-color: #909399;
+$core-light-color: #c0c4cc;
+$core-border-color: #e4e7ed;
+$core-bg-color: #f3f4f6;
+
+$core-type-primary: #2979ff;
+$core-type-primary-light: #ecf5ff;
+$core-type-primary-disabled: #a0cfff;
+$core-type-primary-dark: #2b85e4;
+
+$core-type-warning: #ff9900;
+$core-type-warning-disabled: #fcbd71;
+$core-type-warning-dark: #f29100;
+$core-type-warning-light: #fdf6ec;
+
+$core-type-success: #19be6b;
+$core-type-success-disabled: #71d5a1;
+$core-type-success-dark: #18b566;
+$core-type-success-light: #dbf1e1;
+
+$core-type-error: #fa3534;
+$core-type-error-disabled: #fab6b6;
+$core-type-error-dark: #dd6161;
+$core-type-error-light: #fef0f0;
+
+$core-type-info: #909399;
+$core-type-info-disabled: #c8c9cc;
+$core-type-info-dark: #82848a;
+$core-type-info-light: #f4f4f5;
+
+$core-form-item-height: 35px;
+$core-form-item-border-color: #dcdfe6;
+
+
+
+/* 颜色变量 */
+
+/* 行为相关颜色 */
+$uni-color-primary: #007aff;
+$uni-color-success: #4cd964;
+$uni-color-warning: #f0ad4e;
+$uni-color-error: #dd524d;
+
+/* 文字基本颜色 */
+$uni-text-color: #333; //基本色
+$uni-text-color-inverse: #fff; //反色
+$uni-text-color-grey: #999; //辅助灰色，如加载更多的提示信息
+$uni-text-color-placeholder: #808080;
+$uni-text-color-disable: #c0c0c0;
+
+/* 背景颜色 */
+$uni-bg-color: #ffffff;
+$uni-bg-color-grey: #f8f8f8;
+$uni-bg-color-hover: #f1f1f1; //点击状态颜色
+$uni-bg-color-mask: rgba(0, 0, 0, 0.4); //遮罩颜色
+
+/* 边框颜色 */
+$uni-border-color: #c8c7cc;
+
+/* 尺寸变量 */
+
+/* 文字尺寸 */
+$uni-font-size-sm: 24upx;
+$uni-font-size-base: 28upx;
+$uni-font-size-lg: 32upx;
+
+/* 图片尺寸 */
+$uni-img-size-sm: 40upx;
+$uni-img-size-base: 52upx;
+$uni-img-size-lg: 80upx;
+
+/* Border Radius */
+$uni-border-radius-sm: 4upx;
+$uni-border-radius-base: 6upx;
+$uni-border-radius-lg: 12upx;
+$uni-border-radius-circle: 50%;
+
+/* 水平间距 */
+$uni-spacing-row-sm: 10px;
+$uni-spacing-row-base: 20upx;
+$uni-spacing-row-lg: 30upx;
+
+/* 垂直间距 */
+$uni-spacing-col-sm: 8upx;
+$uni-spacing-col-base: 16upx;
+$uni-spacing-col-lg: 24upx;
+
+/* 透明度 */
+$uni-opacity-disabled: 0.3; // 组件禁用态的透明度
+
+/* 文章场景相关 */
+$uni-color-title: #2C405A; // 文章标题颜色
+$uni-font-size-title: 40upx;
+$uni-color-subtitle: #555555; // 二级标题颜色
+$uni-font-size-subtitle: 36upx;
+$uni-color-paragraph: #3F536E; // 文章段落颜色
+$uni-font-size-paragraph: 30upx;
+
+//自定义变量
+$theme-color: #28b8a1;
+$bg-grey: #f4f4f4;
+$bd-color: #f0f0f0;
+$color-light: #5e5e5e;
+$g2: #eeeeee;
+$g5: #9e9e9e;
+$fz12: 24upx;
+$fz16: 32upx;
+$fz18: 36upx;
+$fz20: 40upx;
+
+$u-type-primary: #2979ff;
+$u-type-primary-light: #ecf5ff;
+$u-type-primary-disabled: #a0cfff;
+$u-type-primary-dark: #2b85e4;
+
+$u-type-warning: #ff9900;
+$u-type-warning-disabled: #fcbd71;
+$u-type-warning-dark: #f29100;
+$u-type-warning-light: #fdf6ec;
+
+$u-type-success: #19be6b;
+$u-type-success-disabled: #71d5a1;
+$u-type-success-dark: #18b566;
+$u-type-success-light: #dbf1e1;
+
+$u-type-error: #fa3534;
+$u-type-error-disabled: #fab6b6;
+$u-type-error-dark: #dd6161;
+$u-type-error-light: #fef0f0;
+
+$u-type-info: #909399;
+$u-type-info-disabled: #c8c9cc;
+$u-type-info-dark: #82848a;
+$u-type-info-light: #f4f4f5;
+
+$u-form-item-height: 35px;
+$u-form-item-border-color: #dcdfe6;
+
+//项目静态资源请求地址，如果使用官方的静态文件地址可以直接替换为：https://files.coreshop.corecms.net
+//css中背景图片变量。js图片变量在constVarsHelper
+$apiFilesUrl: 'https://files.cdn.coreshop.cn';
+
+
+
+$u-main-color: #303133;
+$u-content-color: #606266;
+$u-tips-color: #909193;
+$u-light-color: #c0c4cc;
+$u-border-color: #dadbde;
+$u-bg-color: #f3f4f6;
+$u-disabled-color: #c8c9cc;
+
+$u-primary: #3c9cff;
+$u-primary-dark: #398ade;
+$u-primary-disabled: #9acafc;
+$u-primary-light: #ecf5ff;
+
+$u-warning: #f9ae3d;
+$u-warning-dark: #f1a532;
+$u-warning-disabled: #f9d39b;
+$u-warning-light: #fdf6ec;
+
+$u-success: #5ac725;
+$u-success-dark: #53c21d;
+$u-success-disabled: #a9e08f;
+$u-success-light: #f5fff0;
+
+$u-error: #f56c6c;
+$u-error-dark: #e45656;
+$u-error-disabled: #f7b2b2;
+$u-error-light: #fef0f0;
+
+$u-info: #909399;
+$u-info-dark: #767a82;
+$u-info-disabled: #c4c6c9;
+$u-info-light: #f4f4f5;
+
+// scss混入，为了少写几行#ifndef
+@mixin flex($direction: row) {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	flex-direction: $direction;
+}

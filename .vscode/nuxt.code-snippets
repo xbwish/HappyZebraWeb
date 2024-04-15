@@ -1,0 +1,17 @@
+{
+	"nuxt":{
+	  "prefix":"nuxt",
+	  "body":[
+		  "<template>",
+			  "  <div class=\"\"></div>",
+		  "</template>",
+		  "",
+		  "<script setup lang='ts'>",
+		  "import {} from 'vue'",
+		  "</script>",
+		  "",
+		  "<style scoped lang='scss'></style>",
+	  ],
+	  "description":"nuxt3 Components"
+	}
+  }

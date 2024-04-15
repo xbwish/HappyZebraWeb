@@ -1,0 +1,291 @@
+.layot-member{
+    padding-bottom: 2rem;
+}
+.personal-smg {
+    height: 160px;
+    overflow: hidden;
+    border-radius: 0 0 640px 640px/0 0 80px 80px;
+    // padding: 25px 14px 25px 24px;
+    background-color: #E74436;
+    color: #fff;
+    background-image: url(../../../public/images/meBg.png);
+    background-size: cover;
+    background-position: right center;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 25px 14px 0 24px;
+        div {
+            display: flex;
+        }
+
+        >div:nth-of-type(1) {
+            align-items: center;
+
+            p {
+                font-size: 14px;
+                margin-left: 10px;
+            }
+            .login{
+                font-size: 16px;
+                color: #fff;
+                line-height: 50px;
+                margin-left: 20px;
+            }
+        }
+
+        >div:nth-of-type(2) {
+            width: 78%;
+            // justify-content: space-around;
+            // flex-direction: column;
+            .name {
+                font-size: 0.4rem;
+            }
+            section {
+                display: flex;
+
+            }
+            .right-icon{}
+
+            .link {
+                font-size: 0.3rem;
+                color: #fff;
+            }
+        }
+        .header-info{
+            display: flex;
+            flex-direction:row ;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .info-text{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+}
+
+.personal-count {
+    margin: 0.35rem 0;
+    padding: 0 0.35rem;
+
+    ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0;
+
+        li {
+            display: flex;
+            .link {
+                margin: auto;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                color: #fff;
+
+                div:nth-of-type(2) {
+                    margin-left: 0.2rem;
+                }
+
+                p {
+                    text-align: center;
+                    font-size: 0.35rem;
+                    margin-bottom: 0;
+                }
+
+                p:nth-of-type(1) {
+                    font-size: 0.4rem;
+                }
+
+            }
+        }
+    }
+}
+.my-huiyuan{
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    margin: 20px 10px 0 10px;
+    // padding: 0.3rem 0;
+    padding: 12px 12px 25px 12px;
+    margin-top: 20px;
+    height: 54px;
+    border-radius: 8px;
+    background: linear-gradient(89.97deg, #45403A 0.03%, #3A312C 99.99%) !important;
+    .line{
+        display: block;
+        width: 0.5px;
+        height: 10px;
+        background: #D9D9D9;
+        margin: 0 12px;
+    }
+    .link{
+        font-size: 14px;
+        color: #FFEBD0;
+        flex: 1;
+
+
+    }
+    .see-detail{
+        width:  78px;
+        border-radius: 20px;    
+        color: #292B2E;
+        font-size: 12px;
+        height: 23px;
+        margin-left: auto;
+        background: linear-gradient(180deg, #F8E4CC 0%, #FDDABC 100%);
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       >span{
+        margin-right: 3px;
+       }
+    }
+}
+
+.personal-order {
+    border-radius: 5px;
+    background: #fff;
+    // margin: -0.7rem 10px 0 10px;
+    margin: 20px 10px 0 10px;
+    padding: 0.3rem 0;
+
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 0.5rem 0.2rem;
+        font-size: 0.37rem;
+        color: #000;
+        font-weight: bold;
+    }
+
+    ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+
+        li {
+            text-align: center;
+            width: 20%;
+            cursor: pointer;
+            color: #292B2E;
+            font-family: "PingFang HK";
+            font-size: 0.3rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+
+            p {
+                text-align: center;
+                // font-size: 0.35rem;
+            }
+
+            p:nth-of-type(1) {
+                // font-size: 0.4rem;
+            }
+            p:nth-of-type(2) {
+                color: #aaaaaa;
+            }
+            
+        }
+    }
+}
+
+.service-box {
+    border-radius: 5px;
+    background: #fff;
+    margin: 0.4rem 10px;
+    padding: 0.3rem 0;
+
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 0.4rem 0.2rem;
+        font-size: 0.37rem;
+
+        color: #292B2E;
+        font-family: "PingFang HK";
+        font-size: 0.4rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    ul {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        li {
+            // width: 25%;
+            width: 20%;
+            padding: 0.3rem 0;
+
+            a {
+                p {
+                    font-size: 0.275rem;
+                    padding-top: 0.25rem;
+                    color: #606266;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+
+.invite-friends{
+    border-radius: 5px;
+    background: #fff;
+    margin: 0.4rem 10px;
+    padding: 0.3rem 0;
+
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 0.5rem 0.2rem;
+        font-size: 0.37rem;
+        color: #292B2E;
+        font-weight: bold;
+    }
+    ul{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 0.5rem;
+        li{
+            width: 49%;
+            a{
+                display: flex;
+                align-items: center;
+                // border: 1px solid #eee;
+                padding: 0.2rem;
+                border-radius: 10px;
+                div:nth-of-type(1){
+                    img{
+                        display: block;
+                        width: 1.2rem;
+                    }
+                }
+                div:nth-of-type(2) {
+                    margin-left: 0.25rem;
+                    p{
+                        font-size: 0.35rem;
+                        color: #292B2E;
+                    }
+                    p:nth-of-type(2) {
+                        font-size: 0.3rem;
+                        color: #989FA9;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,82 @@
+.layout-seach {
+    position: relative;
+    z-index: 999;
+}
+
+.price-brand {
+    border-top: 1px solid #eee;
+
+    .price-box {
+        padding: 0.3rem 0.5rem;
+
+        .price {
+            display: flex;
+            align-items: center;
+            margin-top: 12px;
+            :deep(.van-field){
+                background-color: #F6F8FB;
+                // height: 36px;
+                padding: 4px 10px !important;
+            }
+            .line {
+                margin: 0 0.6rem;
+                color: #D0D0D0;
+            }
+        }
+    }
+
+    .brand-box {
+        padding: 0.2rem 0.5rem;
+
+        .title {
+            padding-bottom: 0.3rem;
+            font-size: 0.35rem;
+        }
+
+        .brand {
+            ul {
+                li {
+                    display: inline-block;
+                    font-size: 0.3rem;
+                    background-color: #EFF0F1;
+                    padding: 0.15rem 0.3rem;
+                    margin-right: 0.2rem;
+                    margin-bottom: 0.2rem;
+                    border-radius: 50px;
+                }
+
+                li.active {
+                    background: #D33123;
+                    color: #fff;
+
+                }
+            }
+        }
+    }
+
+    .btn-box {
+        display: flex;
+        padding: 0 20px 20px 20px;
+
+
+        div {
+            flex: 1;
+            text-align: center;
+            padding: 0.2rem;
+            font-size: 0.35rem;
+            border-radius: 50px;
+        }
+
+        div:nth-of-type(1) {
+            border: 1px solid #ebedf0;
+            margin-right: 0.1rem;
+        }
+
+        div:nth-of-type(2) {
+            margin-left: 0.1rem;
+            border: 1px solid #D33123;
+            background-color: #D33123;
+            color: #fff;
+        }
+    }
+}

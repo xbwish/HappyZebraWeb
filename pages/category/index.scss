@@ -1,0 +1,90 @@
+.search-contain {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.products-box {
+    margin-top: 60px;
+}
+
+.products-list {
+    width: 9.5rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+
+    ul {
+        display: flex;
+        flex-flow: column wrap;
+        flex-direction: inherit;
+        justify-content: space-between;
+
+        li {
+            height: max-content;
+            padding: 0.25rem;
+            margin-bottom: 0.2rem;
+            width: calc(100%/2 - 0.6rem);
+            background: #FFFFFF;
+            box-shadow: 10px 24px 54px rgba(15, 13, 35, 0.04);
+            border-radius: 8px;
+
+            a {
+                display: block;
+
+                >div:nth-of-type(1) {
+                    img {
+                        width: 100%;
+                        display: block;
+                        border-radius: 5px;
+                    }
+                }
+
+                >div:nth-of-type(2) {
+                    .title {
+                        margin-top: 0.2rem;
+                        font-size: 0.35rem;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        color: #000;
+                        text-align: inherit;
+
+                        img {
+                            height: 0.37rem;
+                            margin-right: 0.05rem;
+                        }
+                    }
+
+                    .price {
+                        font-size: 0.4rem;
+
+                        span {
+                            font-size: 0.3rem;
+                            text-decoration: line-through;
+                        }
+                    }
+                }
+
+                .point-box {
+                    div {
+                        display: flex;
+                        align-items: center;
+                        font-size: 0.27rem;
+                    }
+
+                    div:nth-of-type(1) {
+                        padding-top: 0.2rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.no-data {
+    width: 80%;
+    margin: 100px auto;
+}

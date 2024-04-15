@@ -1,0 +1,2543 @@
+﻿/*
+    text-decoration 属性规定添加到文本的修饰，下划线、上划线、删除线等。
+    none	默认。定义标准的文本。
+    underline	定义文本下的一条线。
+    overline	定义文本上的一条线。
+    line-through	定义穿过文本下的一条线。
+    blink	定义闪烁的文本。
+    inherit	规定应该从父元素继承 text-decoration 属性的值。
+*/
+.cs-text-decoration-none {
+    text-decoration: none;
+}
+
+.cs-text-decoration-underline {
+    text-decoration: underline;
+}
+
+.cs-text-decoration-overline {
+    text-decoration: overline;
+}
+
+.cs-text-decoration-line-through {
+    text-decoration: line-through;
+}
+
+.cs-text-decoration-blink {
+    text-decoration: blink;
+}
+
+.cs-text-decoration-inherit {
+    text-decoration: inherit;
+}
+
+/*
+    border 是边框属性的简写属性。
+    CSS border 属性用于指定元素边框的样式、宽度和颜色。
+    可以设置的属性分别（按顺序）：border-width, border-style 和 border-color。
+    也可以只设置一个值，例如 border：＃FF0000; 是正确的，其他值会设置成对应属性的初始值。
+ */
+.cs-border-solid,
+.cs-border-solid-top,
+.cs-border-solid-right,
+.cs-border-solid-bottom,
+.cs-border-solid-left {
+    position: relative;
+}
+
+.cs-border-solid::after,
+.cs-border-solid-top::after,
+.cs-border-solid-right::after,
+.cs-border-solid-bottom::after,
+.cs-border-solid-left::after {
+    content: " ";
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: inherit;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.cs-border-solid::after {
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.cs-border-solid-top::after {
+    border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.cs-border-solid-right::after {
+    border-right: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.cs-border-solid-bottom::after {
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.cs-border-solid-left::after {
+    border-left: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.cs-border-none {
+    border: 0 !important;
+}
+
+/*
+    float属性指定一个盒子（元素）是否应该浮动。
+    left	元素向左浮动。
+    right	元素向右浮动。
+    none	默认值。元素不浮动，并会显示在其在文本中出现的位置。
+    inherit	规定应该从父元素继承 float 属性的值。
+*/
+.cs-float-left {
+    float: left;
+}
+
+.cs-float-right {
+    float: right;
+}
+
+.cs-float-none {
+    float: none;
+}
+
+.cs-float-inherit {
+    float: inherit;
+}
+
+/* -- flex弹性布局 -- */
+
+/*
+    display 属性规定元素应该生成的框的类型。
+    none	此元素不会被显示。
+    block	此元素将显示为块级元素，此元素前后会带有换行符。
+    inline	默认。此元素会被显示为内联元素，元素前后没有换行符。
+*/
+.cs-display-inline-flex {
+    display: inline-flex;
+}
+
+.cs-display-flex {
+    display: flex;
+}
+
+.cs-display-block {
+    display: block;
+}
+
+.cs-display-block-important {
+    display: block !important;
+}
+
+.cs-display-hide {
+    display: none;
+}
+
+.cs-display-inline {
+    display: inline;
+}
+
+.cs-display-inline-block {
+    display: inline-block;
+}
+
+/*
+    flex-direction属性决定主轴的方向（即项目的排列方向）；
+    row（默认值）： 主轴为水平方向，起点在左端；
+    row-reverse： 主轴在水平方向，起点在右端 ；
+    column：主轴为垂直方向，起点在上沿；
+    column-reverse：主轴为垂直方向，起点在下沿；
+*/
+.cs-flex-direction-row {
+    flex-direction: row;
+}
+
+.cs-flex-direction-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.cs-flex-direction-column {
+    flex-direction: column;
+}
+
+.cs-flex-direction-column-reverse {
+    flex-direction: column-reverse;
+}
+
+/*
+    属性决定主轴的方向（即项目的排列方向）
+    nowrap（默认）：不换行。当容器宽度不够时，每个项目会被挤压宽度；
+    wrap： 换行，并且第一行在容器最上方；
+    wrap-reverse： 换行，并且第一行在容器最下方。
+    注：（flex-flow 是flex-direction和flex-wrap的缩写形式，默认值为：flex-flow: row wrap;）
+*/
+.cs-flex-nowrap {
+    flex-wrap: nowrap;
+}
+
+.cs-flex-wrap {
+    flex-wrap: wrap;
+}
+
+.cs-flex-wrap-reverse {
+    flex-wrap: wrap-reverse;
+}
+
+/*
+    justify-content属性定义了项目在主轴上的对齐方式；
+    flex-start（默认值）：左对齐
+    flex-end：右对齐
+    center： 居中
+    space-between：两端对齐，项目之间的间隔都相等。
+    space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。
+*/
+.cs-justify-content-flex-start {
+    justify-content: flex-start;
+}
+
+.cs-justify-content-flex-end {
+    justify-content: flex-end;
+}
+
+.cs-justify-content-center {
+    justify-content: center;
+}
+
+.cs-justify-content-end {
+    justify-content: end
+}
+
+.cs-justify-content-space-between {
+    justify-content: space-between;
+}
+
+.cs-justify-content-space-around {
+    justify-content: space-around;
+}
+
+.cs-justify-content-space-evenly {
+    justify-content: space-evenly;
+}
+
+/*
+    align-items属性定义项目在交叉轴上如何对齐；
+    flex-start：交叉轴的起点对齐。
+    flex-end：交叉轴的终点对齐。
+    center：交叉轴的中点对齐。
+    baseline: 项目的第一行文字的基线对齐。(文字的行高、字体大小会影响每行的基线)
+    stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。
+*/
+.cs-align-items-start {
+    align-items: flex-start;
+}
+
+.cs-align-items-end {
+    align-items: flex-end;
+}
+
+.cs-align-items-center {
+    align-items: center;
+}
+
+.cs-align-items-baseline {
+    align-items: baseline;
+}
+
+.cs-align-items-stretch {
+    align-items: stretch;
+}
+
+/*
+    align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
+    flex-start：与交叉轴的起点对齐。
+    flex-end：与交叉轴的终点对齐。
+    center：与交叉轴的中点对齐。
+    space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。
+    space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
+    stretch（默认值）：轴线占满整个交叉轴。
+*/
+.cs-align-content-flex-start {
+    align-content: flex-start;
+}
+
+.cs-align-content-flex-end {
+    align-content: flex-end;
+}
+
+.cs-align-content-center {
+    align-content: center;
+}
+
+.cs-align-content-space-between {
+    align-content: space-between;
+}
+
+.cs-align-content-space-around {
+    align-content: space-around;
+}
+
+.cs-align-content-stretch {
+    align-content: stretch;
+}
+
+/*
+    order属性定义项目的排列顺序。
+    数值越小，排列越靠前，默认为0。
+*/
+.cs-order-0 {
+    order: 0;
+}
+
+.cs-order-1 {
+    order: 1;
+}
+
+.cs-order-2 {
+    order: 2;
+}
+
+.cs-order-3 {
+    order: 3;
+}
+
+.cs-order-4 {
+    order: 4;
+}
+
+.cs-order-5 {
+    order: 5;
+}
+
+.cs-order-6 {
+    order: 6;
+}
+
+.cs-order-7 {
+    order: 7;
+}
+
+.cs-order-8 {
+    order: 8;
+}
+
+.cs-order-9 {
+    order: 9;
+}
+
+/*
+    flex-grow属性定义项目的放大比例，
+    默认为0，即如果存在剩余空间，也不放大。
+*/
+.cs-flex-grow-0 {
+    flex-grow: 0;
+}
+
+.cs-flex-grow-1 {
+    flex-grow: 1;
+}
+
+.cs-flex-grow-2 {
+    flex-grow: 2;
+}
+
+.cs-flex-grow-3 {
+    flex-grow: 3;
+}
+
+.cs-flex-grow-4 {
+    flex-grow: 4;
+}
+
+.cs-flex-grow-5 {
+    flex-grow: 5;
+}
+
+.cs-flex-grow-6 {
+    flex-grow: 6;
+}
+
+.cs-flex-grow-7 {
+    flex-grow: 7;
+}
+
+.cs-flex-grow-8 {
+    flex-grow: 8;
+}
+
+.cs-flex-grow-9 {
+    flex-grow: 9;
+}
+
+/*
+    flex-shrink属性定义了项目的缩小比例，
+    默认为1，即如果空间不足，该项目将缩小。
+*/
+.cs-flex-shrink-0 {
+    flex-shrink: 0;
+}
+
+.cs-flex-shrink-1 {
+    flex-shrink: 1;
+}
+
+.cs-flex-shrink-2 {
+    flex-shrink: 2;
+}
+
+.cs-flex-shrink-3 {
+    flex-shrink: 3;
+}
+
+.cs-flex-shrink-4 {
+    flex-shrink: 4;
+}
+
+.cs-flex-shrink-5 {
+    flex-shrink: 5;
+}
+
+.cs-flex-shrink-6 {
+    flex-shrink: 6;
+}
+
+.cs-flex-shrink-7 {
+    flex-shrink: 7;
+}
+
+.cs-flex-shrink-8 {
+    flex-shrink: 8;
+}
+
+.cs-flex-shrink-9 {
+    flex-shrink: 9;
+}
+
+/*
+    flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。
+    浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。
+    它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。
+*/
+.cs-flex-basis-auto {
+    flex-basis: auto;
+}
+
+.cs-flex-basis-0 {
+    flex-basis: 0;
+}
+
+.cs-flex-basis-1 {
+    flex-basis: 10%;
+}
+
+.cs-flex-basis-2 {
+    flex-basis: 20%;
+}
+
+.cs-flex-basis-3 {
+    flex-basis: 30%;
+}
+
+.cs-flex-basis-4 {
+    flex-basis: 40%;
+}
+
+.cs-flex-basis-5 {
+    flex-basis: 50%;
+}
+
+.cs-flex-basis-6 {
+    flex-basis: 60%;
+}
+
+.cs-flex-basis-7 {
+    flex-basis: 70%;
+}
+
+.cs-flex-basis-8 {
+    flex-basis: 80%;
+}
+
+.cs-flex-basis-9 {
+    flex-basis: 90%;
+}
+
+/*
+    flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。
+*/
+.cs-flex-sub {
+    flex: 1;
+}
+
+.cs-flex-1 {
+    flex: 1;
+}
+
+
+.cs-flex-twice {
+    flex: 2;
+}
+
+.cs-flex-treble {
+    flex: 3;
+}
+
+/*
+    align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。
+    默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
+*/
+.cs-align-self-auto {
+    align-self: auto;
+}
+
+.cs-align-self-flex-start {
+    align-self: flex-start;
+}
+
+.cs-align-self-center {
+    align-self: center;
+}
+
+.cs-align-self-flex-end {
+    align-self: flex-end;
+}
+
+.cs-align-self-baseline {
+    align-self: baseline;
+}
+
+.cs-align-self-stretch {
+    align-self: stretch;
+}
+
+/*
+    vertical-align 属性设置一个元素的垂直对齐方式。
+    该属性定义行内元素的基线相对于该元素所在行的基线的垂直对齐。
+    允许指定负长度值和百分比值。这会使元素降低而不是升高。在表单元格中，这个属性会设置单元格框中的单元格内容的对齐方式。
+    baseline	默认。元素放置在父元素的基线上。
+    sub	垂直对齐文本的下标。
+    super	垂直对齐文本的上标
+    top	把元素的顶端与行中最高元素的顶端对齐
+    text-top	把元素的顶端与父元素字体的顶端对齐
+    middle	把此元素放置在父元素的中部。
+    bottom	使元素及其后代元素的底部与整行的底部对齐。
+    text-bottom	把元素的底端与父元素字体的底端对齐。
+    length	将元素升高或降低指定的高度，可以是负数。
+    %	使用 "line-height" 属性的百分比值来排列此元素。允许使用负值。
+    inherit	规定应该从父元素继承 vertical-align 属性的值。
+ */
+.cs-vertical-align-baseline {
+    vertical-align: baseline;
+}
+
+.cs-vertical-align-sub {
+    vertical-align: sub;
+}
+
+.cs-vertical-align-super {
+    vertical-align: super;
+}
+
+.cs-vertical-align-top {
+    vertical-align: top;
+}
+
+.cs-vertical-align-text-top {
+    vertical-align: text-top;
+}
+
+.cs-vertical-align-middle {
+    vertical-align: middle;
+}
+
+.cs-vertical-align-bottom {
+    vertical-align: bottom;
+}
+
+.cs-vertical-align-text-bottom {
+    vertical-align: text-bottom;
+}
+
+.cs-vertical-align-sub {
+    vertical-align: sub;
+}
+
+.cs-vertical-align-inherit {
+    vertical-align: inherit;
+}
+
+/*
+    background-color属性设置一个元素的背景颜色。
+*/
+.cs-background-color-red {
+    background-color: #e84f5d;
+}
+
+.cs-background-color-orange {
+    background-color: #f37b1d;
+}
+
+.cs-background-color-yellow {
+    background-color: #fbbd08;
+}
+
+.cs-background-color-olive {
+    background-color: #8dc63f;
+}
+
+.cs-background-color-green {
+    background-color: #39b54a;
+}
+
+.cs-background-color-cyan {
+    background-color: #1cbbb4;
+}
+
+.cs-background-color-blue {
+    background-color: #0081ff;
+}
+
+.cs-background-color-purple {
+    background-color: #6739b6;
+}
+
+.cs-background-color-mauve {
+    background-color: #9c26b0;
+}
+
+.cs-background-color-pink {
+    background-color: #e03997;
+}
+
+.cs-background-color-brown {
+    background-color: #a5673f;
+}
+
+.cs-background-color-grey {
+    background-color: #8799a3;
+}
+
+.cs-background-color-gray {
+    background-color: #f0f0f0;
+}
+
+.cs-background-color-black {
+    background-color: #333333;
+}
+
+.cs-background-color-white {
+    background-color: #ffffff;
+}
+
+
+.cs-border-solid-red {
+    border: 1px solid #e84f5d !important;
+}
+
+.cs-border-solid-gray {
+    border: 1px solid #dcdcdc !important;
+}
+
+/*
+    Color属性指定文本的颜色。
+*/
+.cs-color-red {
+    // color: #f56c6c;
+    color: #D33123;
+}
+
+.cs-color-green {
+    color: #19be6b;
+}
+
+.cs-color-orange {
+    color: #f37b1d;
+}
+
+.cs-color-yellow {
+    color: #fbbd08;
+}
+
+.cs-color-olive {
+    color: #8dc63f;
+}
+
+.cs-color-green {
+    color: #39b54a;
+}
+
+.cs-color-cyan {
+    color: #1cbbb4;
+}
+
+.cs-color-blue {
+    color: #0081ff;
+}
+
+.cs-color-purple {
+    color: #6739b6;
+}
+
+.cs-color-mauve {
+    color: #9c26b0;
+}
+
+.cs-color-pink {
+    color: #e03997;
+}
+
+.cs-color-brown {
+    color: #a5673f;
+}
+
+.cs-color-grey {
+    color: #8799a3;
+}
+
+.cs-color-gray {
+    color: #aaaaaa;
+}
+
+.cs-color-black {
+    color: #333333;
+}
+
+.cs-color-white {
+    color: #ffffff;
+}
+
+/*
+    position属性指定一个元素（静态的，相对的，绝对或固定）的定位方法的类型。
+    absolute：生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。
+    fixed：生成固定定位的元素，相对于浏览器窗口进行定位。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。
+    relative：生成相对定位的元素，相对于其正常位置进行定位。因此，"left:20" 会向元素的 LEFT 位置添加 20 像素。
+    static：默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 z-index 声明）。
+    sticky：粘性定位，该定位基于用户滚动的位置。它的行为就像 position:relative; 而当页面滚动超出目标区域时，它的表现就像 position:fixed;，它会固定在目标位置。
+    注意: Internet Explorer, Edge 15 及更早 IE 版本不支持 sticky 定位。 Safari 需要使用 -webkit- prefix (查看以下实例)。
+    inherit	规定应该从父元素继承 position 属性的值。
+    initial	设置该属性为默认值，详情查看 CSS initial 关键字。
+*/
+.cs-position-absolute {
+    position: absolute;
+}
+
+.cs-position-relative {
+    position: relative;
+}
+
+.cs-position-fixed {
+    position: fixed;
+}
+
+.cs-position-static {
+    position: static;
+}
+
+.cs-position-sticky {
+    position: sticky;
+}
+
+.cs-position-inherit {
+    position: inherit;
+}
+
+.cs-position-initial {
+    position: initial;
+}
+
+/*
+    font-weight 属性设置文本的粗细
+    normal	默认值。定义标准的字符。
+    bold	定义粗体字符。
+    bolder	定义更粗的字符。
+    lighter	定义更细的字符。
+*/
+.cs-font-weight-normal {
+    font-weight: normal;
+}
+
+.cs-font-weight-bold {
+    font-weight: bold;
+}
+
+.cs-font-weight-bolder {
+    font-weight: bolder;
+}
+
+.cs-font-weight-lighter {
+    font-weight: lighter;
+}
+
+.cs-font-weight-inherit {
+    font-weight: inherit;
+}
+
+.cs-font-weight-100 {
+    font-weight: 100;
+}
+
+.cs-font-weight-200 {
+    font-weight: 200;
+}
+
+.cs-font-weight-300 {
+    font-weight: 300;
+}
+
+.cs-font-weight-400 {
+    font-weight: 400;
+}
+
+.cs-font-weight-500 {
+    font-weight: 500;
+}
+
+.cs-font-weight-600 {
+    font-weight: 600;
+}
+
+.cs-font-weight-700 {
+    font-weight: 700;
+}
+
+.cs-font-weight-800 {
+    font-weight: 800;
+}
+
+.cs-font-weight-900 {
+    font-weight: 900;
+}
+
+/*
+    text-align属性指定元素文本的水平对齐方式。
+    left	把文本排列到左边。默认值：由浏览器决定。
+    right	把文本排列到右边。
+    center	把文本排列到中间。
+    justify	实现两端对齐文本效果。
+    inherit	规定应该从父元素继承 text-align 属性的值。
+*/
+.cs-text-align-left {
+    text-align: left;
+}
+
+.cs-text-align-center {
+    text-align: center;
+}
+
+.cs-text-align-right {
+    text-align: right;
+}
+
+.cs-text-align-justify {
+    text-align: justify;
+}
+
+.cs-text-align-inherit {
+    text-align: inherit;
+}
+
+/*
+    width: fit-content  根据内容自适应宽度  可以结合margin-auto 来实现居中
+    with: min-content 使用子元素中宽度最小的。（无论子元素是inline,还是 block，都会使用最小的宽度）
+    width:max-content 使用子元素中最大的开你的。无论是inline还是block
+*/
+.cs-width-fit-content {
+    width: fit-content;
+}
+
+.cs-width-min-content {
+    width: min-content;
+}
+
+.cs-width-max-content {
+    width: max-content;
+}
+
+.cs-word-wrap-break-word {
+    word-wrap: break-word;
+}
+
+/*
+    字体高度
+*/
+.cs-line-height-initial {
+    line-height: initial;
+}
+
+/*
+    人民币符号
+*/
+.cs-text-price::before {
+    content: "NT$";
+    font-size: 80%;
+    margin-right: 2px;
+}
+
+.cs-cursor-pointer {
+    cursor: pointer;
+}
+
+.cs-foverflow-hidden {
+    overflow: hidden;
+}
+
+.cs-margin-auto {
+    margin: auto;
+}
+
+.cs-margin-auto-0 {
+    margin: auto 0;
+}
+
+// 阴影
+.cs-box-shadow-gray {
+    background: #FFFFFF;
+    box-shadow: 10px 24px 54px rgba(15, 13, 35, 0.04);
+    border-radius: 8px;
+}
+
+.cs {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cs-word-break-keep-all {
+    word-break: keep-all;
+}
+
+.cs-text-align-last-justify {
+    text-align-last: justify;
+}
+
+.cs-object-fit-cover {
+    object-fit: cover;
+}
+
+.cs-object-fit-contain {
+    object-fit: contain;
+}
+
+// 定义在多行省略...
+@for $i from 1 through 5 {
+    .cs-o-e-v-#{$i} {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: $i;
+        -webkit-box-orient: vertical;
+    }
+}
+
+
+// 定义宽度百分比等分%
+@for $i from 1 through 100 {
+    .cs-percent-w-#{$i} {
+        width: ($i)+#{"%"} !important;
+    }
+
+    .cs-percent-h-#{$i} {
+        height: ($i)+#{"%"};
+    }
+
+    .cs-percent-border-radius-#{$i} {
+        border-radius: ($i)+#{"%"};
+    }
+}
+
+// 定义宽度px
+@for $i from 0 through 1200 {
+    .cs-w-#{$i} {
+        width: $i+px;
+    }
+
+    .cs-h-#{$i} {
+        height: $i+px;
+    }
+}
+
+// 定义最小宽高(px)单位
+@for $i from 0 through 200 {
+    .cs-min-width-#{$i} {
+        min-width: $i+px;
+    }
+
+    .cs-max-width-#{$i} {
+        max-width: $i + px;
+    }
+
+    .cs-min-height-#{$i} {
+        min-height: $i + px;
+    }
+
+    .cs-max-height-#{$i} {
+        max-height: $i + px;
+    }
+}
+
+// 定义flex等分
+@for $i from 0 through 12 {
+    .cs-flex-#{$i} {
+        flex: $i;
+    }
+}
+
+// 定义字体(px)单位
+
+.cs-font-size-12 {
+    font-size: 0.3rem;
+}
+
+.cs-font-size-14 {
+    font-size: 0.35rem;
+}
+
+.cs-font-size-16 {
+    font-size: 0.4rem;
+}
+
+.cs-line-height-no-px-1 {
+    line-height: 1 !important;
+}
+
+// 定义圆角(px)单位
+@for $i from 0 through 40 {
+    .cs-border-radius-#{$i} {
+        border-radius: $i + px;
+    }
+}
+
+// 定义内外边距，历遍1-80
+@for $i from 0 through 120 {
+
+    // 只要双数和能被5除尽的数
+    @if $i {
+
+        // 得出：coreshop-margin-30或者cs-m-30
+        .cs-margin-#{$i},
+        .cs-m-#{$i} {
+            margin: $i + px !important;
+        }
+
+        // 得出：coreshop-padding-15或者cs-p-30
+        .cs-padding-#{$i},
+        .cs-p-#{$i} {
+            padding: $i + px !important;
+        }
+
+        @each $short,
+        $long in l left,
+        t top,
+        r right,
+        b bottom {
+
+            // 缩写版，结果如： cs-m-l-30
+            // 定义外边距
+            .cs-m-#{$short}-#{$i} {
+                margin-#{$long}: $i + px !important;
+            }
+
+            .cs-m-#{$short}-#{$i}- {
+                margin-#{$long}: - $i + px !important;
+            }
+
+            // 定义内边距
+            .cs-p-#{$short}-#{$i} {
+                padding-#{$long}: $i + px !important;
+            }
+
+            // 完整版，结果如：coreshop-margin-left-30
+            // 定义外边距
+            .cs-margin-#{$long}-#{$i} {
+                margin-#{$long}: $i + px !important;
+            }
+
+            // 定义内边距
+            .cs-padding-#{$long}-#{$i} {
+                padding-#{$long}: $i + px !important;
+            }
+        }
+    }
+}
+
+//
+.bg-page,
+.coreshop-bg-main {
+    background: #f7f7f7;
+}
+
+.coreshop-float-left {
+    float: left;
+}
+
+.coreshop-float-right {
+    float: right;
+}
+
+/* -- 实线 -- */
+.coreshop-solid,
+.coreshop-solid-top,
+.coreshop-solid-right,
+.coreshop-solid-bottom,
+.coreshop-solid-left {
+    position: relative;
+}
+
+.coreshop-solid::after,
+.coreshop-solid-top::after,
+.coreshop-solid-right::after,
+.coreshop-solid-bottom::after,
+.coreshop-solid-left::after {
+    content: " ";
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: inherit;
+    transform: scale(0.5);
+    transform-origin: 0 0;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.coreshop-solid::after {
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.coreshop-solid-top::after {
+    border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.coreshop-solid-right::after {
+    border-right: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.coreshop-solid-bottom::after {
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.coreshop-solid-left::after {
+    border-left: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+/* flex弹性布局 */
+
+.coreshop-display-block {
+    display: block !important;
+}
+
+.coreshop-display-flex {
+    display: flex;
+}
+
+.coreshop-display-inline-block {
+    display: inline-block;
+}
+
+.coreshop-flex {
+    display: flex;
+}
+
+.coreshop-flex-sub {
+    flex: 1;
+}
+
+.coreshop-flex-twice {
+    flex: 2;
+}
+
+.coreshop-flex-treble {
+    flex: 3;
+}
+
+.coreshop-flex-direction {
+    flex-direction: column;
+}
+
+.coreshop-flex-wrap {
+    flex-wrap: wrap;
+}
+
+.coreshop-align-start {
+    align-items: flex-start;
+}
+
+.coreshop-align-end {
+    align-items: flex-end;
+}
+
+.coreshop-align-center {
+    align-items: center;
+}
+
+.coreshop-align-baseline {
+    align-items: baseline
+}
+
+.coreshop-align-stretch {
+    align-items: stretch;
+}
+
+.coreshop-self-start {
+    align-self: flex-start;
+}
+
+.coreshop-self-center {
+    align-self: flex-center;
+}
+
+.coreshop-self-end {
+    align-self: flex-end;
+}
+
+.coreshop-self-stretch {
+    align-self: stretch;
+}
+
+.coreshop-flex-direction-row {
+    flex-direction: row
+}
+
+.coreshop-flex-direction-row-reverse {
+    flex-direction: row-reverse
+}
+
+.coreshop-flex-direction-column {
+    flex-direction: column
+}
+
+.coreshop-flex-direction-column-reverse {
+    flex-direction: column-reverse
+}
+
+.coreshop-justify-start {
+    justify-content: flex-start;
+}
+
+.coreshop-justify-end {
+    justify-content: flex-end;
+}
+
+.coreshop-justify-center {
+    justify-content: center;
+}
+
+.coreshop-justify-between {
+    justify-content: space-between;
+}
+
+.coreshop-justify-around {
+    justify-content: space-around;
+}
+
+/*区域*/
+.coreshop-basis-1 {
+    flex-basis: 10%;
+}
+
+.coreshop-basis-2 {
+    flex-basis: 20%;
+}
+
+.coreshop-basis-3 {
+    flex-basis: 30%;
+}
+
+.coreshop-basis-4 {
+    flex-basis: 40%;
+}
+
+.coreshop-basis-5 {
+    flex-basis: 50%;
+}
+
+.coreshop-basis-6 {
+    flex-basis: 60%;
+}
+
+.coreshop-basis-7 {
+    flex-basis: 70%;
+}
+
+.coreshop-basis-8 {
+    flex-basis: 80%;
+}
+
+.coreshop-basis-9 {
+    flex-basis: 90%;
+}
+
+/*单行*/
+.coreshop-single-line-clamp {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/*多行*/
+.coreshop-multiple-line-clamp {
+    word-wrap: break-word;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal !important;
+}
+
+/*位置信息*/
+.coreshop-vertical-align-sub {
+    vertical-align: sub
+}
+
+/*背景颜色*/
+.coreshop-bg-red {
+    background-color: #e54d42;
+    color: #ffffff;
+}
+
+.coreshop-bg-orange {
+    background-color: #f37b1d;
+    color: #ffffff;
+}
+
+.coreshop-bg-yellow {
+    background-color: #fbbd08;
+    color: #333333;
+}
+
+.coreshop-bg-olive {
+    background-color: #8dc63f;
+    color: #ffffff;
+}
+
+.coreshop-bg-green {
+    background-color: #39b54a;
+    color: #ffffff;
+}
+
+.coreshop-bg-cyan {
+    background-color: #1cbbb4;
+    color: #ffffff;
+}
+
+.coreshop-bg-blue {
+    background-color: #0081ff;
+    color: #ffffff;
+}
+
+.coreshop-bg-purple {
+    background-color: #6739b6;
+    color: #ffffff;
+}
+
+.coreshop-bg-mauve {
+    background-color: #9c26b0;
+    color: #ffffff;
+}
+
+.coreshop-bg-pink {
+    background-color: #e03997;
+    color: #ffffff;
+}
+
+.coreshop-bg-brown {
+    background-color: #a5673f;
+    color: #ffffff;
+}
+
+.coreshop-bg-grey {
+    background-color: #8799a3;
+    color: #ffffff;
+}
+
+.coreshop-bg-gray {
+    background-color: #f0f0f0;
+    color: #333333;
+}
+
+.coreshop-bg-black {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.coreshop-bg-white {
+    background-color: #ffffff;
+    color: #666666;
+}
+
+.coreshop-bg-shadeTop {
+    background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.01));
+    color: #ffffff;
+}
+
+.coreshop-bg-shadeBottom {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 1));
+    color: #ffffff;
+}
+
+
+.coreshop-backgroun-gradual-origin-red {
+    background: linear-gradient(90deg, #ffbd1d, #ff4a09);
+}
+
+.coreshop-backgroun-gradual-green-white {
+    background: linear-gradient(180deg, #04c668, hsla(0, 0%, 100%, 0));
+}
+
+.coreshop-backgroun-gradual-white-tran {
+    background: linear-gradient(180deg, #fff, hsla(0, 0%, 100%, .5));
+}
+
+.coreshop-backgroun-gradual-light-yellow {
+    background: linear-gradient(180deg, #ffde82, #fff3d9);
+}
+
+.coreshop-backgroun-gradual-green {
+    background: linear-gradient(225deg, #00c78a, #04c668);
+}
+
+.coreshop-backgroun-gradual-purple {
+    background: linear-gradient(225deg, #ffa8ec, #3e8eff);
+}
+
+.coreshop-backgroun-gradual-red-pink {
+    background: linear-gradient(225deg, #ff45d4, #ff7a66);
+}
+
+.coreshop-backgroun-gradual-black-gray {
+    background: linear-gradient(225deg, #97a0ab, #5b6778);
+}
+
+.coreshop-backgroun-gradual-black-light-back {
+    background: linear-gradient(180deg, #4f6084, #2a303e);
+}
+
+.coreshop-backgroun-gradual-golden-origin {
+    background: linear-gradient(180deg, #ffdab9, #f5f5f5);
+}
+
+.coreshop-backgroun-gradual-golden-yellow {
+    background: linear-gradient(180deg, #fff2d2, #f5f5f5);
+}
+
+.coreshop-backgroun-gradual-azure-light-azure {
+    background: linear-gradient(1turn, rgba(4, 105, 247, .2), #0469f7);
+}
+
+.coreshop-backgroun-gradual-azure-little-azure {
+    background: linear-gradient(270deg, #e5e9f1, #b4d3fd);
+}
+
+.coreshop-backgroun-gradual-brown-little-brown {
+    background: linear-gradient(90deg, #4d443f, #211919);
+}
+
+.coreshop-backgroun-gradual-red-little-origin {
+    background: linear-gradient(90deg, #ff7f4e, #ff3b3b);
+}
+
+.coreshop-backgroun-light-orange {
+    background: #fbf8ed;
+}
+
+.coreshop-backgroun-light-green {
+    background: #f0fff8;
+}
+
+.coreshop-backgroun-light-pink {
+    background: #fff3f3;
+}
+
+.coreshop-bg-red-light {
+    color: #e54d42;
+    background-color: #fadbd9;
+}
+
+.coreshop-bg-orange-light {
+    color: #f37b1d;
+    background-color: #fde6d2;
+}
+
+.coreshop-bg-yellow-light {
+    color: #fbbd08;
+    background-color: #fef2ced2;
+}
+
+.coreshop-bg-olive-light {
+    color: #8dc63f;
+    background-color: #e8f4d9;
+}
+
+.coreshop-bg-green-light {
+    color: #39b54a;
+    background-color: #d7f0dbff;
+}
+
+.coreshop-bg-cyan-light {
+    color: #1cbbb4;
+    background-color: #d2f1f0;
+}
+
+.coreshop-bg-blue-light {
+    color: #0081ff;
+    background-color: #cce6ff;
+}
+
+.coreshop-bg-purple-light {
+    color: #6739b6;
+    background-color: #e1d7f0;
+}
+
+.coreshop-bg-mauve-light {
+    color: #9c26b0;
+    background-color: #ebd4ef;
+}
+
+.coreshop-bg-pink-light {
+    color: #e03997;
+    background-color: #f9d7ea;
+}
+
+.coreshop-bg-brown-light {
+    color: #a5673f;
+    background-color: #ede1d9;
+}
+
+.coreshop-bg-grey-light {
+    color: #8799a3;
+    background-color: #e7ebed;
+}
+
+/*字体颜色*/
+.coreshop-text-green {
+    background-color: #19be6b;
+    color: #fff;
+}
+
+.coreshop-text-red,
+.line-red,
+.lines-red {
+    color: #e54d42;
+}
+
+.coreshop-text-orange,
+.line-orange,
+.lines-orange {
+    color: #f37b1d;
+}
+
+.coreshop-text-yellow,
+.line-yellow,
+.lines-yellow {
+    color: #fbbd08;
+}
+
+.coreshop-text-olive,
+.line-olive,
+.lines-olive {
+    color: #8dc63f;
+}
+
+.coreshop-text-green,
+.line-green,
+.lines-green {
+    color: #39b54a;
+}
+
+.coreshop-text-cyan,
+.line-cyan,
+.lines-cyan {
+    color: #1cbbb4;
+}
+
+.coreshop-text-blue,
+.line-blue,
+.lines-blue {
+    color: #0081ff;
+}
+
+.coreshop-text-purple,
+.line-purple,
+.lines-purple {
+    color: #6739b6;
+}
+
+.coreshop-text-mauve,
+.line-mauve,
+.lines-mauve {
+    color: #9c26b0;
+}
+
+.coreshop-text-pink,
+.line-pink,
+.lines-pink {
+    color: #e03997;
+}
+
+.coreshop-text-brown,
+.line-brown,
+.lines-brown {
+    color: #a5673f;
+}
+
+.coreshop-text-grey,
+.line-grey,
+.lines-grey {
+    color: #8799a3;
+}
+
+.coreshop-text-gray,
+.line-gray,
+.lines-gray {
+    color: #aaaaaa;
+}
+
+.coreshop-text-black,
+.line-black,
+.lines-black {
+    color: #333333;
+}
+
+.coreshop-text-white,
+.line-white,
+.lines-white {
+    color: #ffffff;
+}
+
+
+.coreshop-position-absolute {
+    position: absolute;
+}
+
+.coreshop-position-relative {
+    position: relative;
+}
+
+.coreshop-white-space-nowrap {
+    white-space: nowrap;
+}
+
+
+.coreshop-font-weight-bold {
+    font-weight: bold;
+}
+
+.coreshop-font-xs {
+    font-size: 11px;
+}
+
+.coreshop-font-sm {
+    font-size: 13px;
+}
+
+.coreshop-font-md {
+    font-size: 14px;
+}
+
+.coreshop-font-lg {
+    font-size: 15px;
+}
+
+.coreshop-font-xl {
+    font-size: 17px;
+}
+
+.coreshop-flex-nowrap {
+    flex-wrap: nowrap;
+}
+
+.coreshop-text-left {
+    text-align: left;
+}
+
+.coreshop-text-center {
+    text-align: center;
+}
+
+.coreshop-text-right {
+    text-align: right;
+}
+
+//width: fit-content  根据内容自适应宽度  可以结合margin-auto 来实现居中
+.coreshop-width-fit-content {
+    width: fit-content;
+}
+
+//with: min-content 使用子元素中宽度最小的。（无论子元素是inline,还是 block，都会使用最小的宽度）
+.coreshop-width-min-content {
+    width: min-content;
+}
+
+//width:max-content 使用子元素中最大的开你的。无论是inline还是block
+.coreshop-width-max-content {
+    width: max-content;
+}
+
+/*字体高度*/
+.coreshop-line-height-initial {
+    line-height: initial
+}
+
+/*人民币符号*/
+.coreshop-text-price::before {
+    content: "¥";
+    font-size: 80%;
+    margin-right: 2px;
+}
+
+/*字体格式*/
+.coreshop-text-bold {
+    font-weight: bold;
+}
+
+/*empty外部盒子用于空数据下整体外包*/
+.coreshop-emptybox {
+    text-align: center;
+    margin: 100px auto;
+    font-size: 16px;
+
+    .coreshop-btn {
+        margin: 40px auto;
+        width: 100px;
+        border-radius: 16px;
+        line-height: 37px;
+        color: #ffffff;
+        font-size: 13px;
+        background: linear-gradient(270deg, rgba(249, 116, 90, 1) 0%, rgba(255, 158, 1, 1) 100%);
+    }
+}
+
+/*底部tab切换区域占高*/
+.coreshop-tabbar-height {
+    min-height: 50px;
+    height: calc(50px + env(safe-area-inset-bottom) / 2);
+    margin-top: 15px;
+}
+
+
+/*宽屏按钮*/
+.coreshop-btn {
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 0;
+    font-size: 14px;
+    transform: scale(1);
+    transition: all .5s;
+}
+
+.coreshop-btn-hover {
+    transform: scale(.90);
+    transition: all .5s;
+    opacity: .8;
+}
+
+.coreshop-btn-hover2 {
+    transition: all .1s;
+    opacity: .6;
+}
+
+.coreshop-btn::after {
+    border: none;
+}
+
+.coreshop-btn-circle {
+    padding: 0px 10px;
+    height: 30px;
+    line-height: 30px;
+    min-width: 120px;
+    font-size: 11px;
+}
+
+.coreshop-btn-square {
+    padding: 0px 20px;
+    height: 45px;
+    line-height: 45px;
+    min-width: 125px;
+    border: none !important;
+}
+
+.coreshop-btn-fillet {
+    border-radius: 25px;
+}
+
+.coreshop-btn-c {
+    background-color: #f7f7f7;
+}
+
+.coreshop-btn-w {
+    border: 1px solid #333;
+    color: #333;
+    background-color: #fff;
+}
+
+.coreshop-btn-g {
+    border: 1px solid #E0E0E0;
+    color: #999;
+    background-color: #fff;
+}
+
+.coreshop-btn-b {
+    border: 1px solid #333;
+    background-color: #333;
+    color: #fff;
+}
+
+.coreshop-btn-o {
+    border: 1px solid #FF7159;
+    background-color: #FF7159;
+    color: #fff;
+}
+
+.coreshop-btn-half {
+    width: 50%;
+}
+
+.coreshop-btn-all {
+    width: 100%;
+}
+
+
+
+.coreshop-border-radius-tr-8 {
+    border-radius: 8px 8px 0px 0px;
+}
+
+.coreshop-border-radius-tr-16 {
+    border-radius: 16px 16px 0px 0px;
+}
+
+.coreshop-border-radius-tr-18 {
+    border-radius: 18px 18px 0px 0px;
+}
+
+.coreshop-border-radius-tr-24 {
+    border-radius: 24px 24px 0px 0px;
+}
+
+.coreshop-border-radius-bl-16 {
+    border-radius: 0px 0px 16px 16px;
+}
+
+.coreshop-border-radius-bl-18 {
+    border-radius: 0px 0px 18px 18px;
+}
+
+.coreshop-border-radius-bl-24 {
+    border-radius: 0px 0px 24px 24px;
+}
+
+.coreshop-border-radius-bl-32 {
+    border-radius: 0px 0px 32px 32px;
+}
+
+.coreshop-border-radius-tlb-18-l-4 {
+    border-radius: 18px 18px 18px 4px;
+}
+
+.coreshop-border-radius-trbl-18 {
+    border-radius: 5px;
+}
+
+.coreshop-border-radius-trbl-4 {
+    border-radius: 4px
+}
+
+
+.coreshop-border-none {
+    border: 0;
+}
+
+/*图标大小*/
+.coreshop-icon-10-20 {
+    height: 20px;
+    vertical-align: middle;
+    width: 10px;
+}
+
+.coreshop-icon-14-28 {
+    height: 28px;
+    vertical-align: middle;
+    width: 14px;
+}
+
+.coreshop-icon-18-20 {
+    height: 20px;
+    vertical-align: middle;
+    width: 18px;
+}
+
+.coreshop-icon-24-24 {
+    height: 24px;
+    vertical-align: middle;
+    width: 24px;
+}
+
+.coreshop-icon-30-30 {
+    height: 30px;
+    vertical-align: middle;
+    width: 30px;
+}
+
+.coreshop-icon-32-32 {
+    height: 32px;
+    vertical-align: middle;
+    width: 32px;
+}
+
+.coreshop-icon-36-40 {
+    height: 40px;
+    vertical-align: middle;
+    width: 36px;
+}
+
+.coreshop-icon-38-38 {
+    height: 38px;
+    vertical-align: middle;
+    width: 38px;
+}
+
+.coreshop-icon-40-40 {
+    height: 40px;
+    vertical-align: middle;
+    width: 40px;
+}
+
+.coreshop-icon-44-44 {
+    height: 44px;
+    vertical-align: middle;
+    width: 44px;
+}
+
+.coreshop-icon-48-48 {
+    height: 48px;
+    vertical-align: middle;
+    width: 48px;
+}
+
+.coreshop-icon-56-56 {
+    height: 56px;
+    vertical-align: middle;
+    width: 56px;
+}
+
+.coreshop-icon-60-58 {
+    height: 58px;
+}
+
+.coreshop-icon-60-58,
+.coreshop-icon-60-60 {
+    vertical-align: middle;
+    width: 60px;
+}
+
+.coreshop-icon-60-60 {
+    height: 60px;
+}
+
+.coreshop-icon-64-64 {
+    height: 64px;
+    vertical-align: middle;
+    width: 64px;
+}
+
+.coreshop-icon-70-48 {
+    height: 48px;
+    vertical-align: middle;
+    width: 70px;
+}
+
+.coreshop-icon-80-80 {
+    height: 80px;
+    vertical-align: middle;
+    width: 80px;
+}
+
+.coreshop-icon-88-88 {
+    height: 88px;
+    vertical-align: middle;
+    width: 88px;
+}
+
+.coreshop-icon-90-90 {
+    height: 90px;
+    vertical-align: middle;
+    width: 90px;
+}
+
+.coreshop-icon-96-96 {
+    height: 96px;
+}
+
+.coreshop-icon-96-66,
+.coreshop-icon-96-96 {
+    vertical-align: middle;
+    width: 96px;
+}
+
+.coreshop-icon-96-66 {
+    height: 66px;
+}
+
+.coreshop-icon-168-48 {
+    height: 48px;
+    vertical-align: middle;
+    width: 168px;
+}
+
+.coreshop-icon-148-40 {
+    height: 40px;
+    vertical-align: middle;
+    width: 148px;
+}
+
+.coreshop-icon-156-156 {
+    height: 156px;
+    vertical-align: middle;
+    width: 156px;
+}
+
+.coreshop-icon-120-32 {
+    height: 32px;
+    vertical-align: middle;
+    width: 120px;
+}
+
+.coreshop-icon-230-45 {
+    height: 45px;
+    vertical-align: middle;
+    width: 230px;
+}
+
+
+.coreshop-button-110-48 {
+    height: 48px;
+    width: 110px;
+}
+
+.coreshop-button-138-48 {
+    height: 48px;
+    width: 138px;
+}
+
+.coreshop-button-130-48 {
+    height: 48px;
+    width: 130px;
+}
+
+.coreshop-button-140-56 {
+    height: 56px;
+    width: 140px;
+}
+
+.coreshop-button-160-68 {
+    height: 68px;
+    width: 160px;
+}
+
+.coreshop-button-120 {
+    height: 52px;
+    width: 120px;
+}
+
+.coreshop-button-150 {
+    height: 64px;
+    width: 158px;
+}
+
+.coreshop-button-170 {
+    height: 56px;
+    width: 180px;
+}
+
+.coreshop-button-200 {
+    height: 72px;
+    width: 200px;
+}
+
+.coreshop-button-240 {
+    height: 72px;
+    width: 240px;
+}
+
+.coreshop-button-280 {
+    height: 82px;
+    width: 280px;
+}
+
+.coreshop-button-330 {
+    height: 72px;
+    width: 330px;
+}
+
+.coreshop-button-400 {
+    height: 82px;
+    width: 400px;
+}
+
+.coreshop-button-450 {
+    height: 82px;
+    width: 450px;
+}
+
+.coreshop-button-686 {
+    border-radius: 12px;
+    height: 82px;
+    width: 686px;
+}
+
+.coreshop-button-156-64 {
+    height: 64px;
+    width: 156px;
+}
+
+.coreshop-button-186-64 {
+    height: 64px;
+    width: 186px;
+}
+
+.coreshop-button-190-80 {
+    height: 80px;
+    width: 190px;
+}
+
+.coreshop-button-210-80 {
+    height: 80px;
+    width: 210px;
+}
+
+.coreshop-button-638-88 {
+    height: 88px;
+    width: 638px;
+}
+
+
+.coreshop-image-default-placeholder {
+    height: 336px;
+    vertical-align: middle;
+    width: 396px;
+}
+
+.coreshop-image-750-400 {
+    height: 400px;
+}
+
+.coreshop-image-750-400,
+.coreshop-image-750-750 {
+    vertical-align: middle;
+    width: 750px;
+}
+
+.coreshop-image-750-750 {
+    height: 750px;
+}
+
+.coreshop-image-686-300 {
+    height: 300px;
+}
+
+.coreshop-image-686-120,
+.coreshop-image-686-300 {
+    vertical-align: middle;
+    width: 686px;
+}
+
+.coreshop-image-686-120 {
+    height: 120px;
+}
+
+.coreshop-image-686-200 {
+    height: 200px;
+}
+
+.coreshop-image-686-200,
+.coreshop-image-686-220 {
+    vertical-align: middle;
+    width: 686px;
+}
+
+.coreshop-image-686-220 {
+    height: 220px;
+}
+
+.coreshop-image-686-320 {
+    height: 320px;
+}
+
+.coreshop-image-686-320,
+.coreshop-image-686-420 {
+    vertical-align: middle;
+    width: 686px;
+}
+
+.coreshop-image-686-420 {
+    height: 420px;
+}
+
+.coreshop-image-686-380 {
+    height: 380px;
+    vertical-align: middle;
+    width: 686px;
+}
+
+.coreshop-image-500-420 {
+    height: 420px;
+    vertical-align: middle;
+    width: 500px;
+}
+
+.coreshop-image-620-120 {
+    height: 120px;
+    vertical-align: middle;
+    width: 620px;
+}
+
+.coreshop-image-250-250 {
+    height: 250px;
+    vertical-align: middle;
+    width: 250px;
+}
+
+.coreshop-image-260-260 {
+    height: 260px;
+    vertical-align: middle;
+    width: 260px;
+}
+
+.coreshop-image-148-148 {
+    height: 148px;
+    vertical-align: middle;
+    width: 148px;
+}
+
+.coreshop-image-140-140 {
+    height: 140px;
+    vertical-align: middle;
+    width: 140px;
+}
+
+.coreshop-image-150-150 {
+    height: 150px;
+    vertical-align: middle;
+    width: 150px;
+}
+
+.coreshop-image-160-160 {
+    height: 160px;
+    vertical-align: middle;
+    width: 160px;
+}
+
+.coreshop-image-202-202 {
+    height: 202px;
+    vertical-align: middle;
+    width: 202px;
+}
+
+.coreshop-image-330-330 {
+    height: 330px;
+    vertical-align: middle;
+    width: 330px;
+}
+
+.coreshop-image-326-326 {
+    height: 326px;
+    vertical-align: middle;
+    width: 326px;
+}
+
+.coreshop-image-332-325 {
+    height: 325px;
+    vertical-align: middle;
+    width: 331px;
+}
+
+.coreshop-image-330-240 {
+    height: 240px;
+    vertical-align: middle;
+    width: 330px;
+}
+
+.coreshop-image-332-200 {
+    height: 200px;
+    vertical-align: middle;
+    width: 332px;
+}
+
+.coreshop-image-396-280 {
+    height: 280px;
+    vertical-align: middle;
+    width: 396px;
+}
+
+.coreshop-image-330-420 {
+    height: 420px;
+    vertical-align: middle;
+    width: 330px;
+}
+
+.coreshop-image-396-282 {
+    height: 282px;
+    vertical-align: middle;
+    width: 396px;
+}
+
+.coreshop-image-180-180 {
+    height: 180px;
+    vertical-align: middle;
+    width: 180px;
+}
+
+.coreshop-image-190-190 {
+    height: 190px;
+    vertical-align: middle;
+    width: 190px;
+}
+
+.coreshop-image-212-212 {
+    height: 212px;
+    vertical-align: middle;
+    width: 212px;
+}
+
+.coreshop-image-220-220 {
+    height: 220px;
+    vertical-align: middle;
+    width: 220px;
+}
+
+.coreshop-image-230-230 {
+    height: 230px;
+    vertical-align: middle;
+    width: 230px;
+}
+
+.coreshop-image-298-338 {
+    height: 338px;
+    vertical-align: middle;
+    width: 298px;
+}
+
+.coreshop-image-750-510 {
+    height: 510px;
+    vertical-align: middle;
+    width: 750px;
+}
+
+.coreshop-image-196-126 {
+    height: 126px;
+    vertical-align: middle;
+    width: 196px;
+}
+
+.coreshop-image-110-110 {
+    height: 110px;
+    vertical-align: middle;
+    width: 110px;
+}
+
+.coreshop-image-88-88 {
+    height: 88px;
+    vertical-align: middle;
+    width: 88px;
+}
+
+.coreshop-image-98-98 {
+    height: 98px;
+    vertical-align: middle;
+    width: 98px;
+}
+
+.coreshop-image-750-64 {
+    height: 64px;
+    width: 750px;
+}
+
+.tag-64 {
+    border-radius: 8px;
+    padding: 4px 10px;
+}
+
+// 定义宽度百分比等分
+@for $i from 1 through 100 {
+    .coreshop-percent-#{$i} {
+        width: $i+#{"%"};
+    }
+
+}
+
+// 定义字体(px)单位
+@for $i from 0 through 100 {
+    .coreshop-min-height-#{$i} {
+        min-height: $i + px;
+    }
+}
+
+// 定义字体(px)单位
+@for $i from 0 through 100 {
+    .coreshop-line-height-#{$i} {
+        line-height: $i + px;
+    }
+}
+
+// 定义flex等分
+@for $i from 0 through 12 {
+    .coreshop-flex-#{$i} {
+        flex: $i;
+    }
+}
+
+// 定义字体(px)单位
+@for $i from 0 through 40 {
+    .coreshop-font-#{$i} {
+        font-size: $i + px;
+    }
+}
+
+// 定义圆角(px)单位
+@for $i from 0 through 40 {
+    .coreshop-border-radius-#{$i} {
+        border-radius: $i + px;
+    }
+}
+
+
+// 定义内外边距，历遍1-80
+@for $i from 0 through 80 {
+
+    // 只要双数和能被5除尽的数
+    @if $i % 2==0 or $i % 5==0 {
+
+        // 得出：coreshop-margin-30或者u-m-30
+        .coreshop-margin-#{$i},
+        .c-m-#{$i} {
+            margin: $i + px !important;
+        }
+
+        // 得出：coreshop-padding-15或者u-p-30
+        .coreshop-padding-#{$i},
+        .c-p-#{$i} {
+            padding: $i + px !important;
+        }
+
+        @each $short,
+        $long in l left,
+        t top,
+        r right,
+        b bottom {
+
+            // 缩写版，结果如： u-m-l-30
+            // 定义外边距
+            .c-m-#{$short}-#{$i} {
+                margin-#{$long}: $i + px !important;
+            }
+
+            // 定义内边距
+            .c-p-#{$short}-#{$i} {
+                padding-#{$long}: $i + px !important;
+            }
+
+            // 完整版，结果如：coreshop-margin-left-30
+            // 定义外边距
+            .coreshop-margin-#{$long}-#{$i} {
+                margin-#{$long}: $i + px !important;
+            }
+
+            // 定义内边距
+            .coreshop-padding-#{$long}-#{$i} {
+                padding-#{$long}: $i + px !important;
+            }
+        }
+    }
+}
+
+.u-line-2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.u-line-1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+/*分割线*/
+.coreshop-divider {
+    display: flex;
+    flex-direction: row;
+    flex-direction: row;
+    align-items: center;
+
+    .complete {
+        margin: 0;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        width: 100%;
+        transform: scaleY(0.5);
+        border-color: #dcdfe6;
+        flex: 1;
+        vertical-align: middle;
+        margin: 10px 0;
+    }
+
+    .groupPurchase,
+    .seckill,
+    .serviceGood {
+        margin: 0;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        width: 100%;
+        transform: scaleY(0.5);
+        border-color: #dcdfe6;
+        flex: 1;
+        vertical-align: middle;
+        margin: 10px 0;
+    }
+
+    .left {
+        margin: 0;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        width: 100%;
+        transform: scaleY(0.5);
+        border-color: #dcdfe6;
+        flex: 1;
+        vertical-align: middle;
+    }
+
+    .dot {
+        font-size: 12px;
+        margin: 0 12px;
+        color: #c0c4cc;
+    }
+
+    .right {
+        margin: 0;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        width: 100%;
+        transform: scaleY(0.5);
+        border-color: #dcdfe6;
+        flex: 1;
+        vertical-align: middle;
+    }
+}
+
+.no-more {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 22px;
+    color: #D5D5D5;
+}
