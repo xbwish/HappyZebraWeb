@@ -9,7 +9,7 @@
         <div class="cs-m-t-20 cs-text-align-center title"><span>優質好店邀您共享</span></div>
         <div class="qrcode-box" ref="qrcode">
             <qrcode-vue :value="props.link" :size="200" level="H" style="width:100%;height: 100%;"/>
-            <img class="img" :src="props.img || configStore.shopLogo" alt="" srcset="">
+            <img class="img" src="@/public/images/share/20240416220039_1126.jpeg" alt="" srcset="">
             <img class="canvasImg" v-if="canvasImg" :src="canvasImg" alt="" srcset="">
         </div>
         <p class="cs-m-t-10 cs-text-align-center" style="color:#000">快樂搬馬歡迎有志之士加入團隊，共同推廣健康生活理念，實現資源共享、互利共贏的目標。</p>
@@ -41,14 +41,13 @@ const props = withDefaults(defineProps<{
 });
 
 watchEffect(() => {
-    if (props.link && qrcode.value) { 
+    if (props.link && qrcode.value) {
         html2canvas((qrcode.value as HTMLElement), {
             useCORS: true,
             allowTaint: false,
             logging: false,
         }).then(canvas => {
             canvasImg.value = canvas.toDataURL('image/png'); 
-            console.log(canvasImg.value)
         })
     }
 }) 
