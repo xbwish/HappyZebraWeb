@@ -1,9 +1,9 @@
 <template>
-    <div class="coreshop-padding-10 coreshop-bg-orange coreshop-margin-10 coreshop-border-radius-trbl-18" v-if="props.coreshopData?.parameters?.list?.length">
+    <div class="coreshop-padding-10 coreshop-margin-10 coreshop-border-radius-trbl-18" v-if="props.coreshopData?.parameters?.list?.length" style="background: url(http://admin.happyzebra.com.tw/upload/20240302/c1a8ac43fd22abb1573dbaa616b44e5.png) top left / 100%;">
         <div class="coreshop-flex coreshop-align-center coreshop-flex-direction-row coreshop-justify-between coreshop-min-height-25">
             <div class="coreshop-font-16 coreshop-text-black coreshop-text-white coreshop-font-weight-bold" style="display: flex;align-items: center;"> <img src="@/public/images/hot-tuangou.png" style="margin-right: 4px;" width="18" height="18"/>{{props.coreshopData.parameters.title}}</div>
             <div class="coreshop-flex coreshop-align-center" @click="onGoGroupPurchase()"> 
-                <span class='coreshop-font-10'>查看更多</span>
+                <span class='coreshop-font-10 coreshop-text-white'>查看更多</span>
                 <CoreshopIconArrowDoubleRight class="arrow-right-double coreshop-text-white"></CoreshopIconArrowDoubleRight>
            </div>
         </div>
