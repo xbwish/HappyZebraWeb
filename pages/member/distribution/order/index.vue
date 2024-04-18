@@ -17,7 +17,7 @@
                                 <p class="cs-font-size-14">{{ distributionOrderSumData.orderInfo.firstOrder || 0}}</p>
                             </div>
                             <div>
-                                <p class="cs-font-size-12 cs-color-gray">{{ v('二级订单')}}</p>
+                                <p class="cs-font-size-12 cs-color-gray">{{ $t('二级订单')}}</p>
                                 <p class="cs-font-size-14">{{ distributionOrderSumData.orderInfo.secondOrder || 0 }}</p>
                             </div>
                         </div>
