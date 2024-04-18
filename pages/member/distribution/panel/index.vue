@@ -104,7 +104,7 @@
             <div
               class="cs-line-height-no-px-1 cs-font-size-16 cs-text-align-center"
             >
-              {{ showMoney ? info.data.settlementAmount || "0.00" : "***" }}
+              {{ showMoney ? info.data.freezeAmount || "0.00" : "***" }}
             </div>
             <div>{{ $t("待入账佣金") }}</div>
           </li>
@@ -112,7 +112,7 @@
             <div
               class="cs-line-height-no-px-1 cs-font-size-16 cs-text-align-center"
             >
-              {{ showMoney ? info.data.settlementAmount || "0.00" : "***" }}
+              {{ showMoney ? info.data.currentMonthOrder || "0.00" : "***" }}
             </div>
             <div>{{ $t("本月订单数") }}</div>
           </li>
