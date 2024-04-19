@@ -25,7 +25,7 @@
                     <div
                         class="cs-percent-w-43 cs-background-color-white cs-border-radius-10 cs-p-10">
                         <div>
-                            <p class="cs-font-size-12 cs-color-gray">{{ $t('团队订单金额')}}（RMB）</p>
+                            <p class="cs-font-size-12 cs-color-gray">{{ $t('团队订单金额')}}（NT$）</p>
                             <p class="cs-font-size-14">{{ distributionOrderSumData.orderInfo.allOrderMoney || '0.00' }}</p>
                         </div>
                         <div class="cs-display-flex cs-align-items-center cs-justify-content-space-between">
@@ -54,7 +54,7 @@
                     <div
                         class="cs-percent-w-43 cs-background-color-white cs-border-radius-10 cs-p-10">
                         <div>
-                            <p class="cs-font-size-12 cs-color-gray">{{ $t('本月订单金额')}}（RMB）</p>
+                            <p class="cs-font-size-12 cs-color-gray">{{ $t('本月订单金额')}}（NT$）</p>
                             <p class="cs-font-size-14">{{ distributionOrderSumData.orderInfo.monthOrderMoney || '0.00' }}
                             </p>
                         </div>
