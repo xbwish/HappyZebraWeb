@@ -1,12 +1,13 @@
 <template>
-    <div class="coreshop-padding-10 coreshop-margin-10 coreshop-bg-white coreshop-border-radius-trbl-18 layout">
-        <div class="coreshop-flex coreshop-align-center coreshop-flex-direction-row coreshop-justify-between coreshop-min-height-30"
+    <div class="coreshop-margin-top-20 coreshop-border-radius-trbl-18 layout">
+        <div
+            class="coreshop-flex coreshop-align-center coreshop-flex-direction-row coreshop-justify-between coreshop-min-height-30"
             v-if="props.coreshopData?.parameters?.lookTitle">
-            <div class="coreshop-font-16 coreshop-span-black coreshop-font-weight-bold">{{
-                props.coreshopData.parameters.title
-            }}</div>
+            <div class="coreshop-font-16 coreshop-span-black coreshop-font-weight-bold" style="color: #333;">
+                {{props.coreshopData.parameters.title}}
+            </div>
             <div  v-if="props.coreshopData?.parameters?.lookMore == 'true'" @click=" onGoGoodsList(props.coreshopData?.parameters?.classifyId)"
-                class="coreshop-flex coreshop-align-center">
+                class="coreshop-flex coreshop-align-center coreshop-font-10" style="color: #777;">
                 <span>查看更多</span>
                 <CoreshopIconArrowDoubleRight class="arrow-right-double"></CoreshopIconArrowDoubleRight>
             </div>
@@ -15,7 +16,7 @@
             <NGrid :cols="props.coreshopData?.parameters?.column" x-gap="10">
                 <NGi v-for="(item, index) in props.coreshopData?.parameters?.list" :key="item.id"
                     @click="onGoGoodsDetail(item.id)">
-                    <div class="goods coreshop-padding-bottom-10 coreshop-bg-main display-block good-item">
+                    <div class="goods coreshop-padding-4 coreshop-bg-main display-block good-item">
                         <NImage :src="item.image" object-fit="cover" :preview-disabled="true" class="good-cover"></NImage>
 
                         <div
