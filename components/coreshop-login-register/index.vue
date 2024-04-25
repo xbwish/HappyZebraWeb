@@ -140,17 +140,23 @@ const lineCallbackLogin = async () => {
     platform: loginState.platform,
     invitecode: useCookie(invitecode).value || undefined,
   };
-  
-  const loginResult: Result<any> = await queryLineLogin(data);
-  if (!loginResult.status || !loginResult.data?.success) {
-    showToast(loginResult.msg || "网络异常，登录失败");
-    return;
+  try {
+    const loginResult: Result<any> = await queryLineLogin(data);
+    if (!loginResult.status || !loginResult.data?.success) {
+      loading && loading.close()
+      showToast(loginResult.msg || "网络异常，登录失败");
+      return;
+    }
+    loading && loading.close()
+    accountStore.setAccountInfo(loginResult.data);
+    return navigateTo(
+      rotue.query?.backUrl ? (rotue.query.backUrl as string) : "/"
+    );
+  } catch (error) {
+    showToast("登录失败，请稍后重试");
+    loading && loading.close()
+    console.log(error)
   }
-  loading && loading.close()
-  accountStore.setAccountInfo(loginResult.data);
-  return navigateTo(
-    rotue.query?.backUrl ? (rotue.query.backUrl as string) : "/"
-  );
 }
 
 onMounted(() => {
