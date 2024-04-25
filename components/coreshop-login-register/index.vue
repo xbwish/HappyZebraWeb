@@ -72,13 +72,12 @@
 
 <script setup lang="ts">
 import { Ref } from "vue";
-import { sendSmsCode, smsCodeLogin } from "@/composables/smsService";
-import { NCountdown, CountdownProps, CountdownInst } from "naive-ui";
+import { sendSmsCode, smsCodeLogin, queryGetLineToken, queryGetLineProfile, queryLineLogin } from "@/composables/smsService";
+import { CountdownProps, CountdownInst } from "naive-ui";
 import { ILogin, IAuth } from "@/model/login";
 import { Result } from "@/model/result";
 import { useAccountStore } from "@/store";
-import { showToast, Image, Field, CountDown } from "vant";
-import { mobileReg } from "@/consts";
+import { showToast, Image, Field, CountDown, showLoadingToast } from "vant";
 import { btnSize } from "@/enum";
 import { invitecode } from "@/consts";
 
@@ -113,6 +112,53 @@ if (rotue.query.sessionAuthId) {
 const renderCountdown: CountdownProps["render"] = ({ seconds }) => {
   return `${String(seconds).padStart(2, "0")}s`;
 };
+
+const lineCallbackLogin = async () => {
+  const loading = showLoadingToast({
+    message: '加载中...',
+    forbidClick: true,
+    loadingType: 'spinner',
+    overlay: true,
+    duration: 0,
+  });
+  const { data: tokenInfo } = await queryGetLineToken({
+    grant_type: 'authorization_code', // 固定值
+    code: rotue.query.code as string, // 从 LINE 平台收到的授权码
+    client_id: '2004706479',
+    client_secret: 'ca01e5ba49b52750c49adaca1edc9c51',
+    redirect_uri: 'http://aa.xs1888.cc/login' // 与授权请求redirect_uri中指定的值相同
+  })
+
+  const { data: userinfo } = await queryGetLineProfile({
+    'Authorization': `${(tokenInfo as any).value?.token_type} ${(tokenInfo as any).value?.access_token}`
+  })
+
+  let data: any = {
+    nickname: (userinfo as any).value?.displayName,
+    sessionAuthId: (userinfo as any).value?.userId,
+    avatar: (userinfo as any).value?.pictureUrl,
+    platform: loginState.platform,
+    invitecode: useCookie(invitecode).value || undefined,
+  };
+  
+  const loginResult: Result<any> = await queryLineLogin(data);
+  if (!loginResult.status || !loginResult.data?.success) {
+    showToast(loginResult.msg || "网络异常，登录失败");
+    return;
+  }
+  loading && loading.close()
+  accountStore.setAccountInfo(loginResult.data);
+  return navigateTo(
+    rotue.query?.backUrl ? (rotue.query.backUrl as string) : "/"
+  );
+}
+
+onMounted(() => {
+  if (rotue.query.code && rotue.query.state) {
+    lineCallbackLogin()
+  }
+})
+
 const onFinish = () => {
   sendSmsCodeDisabled.value = false;
 };
