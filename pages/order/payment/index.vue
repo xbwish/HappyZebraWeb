@@ -297,15 +297,8 @@ const ecpayToPay = async (data: { [key: string]: any }) => {
     showToast(payResult.msg);
     return;
   }
-  closeToast();
-  useMemberStore().setBalance();
-   showSuccessToast({message:payResult.msg,duration:2000});
-   setTimeout(() => {
-   closeToast();
-   return navigateTo(`/order/payment/result?id=${payResult.data.paymentId}&type=${PaymentTypeEnum.balancepay}`, {
-        replace: true,
-      });
-   }, 1000);
+
+  window.location.href = `http://www.jlt1888.cc/AioCheckOut.aspx?parameterName=${JSON.stringify(payResult.data)}`
 };
 
 /** 微信支付 */
