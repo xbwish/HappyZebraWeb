@@ -297,6 +297,7 @@ const ecpayToPay = async (data: { [key: string]: any }) => {
     showToast(payResult.msg);
     return;
   }
+  closeToast();
 
   window.location.href = `http://www.jlt1888.cc/AioCheckOut.aspx?parameterName=${JSON.stringify(payResult.data)}`
 };
