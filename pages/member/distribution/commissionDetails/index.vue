@@ -37,7 +37,7 @@
                  
                     <p class="cs-font-size-16">{{ showMoney? commissionDetailsData.userData.balance || '0.00': '***' }}
                     </p>
-                    <p>{{ $t('可提现佣金') }}</p>
+                    <p>{{ $t('可提领佣金余额') }}</p>
                 </div>
             </div>
         </div>
