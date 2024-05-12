@@ -212,26 +212,31 @@ const handleAddCard = () => {
 // 确认提现
 const handleConfirmWithdrawal = async () => {
   if (!balanceData.defaultCard) {
-    showToast(coreShopLang("请选择要提现的银行卡"));
+    showToast(coreShopLang("請選擇要提現的銀行卡"));
     return;
   }
   if (typeof balanceData.value === "undefined") {
-    showToast(coreShopLang("请输入要提现的金额"));
+    showToast(coreShopLang("請輸入要提現的金額"));
     return;
   }
 
   if (isNaN(balanceData.value)) {
-    showToast(coreShopLang("请输入要提现的金额"));
+    showToast(coreShopLang("請輸入要提現的金額"));
     return;
   }
 
   if (parseFloat(`${balanceData.value}`) <= 0) {
-    showToast(coreShopLang("提现的金额不能小于等于0"));
+    showToast(coreShopLang("提現的金額不能小於等於0"));
+    return;
+  }
+
+  if (parseFloat(`${balanceData.value}`) > (userData.balance || 0)) {
+    showToast(coreShopLang("提現的金額不能大於可用餘額"));
     return;
   }
 
   if (!balanceData.flag) {
-    showToast(coreShopLang("提现的金额要大于最低提现金额"));
+    showToast(coreShopLang("提現的金額要大於最低提現金額"));
     return;
   }
   try {
