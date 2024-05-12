@@ -68,7 +68,7 @@
         <Field class="with-draw" v-model="balanceData.value" type="digit" :placeholder="$t('请输入体现金额')" />
 
         <p v-if="balanceData.flag" class="use-money">
-          <CoreshopLanguage :text="$t('可用余额')" /> <span class="cs-color-red">NT$ {{ userData.balance }}</span>
+          <CoreshopLanguage :text="$t('可提领佣金余额')" /> <span class="cs-color-red">NT$ {{ userData.balance }}</span>
         </p>
         <p v-else class="cs-color-red">
           <CoreshopLanguage :text="$t('提现金额超过可用余额')" />
