@@ -709,7 +709,9 @@ const handletackDelivery = (orderId: string) => {
     showConfirmDialog({
     title: coreShopLang("确认收获"),
     message: coreShopLang("确认执行收货操作"),
-    confirmButtonColor:'#f56c6c'
+    confirmButtonColor:'#f56c6c',
+    confirmButtonText: coreShopLang("确认"),
+    cancelButtonText: coreShopLang("取消"),
   })
     .then( async () => {
       const confirmOrderRes: Result = await queryConfirmOrder({ id: orderId});

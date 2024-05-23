@@ -24,9 +24,9 @@
           <div class="price-box">
             <p class="title">{{$t("价格区间")}}</p>
             <div class="price">
-              <Field :border="false" v-model="searchState.priceFrom" type="number" :placeholder="t('最低价')"> </Field>
+              <Field :border="false" v-model="searchState.priceFrom" type="number" :placeholder="$t('最低价')"> </Field>
               <div class="line">——</div>
-              <Field :border="false" v-model="searchState.priceTo"  input-align="right" type="number" :placeholder="t('最高价')"> </Field>
+              <Field :border="false" v-model="searchState.priceTo"  input-align="right" type="number" :placeholder="$t('最高价')"> </Field>
             </div>
           </div>
           <div class="brand-box">
