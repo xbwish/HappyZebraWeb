@@ -193,15 +193,16 @@ const handleShowCardList = () => {
 
 // 选择银行卡
 const handleSelectCard = (data: DefaultBankCard) => {
-  if (data.bankAreaId != balanceData.defaultCard.bankAreaId) {
-    let bankInfo = balanceData.bankCardList.filter((item: DefaultBankCard) => data.bankAreaId === item.bankAreaId)[0];
-    balanceData.defaultCard.bankAreaId = bankInfo.id;
-    balanceData.defaultCard.bankLogo = bankInfo.bankLogo;
-    balanceData.defaultCard.bankName = bankInfo.bankName;
-    balanceData.defaultCard.cardTypeName = bankInfo.cardTypeName;
-    balanceData.defaultCard.cardNumber = bankInfo.cardNumber;
-    handleShowCardList();
-  }
+  // FIXBUG: 后端：「你把这个逻辑去掉吧  后台没有添加地区的地方，前台没传后台就没管」
+  // if (data.bankAreaId != balanceData.defaultCard.bankAreaId) {
+  // }
+  let bankInfo = balanceData.bankCardList.filter((item: DefaultBankCard) => data.bankAreaId === item.bankAreaId)[0];
+  balanceData.defaultCard.bankAreaId = bankInfo.id;
+  balanceData.defaultCard.bankLogo = bankInfo.bankLogo;
+  balanceData.defaultCard.bankName = bankInfo.bankName;
+  balanceData.defaultCard.cardTypeName = bankInfo.cardTypeName;
+  balanceData.defaultCard.cardNumber = bankInfo.cardNumber;
+  handleShowCardList();
 };
 
 // 添加银行卡跳转
