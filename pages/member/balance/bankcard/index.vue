@@ -220,6 +220,9 @@ const handleDeleteCard = (item: any) => {
   showConfirmDialog({
     title: coreShopLang("提示"),
     message: coreShopLang("确定删除该金融卡"),
+    confirmButtonColor:'#f56c6c',
+    confirmButtonText: coreShopLang("确认"),
+    cancelButtonText: coreShopLang("取消"),
   })
     .then(() => {
      // handleModalOk();

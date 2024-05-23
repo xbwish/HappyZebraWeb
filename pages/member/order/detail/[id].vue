@@ -706,7 +706,7 @@ let id: string = "";
 const handletackDelivery = (orderId: string) => {
 	id = orderId;
 
-    showConfirmDialog({
+	showConfirmDialog({
     title: coreShopLang("确认收获"),
     message: coreShopLang("确认执行收货操作"),
     confirmButtonColor:'#f56c6c',

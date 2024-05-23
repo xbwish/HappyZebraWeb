@@ -198,6 +198,9 @@ const onBeforeClose = (event: { name: number; position: string }): Promise<boole
     showConfirmDialog({
       title: coreShopLang("删除商品"),
       message: coreShopLang("确定删除商品"),
+      confirmButtonColor:'#f56c6c',
+      confirmButtonText: coreShopLang("确认"),
+      cancelButtonText: coreShopLang("取消"),
     })
       .then(() => {
         cartStore.setDeleteCartItem(event.name);

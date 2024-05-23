@@ -147,6 +147,8 @@ const onDeleteAddress = (id: number) => {
     confirmButtonColor: "#D33123",
     title: coreShopLang("删除地址"),
     message: coreShopLang("删除地址后将不能恢复"),
+    confirmButtonText: coreShopLang("确认"),
+    cancelButtonText: coreShopLang("取消"),
   })
     .then(async () => {
       const removeRes: Result = await queryRemoveShip({ id });
