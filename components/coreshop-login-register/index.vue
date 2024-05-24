@@ -137,7 +137,7 @@ const lineCallbackLogin = async () => {
     nickname: (userinfo as any).value?.displayName,
     sessionAuthId: (userinfo as any).value?.userId,
     avatar: (userinfo as any).value?.pictureUrl,
-    platform: loginState.platform,
+    platform: 'line',
     invitecode: useCookie(invitecode).value || undefined,
   };
   try {
