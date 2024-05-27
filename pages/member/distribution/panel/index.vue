@@ -251,7 +251,7 @@ definePageMeta({
   layout: false,
 });
 
-const showMoney = ref(false);
+const showMoney = ref(true);
 const info: Result<AgentInfo> = await queryDistributionInfo();
 const userInfo: any = useMemberStore().userData;
 
