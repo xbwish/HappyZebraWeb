@@ -8,6 +8,7 @@
             <div class="other-login-title">{{$t('其他登录方式')}}</div>
             <ul class="other-login-list">
               <li class="other-login-item" @click="handleToLineLogin"><img src="/images/login/f37bb9112a9f59dd0af172f6caabe612.png" alt=""></li>
+              <li class="other-login-item" @click="handleToFacebookLogin"><img src="/images/login/facebook_icon.png" alt=""></li>
             </ul>
           </div>
         </CoreshopLoginRegister>
@@ -47,6 +48,20 @@ const handleToLineLogin = () => {
   const paramsString = objectToQuery(auth_params);
   window.location.href = `${line_auth}?${paramsString}`;
 }
+
+const handleToFacebookLogin = () => {
+  window.FB.login((response: any) => {
+    if (response.authResponse) {
+      console.log('Welcome! Fetching your information.... ');
+      window.FB.api('/me', (response: any) => {
+        console.log('Good to see you, ' + response);
+      });
+    } else {
+      console.log('User cancelled login or did not fully authorize.');
+    }
+  });
+}
+
 </script>
 
 <style lang="scss" scoped>

@@ -53,7 +53,9 @@ export default defineNuxtConfig({
         '@/assets/css/core-theme.scss',
         '@/assets/css/reset.css',
     ],
-    plugins: [],
+    plugins: [
+        { src: '~/plugins/facebook-sdk.ts', mode: 'client' }
+    ],
 
     router: {},
 
