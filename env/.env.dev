@@ -1,1 +1,1 @@
-VITE_API_HOST = "http://api.happyzebra.com.tw/"
+VITE_API_HOST = "https://api.happyzebra.com.tw/"

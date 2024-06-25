@@ -126,7 +126,7 @@ const lineCallbackLogin = async () => {
     code: rotue.query.code as string, // 从 LINE 平台收到的授权码
     client_id: '2004706479',
     client_secret: 'ca01e5ba49b52750c49adaca1edc9c51',
-    redirect_uri: 'http://aa.xs1888.cc/login' // 与授权请求redirect_uri中指定的值相同
+    redirect_uri: location.origin + '/login' // 与授权请求redirect_uri中指定的值相同
   })
 
   const { data: userinfo } = await queryGetLineProfile({
@@ -137,7 +137,7 @@ const lineCallbackLogin = async () => {
     nickname: (userinfo as any).value?.displayName,
     sessionAuthId: (userinfo as any).value?.userId,
     avatar: (userinfo as any).value?.pictureUrl,
-    platform: 'line',
+    platform: 4,
     invitecode: useCookie(invitecode).value || undefined,
   };
   try {
