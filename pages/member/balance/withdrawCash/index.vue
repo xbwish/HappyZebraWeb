@@ -22,10 +22,17 @@
             class="cs-display-flex cs-percent-w-100 cs-align-items-center cs-border-solid-bottom cs-p-10 cs-cursor-pointer"
           >
             <div class="cs-display-flex">
-              <img class="cs-display-flex cs-margin-auto-0" :src="balanceData.defaultCard.bankLogo" alt="" />
+              <img
+                class="cs-display-flex cs-margin-auto-0"
+                :src="balanceData.defaultCard.bankLogo"
+                alt=""
+              />
             </div>
             <div class="cs-m-l-10 cs-font-size-12">
-              <p>{{ balanceData.defaultCard.bankName }} - {{ balanceData.defaultCard.cardTypeName }}</p>
+              <p>
+                {{ balanceData.defaultCard.bankName }} -
+                {{ balanceData.defaultCard.cardTypeName }}
+              </p>
               <p>{{ balanceData.defaultCard.cardNumber }}</p>
             </div>
           </div>
@@ -49,13 +56,20 @@
             class="cs-position-relative cs-cursor-pointer cs-display-flex cs-p-l-10 cs-p-r-10 cs-m-t-10 cs-m-b-10"
           >
             <div class="cs-display-flex cs-h-50">
-              <img class="cs-display-flex cs-margin-auto-0" :src="item.bankLogo" alt="" />
+              <img
+                class="cs-display-flex cs-margin-auto-0"
+                :src="item.bankLogo"
+                alt=""
+              />
             </div>
             <div class="cs-m-l-10 cs-font-size-12">
               <p>{{ item.bankName }} - {{ item.cardTypeName }}</p>
               <p>{{ item.cardNumber }}</p>
             </div>
-            <div class="isSelect" v-if="balanceData.defaultCard.bankAreaId === item.id">
+            <div
+              class="isSelect"
+              v-if="balanceData.defaultCard.bankAreaId === item.id"
+            >
               <NIcon color="#e84f5d" :size="20">
                 <CoreshopIconCheckmark20Filled></CoreshopIconCheckmark20Filled>
               </NIcon>
@@ -65,10 +79,16 @@
       </div>
       <div class="cs-border-radius-5 cs-m-t-5 cs-m-b-10 cs-p-10">
         <p class="explain">{{ tocashExplain() }}</p>
-        <Field class="with-draw" v-model="balanceData.value" type="digit" :placeholder="$t('请输入体现金额')" />
+        <Field
+          class="with-draw"
+          v-model="balanceData.value"
+          type="digit"
+          :placeholder="$t('请输入体现金额')"
+        />
 
         <p v-if="balanceData.flag" class="use-money">
-          <CoreshopLanguage :text="$t('可提领佣金余额')" /> <span class="cs-color-red">NT$ {{ userData.usebalance }}</span>
+          <CoreshopLanguage :text="$t('可提领佣金余额')" />
+          <span class="cs-color-red">NT$ {{ userData.usebalance }}</span>
         </p>
         <p v-else class="cs-color-red">
           <CoreshopLanguage :text="$t('提现金额超过可用余额')" />
@@ -93,35 +113,39 @@
 </template>
 
 <script setup lang="ts">
-import { UnwrapRef } from "vue";
-import { NIcon } from "naive-ui";
-import { useMemberStore, useConfigStore } from "@/store";
-import { queryDefaultBankCard, queryBankCardList, queryUserToCash } from "@/composables/balance";
-import { queryUserInfo } from "@/composables/member";
-import { Result } from "@/model/result";
-import { DefaultBankCard, UserCash } from "@/model/member";
-import { Config } from "@/model/config";
-import { IAccountInfo } from "@/model/account";
-import { showToast, showSuccessToast, Field, closeToast } from "vant";
-import { useI18n } from "vue-i18n";
-const { t: coreShopLang } = useI18n();
-const userData: IAccountInfo = await useMemberStore().getUserData;
-const cofingData: Config = useConfigStore().getConfig;
+import type { UnwrapRef } from "vue"
+import { NIcon } from "naive-ui"
+import { useMemberStore, useConfigStore } from "@/store"
+import {
+  queryDefaultBankCard,
+  queryBankCardList,
+  queryUserToCash,
+} from "@/composables/balance"
+import { queryUserInfo } from "@/composables/member"
+import type { Result } from "@/model/result"
+import { DefaultBankCard, UserCash } from "@/model/member"
+import { Config } from "@/model/config"
+import type { IAccountInfo } from "@/model/account"
+import { showToast, showSuccessToast, Field, closeToast } from "vant"
+import { useI18n } from "vue-i18n"
+const { t: coreShopLang } = useI18n()
+const userData: IAccountInfo = await useMemberStore().getUserData
+const cofingData: Config = useConfigStore().getConfig
 
 const balanceData: UnwrapRef<{
-  value?: number;
-  flag: boolean;
-  bankCardList: Array<DefaultBankCard>;
-  isShowCardList: boolean;
-  toCashMoneyLow: string;
-  toCashMoneyRate: string;
+  value?: number
+  flag: boolean
+  bankCardList: Array<DefaultBankCard>
+  isShowCardList: boolean
+  toCashMoneyLow: string
+  toCashMoneyRate: string
   defaultCard: {
-    bankAreaId: number;
-    bankLogo?: string;
-    bankName?: string;
-    cardTypeName?: string;
-    cardNumber?: string;
-  };
+    bankAreaId: number
+    bankLogo?: string
+    bankName?: string
+    cardTypeName?: string
+    cardNumber?: string
+  }
 }> = reactive({
   value: undefined,
   flag: true,
@@ -136,17 +160,17 @@ const balanceData: UnwrapRef<{
     cardTypeName: undefined,
     cardNumber: undefined,
   },
-});
+})
 
 // 提现金额更新
 const handleChangeValue = (val: number) => {
-  balanceData.value = val;
+  balanceData.value = val
   if (val > (userData.balance || 0)) {
-    balanceData.flag = false;
+    balanceData.flag = false
   } else {
-    balanceData.flag = true;
+    balanceData.flag = true
   }
-};
+}
 
 // 提现文字说明
 const tocashExplain = () => {
@@ -159,104 +183,113 @@ const tocashExplain = () => {
       balanceData.toCashMoneyRate +
       " %）" +
       coreShopLang("服务费")
-    );
+    )
   } else if (balanceData.toCashMoneyLow) {
-    return coreShopLang("最低提现金额") + balanceData.toCashMoneyLow + " NT$";
+    return coreShopLang("最低提现金额") + balanceData.toCashMoneyLow + " NT$"
   } else if (balanceData.toCashMoneyRate) {
-    return coreShopLang("收取") + balanceData.toCashMoneyRate + " %" + coreShopLang("服务费");
+    return (
+      coreShopLang("收取") +
+      balanceData.toCashMoneyRate +
+      " %" +
+      coreShopLang("服务费")
+    )
   } else {
-    return "";
+    return ""
   }
-};
+}
 
 // 获取默认提现银行卡
 const defaultBankCardQuery = async () => {
   try {
-    const defaultBankCard: Result<DefaultBankCard> = await queryDefaultBankCard();
-    balanceData.defaultCard.bankAreaId = defaultBankCard.data.id;
-    balanceData.defaultCard.bankLogo = defaultBankCard.data.bankLogo;
-    balanceData.defaultCard.bankName = defaultBankCard.data.bankName;
-    balanceData.defaultCard.cardTypeName = defaultBankCard.data.cardTypeName;
-    balanceData.defaultCard.cardNumber = defaultBankCard.data.cardNumber;
+    const defaultBankCard: Result<DefaultBankCard> =
+      await queryDefaultBankCard()
+    balanceData.defaultCard.bankAreaId = defaultBankCard.data.id
+    balanceData.defaultCard.bankLogo = defaultBankCard.data.bankLogo
+    balanceData.defaultCard.bankName = defaultBankCard.data.bankName
+    balanceData.defaultCard.cardTypeName = defaultBankCard.data.cardTypeName
+    balanceData.defaultCard.cardNumber = defaultBankCard.data.cardNumber
   } catch (error) {}
-};
-defaultBankCardQuery();
+}
+defaultBankCardQuery()
 
 // 银行卡列表数据
-const bankCardListRes: Result<Array<DefaultBankCard>> = await queryBankCardList();
-balanceData.bankCardList = bankCardListRes.data;
+const bankCardListRes: Result<Array<DefaultBankCard>> =
+  await queryBankCardList()
+balanceData.bankCardList = bankCardListRes.data
 
 // 银行卡列表下拉
 const handleShowCardList = () => {
-  balanceData.isShowCardList = !balanceData.isShowCardList;
-};
+  balanceData.isShowCardList = !balanceData.isShowCardList
+}
 
 // 选择银行卡
 const handleSelectCard = (data: DefaultBankCard) => {
   // FIXBUG: 后端：「你把这个逻辑去掉吧  后台没有添加地区的地方，前台没传后台就没管」
   // if (data.bankAreaId != balanceData.defaultCard.bankAreaId) {
   // }
-  let bankInfo = balanceData.bankCardList.filter((item: DefaultBankCard) => data.bankAreaId === item.bankAreaId)[0];
-  balanceData.defaultCard.bankAreaId = bankInfo.id;
-  balanceData.defaultCard.bankLogo = bankInfo.bankLogo;
-  balanceData.defaultCard.bankName = bankInfo.bankName;
-  balanceData.defaultCard.cardTypeName = bankInfo.cardTypeName;
-  balanceData.defaultCard.cardNumber = bankInfo.cardNumber;
-  handleShowCardList();
-};
+  let bankInfo = balanceData.bankCardList.filter(
+    (item: DefaultBankCard) => data.bankAreaId === item.bankAreaId
+  )[0]
+  balanceData.defaultCard.bankAreaId = bankInfo.id
+  balanceData.defaultCard.bankLogo = bankInfo.bankLogo
+  balanceData.defaultCard.bankName = bankInfo.bankName
+  balanceData.defaultCard.cardTypeName = bankInfo.cardTypeName
+  balanceData.defaultCard.cardNumber = bankInfo.cardNumber
+  handleShowCardList()
+}
 
 // 添加银行卡跳转
 const handleAddCard = () => {
-  routerLink("/member/balance/bankcard");
-};
+  routerLink("/member/balance/bankcard")
+}
 
 // 确认提现
 const handleConfirmWithdrawal = async () => {
   if (!balanceData.defaultCard) {
-    showToast(coreShopLang("請選擇要提現的銀行卡"));
-    return;
+    showToast(coreShopLang("請選擇要提現的銀行卡"))
+    return
   }
   if (typeof balanceData.value === "undefined") {
-    showToast(coreShopLang("請輸入要提現的金額"));
-    return;
+    showToast(coreShopLang("請輸入要提現的金額"))
+    return
   }
 
   if (isNaN(balanceData.value)) {
-    showToast(coreShopLang("請輸入要提現的金額"));
-    return;
+    showToast(coreShopLang("請輸入要提現的金額"))
+    return
   }
 
   if (parseFloat(`${balanceData.value}`) <= 0) {
-    showToast(coreShopLang("提現的金額不能小於等於0"));
-    return;
+    showToast(coreShopLang("提現的金額不能小於等於0"))
+    return
   }
 
   if (parseFloat(`${balanceData.value}`) > (userData.balance || 0)) {
-    showToast(coreShopLang("提現的金額不能大於可用餘額"));
-    return;
+    showToast(coreShopLang("提現的金額不能大於可用餘額"))
+    return
   }
 
   if (!balanceData.flag) {
-    showToast(coreShopLang("提現的金額要大於最低提現金額"));
-    return;
+    showToast(coreShopLang("提現的金額要大於最低提現金額"))
+    return
   }
   try {
     const toCashRes: Result<UserCash> = await queryUserToCash({
       data: balanceData.value,
       id: balanceData.defaultCard.bankAreaId,
-    });
-    const getUserInfo: Result<any> = await queryUserInfo();
-    useMemberStore().setAccountInfo(getUserInfo.data);
-    balanceData.value = undefined;
-    showSuccessToast(toCashRes.msg);
+    })
+    const getUserInfo: Result<any> = await queryUserInfo()
+    useMemberStore().setAccountInfo(getUserInfo.data)
+    balanceData.value = undefined
+    showSuccessToast(toCashRes.msg)
     setTimeout(() => {
-      closeToast();
-      return navigateTo("/member/center", { replace: true });
-    }, 1000);
+      closeToast()
+      return navigateTo("/member/center", { replace: true })
+    }, 1000)
   } catch (error: any) {
-    showToast(error.msg);
+    showToast(error.msg)
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -302,8 +335,7 @@ const handleConfirmWithdrawal = async () => {
     // margin: 0 auto;
     padding: 0.15rem;
   }
-  .n-button{
-    
+  .n-button {
     height: 1.1rem;
   }
 }
@@ -312,12 +344,12 @@ const handleConfirmWithdrawal = async () => {
   color: #000000;
 }
 .with-draw {
-  color: #6E737D;
+  color: #6e737d;
   box-sizing: border-box;
   padding-left: 8px !important;
   height: 1.1rem;
   border-radius: 4px;
-  background: #EAECEF;
+  background: #eaecef;
   margin: 8px 0;
 }
 .use-money {

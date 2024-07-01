@@ -82,7 +82,7 @@
 import { NImage, NGrid, NGi } from "naive-ui";
 import { NavLinkTypeEnum } from "@/enum";
 import { useConfigStore } from "@/store";
-import { GoodConfig } from "@/model";
+import type { GoodConfig } from "@/model";
 
 const props = withDefaults(defineProps<{ coreshopData?: GoodConfig }>(), {});
 const state = useConfigStore().getConfig;

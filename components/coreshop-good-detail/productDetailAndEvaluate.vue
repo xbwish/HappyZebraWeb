@@ -3,16 +3,26 @@
   <div class="agent-price" v-if="props.agentData?.userAgentGrade?.name">
     <div class="title">
       <p class="cs-font-weight-bold">代理價格</p>
-      <p class="cs-font-size-14">您的等級：{{ props.agentData?.userAgentGrade.name }}</p>
+      <p class="cs-font-size-14">
+        您的等級：{{ props.agentData?.userAgentGrade.name }}
+      </p>
     </div>
-    <table v-if="props.agentData?.agentProducts.length > 0" :border="1" style="border-collapse: collapse">
+    <table
+      v-if="props.agentData?.agentProducts.length > 0"
+      :border="1"
+      style="border-collapse: collapse"
+    >
       <tr align="center">
         <td>貨品名稱</td>
         <td>銷售價</td>
         <td>代理價</td>
         <td>利潤</td>
       </tr>
-      <tr v-for="(item, index) in detailData.agentList" :key="index" align="center">
+      <tr
+        v-for="(item, index) in detailData.agentList"
+        :key="index"
+        align="center"
+      >
         <td>{{ item.name }}</td>
         <td>NT${{ item.price }}</td>
         <td>NT${{ item.agentPrice }}</td>
@@ -37,10 +47,16 @@
       </p>
     </div>
     <ol class="reviews-list__content" v-if="detailData.comments.length > 0">
-      <li class="reviews-list__item" v-for="item in detailData.comments" :key="item.id">
+      <li
+        class="reviews-list__item"
+        v-for="item in detailData.comments"
+        :key="item.id"
+      >
         <div class="review__avatar"><img :src="item.avatarImage" alt="" /></div>
         <div class="review__content">
-          <div class="cs-font-size-12 cs-p-b-5 cs-display-flex cs-text-align-center">
+          <div
+            class="cs-font-size-12 cs-p-b-5 cs-display-flex cs-text-align-center"
+          >
             <span class="cs-m-r-5">{{ item.nickName }}</span>
             <NRate readonly :default-value="item.score" size="small" />
           </div>
@@ -51,19 +67,28 @@
             {{ item.createTime }} <br />
             {{ item.addon || "" }}
           </div>
-          <div v-if="item.sellerContent">商家回復：{{ item.sellerContent }}</div>
+          <div v-if="item.sellerContent">
+            商家回復：{{ item.sellerContent }}
+          </div>
         </div>
       </li>
     </ol>
     <div v-else class="cs-font-size-20">暫無評估</div>
   </div>
   <!-- 参数 -->
-  <div class="spec__section" v-if="props.goodParams && props.goodParams.length > 0">
+  <div
+    class="spec__section"
+    v-if="props.goodParams && props.goodParams.length > 0"
+  >
     <div class="title">
       <p class="cs-font-weight-bold">參數</p>
     </div>
     <div class="cs-border-solid cs-border-radius-5 cs-foverflow-hidden">
-      <div class="spec__row" v-for="(item, index) in props.goodParams" :key="index">
+      <div
+        class="spec__row"
+        v-for="(item, index) in props.goodParams"
+        :key="index"
+      >
         <div class="spec__name">{{ item.name }}</div>
         <div class="spec__value cs-border-solid-bottom">{{ item.value }}</div>
       </div>
@@ -72,48 +97,54 @@
   <!-- 商品详情 -->
   <div class="typography">
     <div class="title">
-      <p class="cs-font-weight-bold">{{$t("商品详情")}}</p>
+      <p class="cs-font-weight-bold">{{ $t("商品详情") }}</p>
     </div>
     <div class="cs-text-align-center" v-html="props.intro"></div>
   </div>
   <!-- 常见问题 -->
   <div class="spec-problem">
     <div class="title">
-      <p class="cs-font-weight-bold">{{$t("常见问题")}}</p>
+      <p class="cs-font-weight-bold">{{ $t("常见问题") }}</p>
     </div>
-    <div class=" cs-border-radius-5 cs-foverflow-hidden">
-      <div class="spec__row" v-for="(item, index) in props.commonQuestion" :key="index">
+    <div class="cs-border-radius-5 cs-foverflow-hidden">
+      <div
+        class="spec__row"
+        v-for="(item, index) in props.commonQuestion"
+        :key="index"
+      >
         <div class="spec__name cs-font-size-12">{{ item.title }}</div>
-        <div class="spec__value cs-line-height-30 cs-font-size-12">{{ item.description }}</div>
+        <div class="spec__value cs-line-height-30 cs-font-size-12">
+          {{ item.description }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { UnwrapRef } from "vue";
-import { queryGoodComment } from "@/composables/productService";
-import { Result } from "@/model/result";
-import { NIcon, NRate } from "naive-ui";
-import { CommentData, Comment } from "@/model/product";
-import { GoodParams } from "@/model/goods";
-import { Product } from "@/model/product";
+import type { UnwrapRef } from "vue"
+import { queryGoodComment } from "@/composables/productService"
+import type { Result } from "@/model/result"
+import { NIcon, NRate } from "naive-ui"
+import { CommentData, Comment } from "@/model/product"
+import { GoodParams } from "@/model/goods"
+import { Product } from "@/model/product"
 
 interface agentList {
-  name: string;
-  price: number;
-  agentPrice: number;
-  profit: number;
+  name: string
+  price: number
+  agentPrice: number
+  profit: number
 }
 
 const props = withDefaults(
   defineProps<{
-    intro: string;
-    commonQuestion: any;
-    id: any;
-    goodParams?: Array<GoodParams>;
-    agentData?: any;
-    goodDetail?: Product;
+    intro: string
+    commonQuestion: any
+    id: any
+    goodParams?: Array<GoodParams>
+    agentData?: any
+    goodDetail?: Product
   }>(),
   {
     intro: "",
@@ -123,15 +154,15 @@ const props = withDefaults(
     agentData: null,
     goodDetail: () => ({}),
   }
-);
+)
 
 const detailData: UnwrapRef<{
-  comments: Array<Comment>;
-  agentList: Array<agentList>;
+  comments: Array<Comment>
+  agentList: Array<agentList>
 }> = reactive({
   comments: [],
   agentList: [],
-});
+})
 
 if (props.agentData?.agentProducts?.length > 0) {
   props.agentData?.agentProducts.forEach((item: any) => {
@@ -141,34 +172,38 @@ if (props.agentData?.agentProducts?.length > 0) {
           name: skuItem.sku_name_arr[0],
           price: item.productPrice,
           agentPrice: item.agentGradePrice,
-          profit: Number((Number(item.productPrice) * 1000 - Number(item.agentGradePrice) * 1000) / 1000),
-        });
+          profit: Number(
+            (Number(item.productPrice) * 1000 -
+              Number(item.agentGradePrice) * 1000) /
+              1000
+          ),
+        })
       }
-    });
-  });
+    })
+  })
 }
 //#region 查询商品评论
 const getGoodComment = async () => {
   const goodCommentResult: Result<CommentData> = await queryGoodComment({
-    id: (props.id as unknown) as number,
+    id: props.id as unknown as number,
     page: 1,
     limit: 1,
-  });
+  })
   console.log(goodCommentResult)
-  detailData.comments = goodCommentResult.data?.list || [];
-};
-getGoodComment();
+  detailData.comments = goodCommentResult.data?.list || []
+}
+getGoodComment()
 //#endregion
 
 // 热销
 const handlerProductHot = (id: number) => {
-  navigateTo(`/goods/detail/${id}`);
-};
+  navigateTo(`/goods/detail/${id}`)
+}
 
 // 看评价
 const handleGoevaluate = () => {
-  navigateTo(`/goods/comment/${props.id}`);
-};
+  navigateTo(`/goods/comment/${props.id}`)
+}
 </script>
 <style scoped lang="scss">
 .agent-price {
@@ -337,7 +372,11 @@ const handleGoevaluate = () => {
     }
   }
 }
-.agent-price,.reviews-list,.spec__section,.typography,.spec-problem {
+.agent-price,
+.reviews-list,
+.spec__section,
+.typography,
+.spec-problem {
   background: #ffffff;
   box-shadow: 10px 24px 54px rgba(15, 13, 35, 0.04);
   border-radius: 8px;

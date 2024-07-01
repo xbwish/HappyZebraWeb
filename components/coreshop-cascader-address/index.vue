@@ -21,34 +21,34 @@
 </template>
 
 <script setup lang="ts">
-import { UnwrapRef } from "vue";
-import { queryAreas } from "@/composables/member";
-import { Result } from "@/model/result";
-import { Areas } from "@/model/member";
-import { useI18n } from "vue-i18n";
-const { t: coreShopLang } = useI18n();
-let areaId: any = ref<number>();
+import type { UnwrapRef } from "vue"
+import { queryAreas } from "@/composables/member"
+import type { Result } from "@/model/result"
+import { Areas } from "@/model/member"
+import { useI18n } from "vue-i18n"
+const { t: coreShopLang } = useI18n()
+let areaId: any = ref<number>()
 
 const addressState: UnwrapRef<{
-  cascaderOptions: Array<any>;
-  showPopup: boolean;
-  fieldValue: string | number;
-  cascaderValue: number;
+  cascaderOptions: Array<any>
+  showPopup: boolean
+  fieldValue: string | number
+  cascaderValue: number
 }> = reactive({
   cascaderOptions: [],
   showPopup: false,
   fieldValue: "",
   cascaderValue: 0,
-});
+})
 
-let emits = defineEmits(["handleChangeValue"]);
+let emits = defineEmits(["handleChangeValue"])
 
 const props = withDefaults(
   defineProps<{
-    areaId?: number | null;
-    areaName?: string | null;
-    label?: string;
-    size?: "small" | "medium" | "large";
+    areaId?: number | null
+    areaName?: string | null
+    label?: string
+    size?: "small" | "medium" | "large"
   }>(),
   {
     areaId: null,
@@ -56,14 +56,14 @@ const props = withDefaults(
     size: "medium", // 'small' | 'medium' | 'large'
     label: "縣市區",
   }
-);
+)
 
 watchEffect(() => {
-  addressState.fieldValue = props.areaName || "";
-  addressState.cascaderValue = Number(props.areaId) | 0;
-});
+  addressState.fieldValue = props.areaName || ""
+  addressState.cascaderValue = Number(props.areaId) | 0
+})
 
-const getAreas: Result<Array<Areas>> = await queryAreas();
+const getAreas: Result<Array<Areas>> = await queryAreas()
 
 const hanldeAreas = (data: any) => {
   return data.map((item: any) => {
@@ -71,19 +71,21 @@ const hanldeAreas = (data: any) => {
       text: item.label,
       value: item.value,
       children: item.children?.length > 0 ? hanldeAreas(item.children) : null,
-    };
-  });
-};
-addressState.cascaderOptions = hanldeAreas(getAreas.data);
+    }
+  })
+}
+addressState.cascaderOptions = hanldeAreas(getAreas.data)
 
 const onFinish = ({ selectedOptions }: any) => {
-  areaId.value = addressState.cascaderValue;
-  addressState.showPopup = false;
-  console.log( addressState.fieldValue);
+  areaId.value = addressState.cascaderValue
+  addressState.showPopup = false
+  console.log(addressState.fieldValue)
 
-  addressState.fieldValue = selectedOptions.map((option: any) => option.text).join("/");
-  emits("handleChangeValue", selectedOptions[1].value, addressState.fieldValue);
-};
+  addressState.fieldValue = selectedOptions
+    .map((option: any) => option.text)
+    .join("/")
+  emits("handleChangeValue", selectedOptions[1].value, addressState.fieldValue)
+}
 </script>
 <style lang="scss" scoped>
 .citySelect {
@@ -93,10 +95,10 @@ const onFinish = ({ selectedOptions }: any) => {
 :deep(.van-icon-arrow:before) {
   content: none;
 }
-:deep(.van-cascader__option--selected){
-  color: #D33123;
+:deep(.van-cascader__option--selected) {
+  color: #d33123;
 }
-:deep(.van-tabs__line){
-  background-color: #D33123;
+:deep(.van-tabs__line) {
+  background-color: #d33123;
 }
 </style>

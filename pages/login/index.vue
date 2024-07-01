@@ -13,7 +13,7 @@
                   alt=""
                 />
               </li>
-              <!-- <li class="other-login-item" @click="handleToFacebookLogin"><img src="/images/login/facebook_icon.png" alt=""></li> -->
+              <li class="other-login-item" @click="handleToFacebookLogin"><img src="/images/login/facebook_icon.png" alt=""></li>
             </ul>
           </div>
         </CoreshopLoginRegister>

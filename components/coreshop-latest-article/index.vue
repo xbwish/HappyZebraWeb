@@ -21,16 +21,17 @@
 </template>
 
 <script setup lang="ts">
-import {} from "vue";
-import { queryLatestArticleList } from "@/composables/articleService";
-import { Article } from "@/model/article";
-import { Result } from "@/model/result";
+import {} from "vue"
+import { queryLatestArticleList } from "@/composables/articleService"
+import type { Article } from "@/model/article"
+import type { Result } from "@/model/result"
 
-let articles: Array<Article> = [];
-const latestArticles: Result<Array<Article>> = await queryLatestArticleList();
-articles = (latestArticles.data || []).map(item=>({...item,link:`/article/detail/${item.id}`}));
+let articles: Array<Article> = []
+const latestArticles: Result<Array<Article>> = await queryLatestArticleList()
+articles = (latestArticles.data || []).map((item) => ({
+  ...item,
+  link: `/article/detail/${item.id}`,
+}))
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

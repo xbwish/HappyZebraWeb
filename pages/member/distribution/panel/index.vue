@@ -224,54 +224,54 @@
 </template>
 
 <script setup lang="ts">
-import { NIcon } from "naive-ui";
-import { UnwrapRef, ref } from "vue";
-import { Result } from "@/model/result";
-import { queryDistributionInfo } from "@/composables/distribution";
-import { useMemberStore, useAccountStore } from "@/store";
-import { AgentInfo } from "@/model/member";
+import { NIcon } from "naive-ui"
+import { UnwrapRef, ref } from "vue"
+import type { Result } from "@/model/result"
+import { queryDistributionInfo } from "@/composables/distribution"
+import { useMemberStore, useAccountStore } from "@/store"
+import type { AgentInfo } from "@/model/member"
 import {
   UrlShareClentType,
   ShareType,
   UrlSharePageType,
   shareUrl,
-} from "@/enum";
-import { queryShare } from "@/composables/shareService";
-import { showToast } from "vant";
-import { IShareParams } from "@/model";
-import { coreShopAuthCookie } from "@/consts";
-import { wxShare } from "@/utils/wx-share";
-import { queryDistributionStoreInfo } from "@/composables/distribution";
-import { useConfigStore } from "@/store";
-import { useI18n } from "vue-i18n";
-const { t: coreShopLang } = useI18n();
-const configStore = useConfigStore().getConfig;
+} from "@/enum"
+import { queryShare } from "@/composables/shareService"
+import { showToast } from "vant"
+import { IShareParams } from "@/model"
+import { coreShopAuthCookie } from "@/consts"
+import { wxShare } from "@/utils/wx-share"
+import { queryDistributionStoreInfo } from "@/composables/distribution"
+import { useConfigStore } from "@/store"
+import { useI18n } from "vue-i18n"
+const { t: coreShopLang } = useI18n()
+const configStore = useConfigStore().getConfig
 
 definePageMeta({
   layout: false,
-});
+})
 
-const showMoney = ref(true);
-const info: Result<AgentInfo> = await queryDistributionInfo();
-const userInfo: any = useMemberStore().userData;
+const showMoney = ref(true)
+const info: Result<AgentInfo> = await queryDistributionInfo()
+const userInfo: any = useMemberStore().userData
 
 const shareState: UnwrapRef<{
-  showPopupPoster: boolean;
-  link: string;
-  shareOptions: { store: number };
+  showPopupPoster: boolean
+  link: string
+  shareOptions: { store: number }
 }> = reactive({
   showPopupPoster: false,
   link: "",
   shareOptions: { store: Number(info.data.store) },
-});
+})
 
 const handleShowMoney = () => {
-  showMoney.value = !showMoney.value;
-};
+  showMoney.value = !showMoney.value
+}
 
 const handleTogglePoster = () => {
-  shareState.showPopupPoster = !shareState.showPopupPoster;
-};
+  shareState.showPopupPoster = !shareState.showPopupPoster
+}
 
 onMounted(async () => {
   let data: IShareParams = {
@@ -283,21 +283,21 @@ onMounted(async () => {
     },
     page: UrlSharePageType.inv,
     token: useAccountStore().getToken,
-  };
-  if (process.client) {
-    data.url = `${window.location.origin}${shareUrl}`;
   }
-  const cookie = useCookie(coreShopAuthCookie);
+  if (process.client) {
+    data.url = `${window.location.origin}${shareUrl}`
+  }
+  const cookie = useCookie(coreShopAuthCookie)
   const result: Result<any> = await queryShare(
     data,
     cookie.value ? true : false
-  );
+  )
   if (result.status) {
-    shareState.link = result.data;
+    shareState.link = result.data
 
     const res = await queryDistributionStoreInfo({
       id: shareState.shareOptions.store,
-    });
+    })
 
     wxShare({
       title: `${res.data.storeName || ""} ${coreShopLang("我的店铺")}` || "",
@@ -307,11 +307,11 @@ onMounted(async () => {
         )}` || "",
       link: result.data,
       // imgUrl: res.data?.storeLogo || "/images/good.jpg",
-    });
+    })
   } else {
-    showToast(result.msg);
+    showToast(result.msg)
   }
-});
+})
 </script>
 
 <style lang="scss" scoped>

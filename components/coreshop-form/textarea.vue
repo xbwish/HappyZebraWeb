@@ -3,7 +3,7 @@
     <div class="title">
       <div>{{ props.data.name }}：</div>
       <div v-if="props.data.required">
-        <Tag type="primary">{{$t('必选')}}</Tag>
+        <Tag type="primary">{{ $t("必选") }}</Tag>
       </div>
     </div>
     <div class="goods-box">
@@ -19,31 +19,31 @@
 </template>
 
 <script setup lang="ts">
-import { UnwrapRef } from "vue";
-import { Tag, Field } from "vant";
+import type { UnwrapRef } from "vue"
+import { Tag, Field } from "vant"
 
 const props = withDefaults(
   defineProps<{
-    data: any;
+    data: any
   }>(),
   {
     data: () => {},
   }
-);
-let emits = defineEmits(["handleConfirm"]);
+)
+let emits = defineEmits(["handleConfirm"])
 
 const textState: UnwrapRef<{
-  value: string;
+  value: string
 }> = reactive({
   value: props.data.defaultValue,
-});
+})
 
 const handleChange = () => {
   emits("handleConfirm", {
     key: props.data.id,
     value: textState.value,
-  });
-};
+  })
+}
 </script>
 
 <style scoped lang="scss">

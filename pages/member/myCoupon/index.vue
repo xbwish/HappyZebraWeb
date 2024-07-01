@@ -2,36 +2,55 @@
   <section>
     <CoreshopTitle :title="$t('优惠券')"></CoreshopTitle>
     <div class="tab-list">
-      <Tabs @click-tab="handleChangeTab($event)" title-active-color="#f56c6c" color="#f56c6c">
-        <Tab v-for="(item, index) in tabList" :key="item.key" :title="$t(item.title)" :name="item.key"></Tab>
+      <Tabs
+        @click-tab="handleChangeTab($event)"
+        title-active-color="#f56c6c"
+        color="#f56c6c"
+      >
+        <Tab
+          v-for="(item, index) in tabList"
+          :key="item.key"
+          :title="$t(item.title)"
+          :name="item.key"
+        ></Tab>
       </Tabs>
     </div>
 
     <section class="layout-coupon">
       <ul v-if="couponData.list.length > 0" class="coupon-box">
         <li
-          :class="'cs-m-b-10 cs-border-radius-5 cs-position-relative ' + couponData.display"
+          :class="
+            'cs-m-b-10 cs-border-radius-5 cs-position-relative ' +
+            couponData.display
+          "
           v-for="item in couponData.list"
           :key="item.id"
         >
-          <div class="cs-display-flex cs-p-15 cs-justify-content-space-between cs-justify-content-center">
-            <div class="cs-display-flex cs-percent-w-25 code ">
+          <div
+            class="cs-display-flex cs-p-15 cs-justify-content-space-between cs-justify-content-center"
+          >
+            <div class="cs-display-flex cs-percent-w-25 code">
               <div class="cs-margin-auto">
                 <!-- <p class="cs-font-size-12 cs-text-align-center">{{ item.couponCode }}</p> -->
                 <p class="cs-font-size-12 cs-text-align-center price">
                   <span>NT$</span>
                   <span class="num">10</span>
                 </p>
-                <p class="cs-font-size-12 cs-color-gray cs-text-align-center text">
+                <p
+                  class="cs-font-size-12 cs-color-gray cs-text-align-center text"
+                >
                   <!-- v-for="items in item.results"
                   :key="items"
                   {{ items }} -->
-                  
                 </p>
               </div>
             </div>
-            <div class="cs-flex-1 cs-m-l-10 cs-display-flex cs-flex-direction-column cs-justify-content-space-between code_right">
-              <div class="cs-display-flex cs-justify-content-space-between cs-justify-content-center">
+            <div
+              class="cs-flex-1 cs-m-l-10 cs-display-flex cs-flex-direction-column cs-justify-content-space-between code_right"
+            >
+              <div
+                class="cs-display-flex cs-justify-content-space-between cs-justify-content-center"
+              >
                 <p class="cs-font-size-14">{{ item.couponName }}</p>
                 <CoreshopButton
                   class="cs-w-70 cs-font-size-12 code_right_btn"
@@ -42,40 +61,52 @@
                 >
                 </CoreshopButton>
               </div>
-              <p class="cs-font-size-12 cs-color-gray">{{ item.stime }} - {{ item.etime }}</p>
+              <p class="cs-font-size-12 cs-color-gray">
+                {{ item.stime }} - {{ item.etime }}
+              </p>
               <div
                 class="cs-m-t-5 cs-display-flex cs-justify-content-space-between cs-align-items-center cs-font-size-12 cs-color-gray"
                 @click="handleViewCoupon(item)"
               >
                 <span>{{ $t("使用规则") }}</span>
-                <Icon :name="`arrow-${item.isShow?'down':'up'}`"  />
+                <Icon :name="`arrow-${item.isShow ? 'down' : 'up'}`" />
               </div>
             </div>
           </div>
-          <div v-show="item.isShow" class="cs-overflow-hidden cs-percent-w-100 coupon-message">
+          <div
+            v-show="item.isShow"
+            class="cs-overflow-hidden cs-percent-w-100 coupon-message"
+          >
             <div class="cs-p-10">
-              <p v-for="(itemCondition, index) in item.conditions" :key="index">{{ itemCondition }}</p>
+              <p v-for="(itemCondition, index) in item.conditions" :key="index">
+                {{ itemCondition }}
+              </p>
             </div>
           </div>
         </li>
       </ul>
       <CoreshopNoData v-else :text="$t('暂无此类优惠券')"></CoreshopNoData>
-      <p class="no-more" v-if="couponData.list.length > 0 && !couponData.haveData">{{$t('没有更多了')}}</p>
+      <p
+        class="no-more"
+        v-if="couponData.list.length > 0 && !couponData.haveData"
+      >
+        {{ $t("没有更多了") }}
+      </p>
     </section>
     <CoreshopLoading v-if="couponData.isLoading" />
   </section>
 </template>
 
 <script setup lang="ts">
-import { UnwrapRef, onMounted } from "vue";
-import { Result } from "@/model/result";
-import { queryUserCoupon } from "@/composables/coupon";
-import { UserCoupon, UserCouponList } from "@/model/member";
-import { usePageConfig } from "@/store";
-import { Tabs, Tab,Icon } from "vant";
-import { useI18n } from "vue-i18n";
-const { t: coreShopLang } = useI18n();
-usePageConfig().set_back_style({ top: "15px" });
+import { UnwrapRef, onMounted } from "vue"
+import type { Result } from "@/model/result"
+import { queryUserCoupon } from "@/composables/coupon"
+import { UserCoupon, UserCouponList } from "@/model/member"
+import { usePageConfig } from "@/store"
+import { Tabs, Tab, Icon } from "vant"
+import { useI18n } from "vue-i18n"
+const { t: coreShopLang } = useI18n()
+usePageConfig().set_back_style({ top: "15px" })
 
 const tabList = [
   {
@@ -90,15 +121,15 @@ const tabList = [
     title: coreShopLang("已失效"),
     key: "invalid",
   },
-];
+]
 
 const couponData: UnwrapRef<{
-  page: number;
-  limit: number;
-  display: string;
-  list: Array<UserCouponList>;
-  haveData: boolean;
-  isLoading: boolean;
+  page: number
+  limit: number
+  display: string
+  list: Array<UserCouponList>
+  haveData: boolean
+  isLoading: boolean
 }> = reactive({
   page: 1,
   limit: 20,
@@ -106,88 +137,92 @@ const couponData: UnwrapRef<{
   list: [],
   haveData: true,
   isLoading: false,
-});
+})
 
 const query = async () => {
-  couponData.isLoading = true;
+  couponData.isLoading = true
 
   const getCouponList: Result<UserCoupon> = await queryUserCoupon({
     limit: couponData.limit,
     page: couponData.page,
     display: couponData.display,
-  });
+  })
   if (getCouponList.data?.list.length > 0) {
     couponData.list = couponData.list.concat(
-      getCouponList.data.list.map((item: UserCouponList) => ({ isShow: false, ...item }))
-    );
+      getCouponList.data.list.map((item: UserCouponList) => ({
+        isShow: false,
+        ...item,
+      }))
+    )
   } else {
-    couponData.haveData = false;
+    couponData.haveData = false
   }
-  couponData.isLoading = false;
-};
-query();
+  couponData.isLoading = false
+}
+query()
 
 onMounted(() => {
   window.addEventListener(
     "scroll",
     throttle(() => {
-      const scrollH = document.documentElement.scrollHeight; // 文档的完整高度
-      const scrollT = document.documentElement.scrollTop || document.body.scrollTop; // 当前滚动条的垂直偏移
-      const screenH = window.screen.height; // 屏幕可视高度
+      const scrollH = document.documentElement.scrollHeight // 文档的完整高度
+      const scrollT =
+        document.documentElement.scrollTop || document.body.scrollTop // 当前滚动条的垂直偏移
+      const screenH = window.screen.height // 屏幕可视高度
       if (scrollH - scrollT - screenH < 60 && couponData.haveData) {
-        couponData.page++;
-        query();
+        couponData.page++
+        query()
       }
     }, 500)
-  );
-});
+  )
+})
 
 const handleViewCoupon = (item: any) => {
-  item.isShow = !item.isShow;
-};
+  item.isShow = !item.isShow
+}
 
-const handleChangeTab = (event: {name:string}) => {
-  couponData.page = 1;
-  couponData.list = [];
-  couponData.haveData = true;
-  couponData.isLoading = false;
-  couponData.display = event.name;
-  query();
-};
+const handleChangeTab = (event: { name: string }) => {
+  couponData.page = 1
+  couponData.list = []
+  couponData.haveData = true
+  couponData.isLoading = false
+  couponData.display = event.name
+  query()
+}
 
 const handleLink = () => {
   if (couponData.display === "noUsed") {
-    routerLink("/goods/classify");
+    routerLink("/goods/classify")
   }
-};
+}
 const handleButtonText = (item: any) => {
-  let text = coreShopLang("立即使用");
+  let text = coreShopLang("立即使用")
   if (couponData.display === "noUsed") {
-    return text;
+    return text
   }
   if (item.isUsed) {
-    text = coreShopLang("已使用");
-    return text;
+    text = coreShopLang("已使用")
+    return text
   }
   if (item.isExpire && !item.isUsed) {
-    text = coreShopLang("已失效");
-    return text;
+    text = coreShopLang("已失效")
+    return text
   }
-};
+}
 const handleButtonBgColor = (item: any) => {
-  let color = "#f56c6c";
+  let color = "#f56c6c"
   if (couponData.display === "noUsed") {
-    return color;
+    return color
   }
   if (item.isUsed) {
-    color = "#f0a020";
-    return color;
+    color = "#f0a020"
+    return color
   }
   if (item.isExpire && !item.isUsed) {
-    color = "#dcdcdc";
-    return color;
+    color = "#dcdcdc"
+    return color
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -227,7 +262,7 @@ const handleButtonBgColor = (item: any) => {
       .code {
         background-image: url(../../../assets/img/green_left.png);
         background-size: 100% 100%;
-        opacity: .8;
+        opacity: 0.8;
         .cs-margin-auto {
           width: 100%;
           display: flex;
@@ -266,7 +301,7 @@ const handleButtonBgColor = (item: any) => {
           flex: 2;
           position: relative;
           .cs-font-size-14 {
-            color: #292B2E;
+            color: #292b2e;
             font-weight: 600;
             line-height: 18px;
           }
@@ -281,7 +316,7 @@ const handleButtonBgColor = (item: any) => {
         }
         .cs-font-size-12 {
           flex: 1;
-          color: #292B2E;
+          color: #292b2e;
         }
         .cs-m-t-5 {
           margin-top: 0px !important;

@@ -13,7 +13,11 @@
         </li>
       </ul>
       <div v-if="articleDataState.list.length > 0">
-        <div class="cs-p-10 article-item" v-for="item in articleDataState.list" :key="item.id">
+        <div
+          class="cs-p-10 article-item"
+          v-for="item in articleDataState.list"
+          :key="item.id"
+        >
           <NuxtLink
             :to="`/article/detail/${item.id}`"
             class="cs-display-flex cs-align-items-center cs-align-content-center cs-justify-content-space-between"
@@ -31,36 +35,41 @@
         </div>
       </div>
       <CoreshopNoData v-else :text="$t('暂无')" />
-      <p class="no-more" v-if="articleDataState.list.length > 0 && !articleDataState.haveData">{{$t('没有更多了')}}</p>
+      <p
+        class="no-more"
+        v-if="articleDataState.list.length > 0 && !articleDataState.haveData"
+      >
+        {{ $t("没有更多了") }}
+      </p>
       <CoreshopLoading v-if="articleDataState.isLoading" />
     </div>
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-import { UnwrapRef } from "vue";
-import { NIcon } from "naive-ui";
-import { queryArticleList } from "@/composables/notice";
-import { Result } from "@/model/result";
-import { ArticleList, ArticleArticleType } from "@/model/article";
-import { ArticleClassify } from "@/model/article";
-import { queryArticleClassify } from "@/composables/articleService";
-import { usePageConfig } from "@/store";
+import type { UnwrapRef } from "vue"
+import { NIcon } from "naive-ui"
+import { queryArticleList } from "@/composables/notice"
+import type { Result } from "@/model/result"
+import { ArticleList, ArticleArticleType } from "@/model/article"
+import { ArticleClassify } from "@/model/article"
+import { queryArticleClassify } from "@/composables/articleService"
+import { usePageConfig } from "@/store"
 
-definePageMeta({ layout: false });
+definePageMeta({ layout: false })
 
 const articleDataState: UnwrapRef<{
-  page: number;
-  limit: number;
-  list: Array<any>;
-  articleType: Array<ArticleArticleType>;
-  showModal: boolean;
-  id: number;
-  totalPages: number;
-  haveData: boolean;
-  isLoading: boolean;
-  classifyList: Array<any>;
-  index: number;
+  page: number
+  limit: number
+  list: Array<any>
+  articleType: Array<ArticleArticleType>
+  showModal: boolean
+  id: number
+  totalPages: number
+  haveData: boolean
+  isLoading: boolean
+  classifyList: Array<any>
+  index: number
 }> = reactive({
   page: 1,
   limit: 30,
@@ -73,69 +82,73 @@ const articleDataState: UnwrapRef<{
   isLoading: false,
   classifyList: [],
   index: 0,
-});
+})
 
-usePageConfig().set_back_style({ "align-items": "flex-end" });
+usePageConfig().set_back_style({ "align-items": "flex-end" })
 
 // 分类
-const articleResult: Result<Array<ArticleClassify>> = await queryArticleClassify();
-articleDataState.classifyList = articleResult.data;
-articleDataState.id = articleResult.data[0].id;
+const articleResult: Result<Array<ArticleClassify>> =
+  await queryArticleClassify()
+articleDataState.classifyList = articleResult.data
+articleDataState.id = articleResult.data[0].id
 
 const handleQuery = async () => {
-  articleDataState.isLoading = true;
+  articleDataState.isLoading = true
 
   const articleRes: Result<ArticleList> = await queryArticleList({
     limit: articleDataState.limit,
     page: articleDataState.page,
     id: articleDataState.id,
-  });
+  })
 
-  articleDataState.totalPages = articleRes.data.totalPages;
+  articleDataState.totalPages = articleRes.data.totalPages
 
   if (articleRes.data?.list.length > 0) {
-    articleDataState.list = articleDataState.list.concat(articleRes.data?.list || []);
+    articleDataState.list = articleDataState.list.concat(
+      articleRes.data?.list || []
+    )
   } else {
-    articleDataState.haveData = false;
+    articleDataState.haveData = false
   }
 
   if (articleDataState.articleType.length === 0) {
-    articleDataState.id = articleRes.data.articleType[0].id;
-    articleDataState.articleType = articleRes.data.articleType;
+    articleDataState.id = articleRes.data.articleType[0].id
+    articleDataState.articleType = articleRes.data.articleType
   }
-  articleDataState.isLoading = false;
-};
-handleQuery();
+  articleDataState.isLoading = false
+}
+handleQuery()
 
 onMounted(() => {
   window.addEventListener(
     "scroll",
     throttle(() => {
-      const scrollH = document.documentElement.scrollHeight; // 文档的完整高度
-      const scrollT = document.documentElement.scrollTop || document.body.scrollTop; // 当前滚动条的垂直偏移
-      const screenH = window.screen.height; // 屏幕可视高度
+      const scrollH = document.documentElement.scrollHeight // 文档的完整高度
+      const scrollT =
+        document.documentElement.scrollTop || document.body.scrollTop // 当前滚动条的垂直偏移
+      const screenH = window.screen.height // 屏幕可视高度
       if (scrollH - scrollT - screenH < 60 && articleDataState.haveData) {
-        articleDataState.page++;
-        handleQuery();
+        articleDataState.page++
+        handleQuery()
       }
     }, 500)
-  );
-});
+  )
+})
 
 const hanldeTab = (index: number, id: number) => {
   if (index != articleDataState.index) {
-    articleDataState.index = index;
-    articleDataState.id = id;
-    articleDataState.list = [];
-    articleDataState.haveData = true;
-    articleDataState.isLoading = false;
-    articleDataState.page = 1;
-    handleQuery();
+    articleDataState.index = index
+    articleDataState.id = id
+    articleDataState.list = []
+    articleDataState.haveData = true
+    articleDataState.isLoading = false
+    articleDataState.page = 1
+    handleQuery()
   }
-};
+}
 const handleViewDetail = (id: number) => {
-  window.location.href = `/article/detail/${id}`;
-};
+  window.location.href = `/article/detail/${id}`
+}
 </script>
 <style scoped lang="scss">
 .tab-list {
@@ -159,14 +172,14 @@ const handleViewDetail = (id: number) => {
   li.on {
     position: relative;
     // border-bottom: 1px solid #D33123;
-    color: #D33123;
+    color: #d33123;
   }
   li.on:after {
     content: "";
     display: inline-block;
     width: 0.9rem;
-    height:0.075rem;
-    background: #D33123;
+    height: 0.075rem;
+    background: #d33123;
     position: absolute;
     bottom: 0;
     left: 50%;

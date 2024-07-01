@@ -1,9 +1,9 @@
 <template>
   <div class="cs-background-color-white cs-p-10">
     <div class="title">
-      <div>{{ props.data.name }}：（{{$t('限制3张')}}）</div>
+      <div>{{ props.data.name }}：（{{ $t("限制3张") }}）</div>
       <div v-if="props.data.required">
-        <Tag type="primary">{{$t('必选')}}</Tag>
+        <Tag type="primary">{{ $t("必选") }}</Tag>
       </div>
     </div>
     <div class="goods-box">
@@ -18,63 +18,72 @@
 </template>
 
 <script setup lang="ts">
-import { UnwrapRef } from "vue";
-import * as fileService from "@/composables/file";
-import { Result } from "@/model/result";
-import { UploadFileResult } from "@/model/file";
-import { showToast, Tag, Uploader, UploaderFileListItem } from "vant";
+import type { UnwrapRef } from "vue"
+import * as fileService from "@/composables/file"
+import type { Result } from "@/model/result"
+import { UploadFileResult } from "@/model/file"
+import { showToast, Tag, Uploader, UploaderFileListItem } from "vant"
 
 const props = withDefaults(
   defineProps<{
-    data: any;
+    data: any
   }>(),
   {
     data: () => {},
   }
-);
-let emits = defineEmits(["handleConfirm"]);
+)
+let emits = defineEmits(["handleConfirm"])
 
 const imgState: UnwrapRef<{
-  banner: Array<UploaderFileListItem>;
-  tempUploadImages?: Array<UploaderFileListItem>;
+  banner: Array<UploaderFileListItem>
+  tempUploadImages?: Array<UploaderFileListItem>
 }> = reactive({
   banner: [],
   tempUploadImages: [],
-});
+})
 
 /** 上传  */
 const handlerUploadBanner = async (uploadFileInfo: UploaderFileListItem) => {
   if (!uploadFileInfo?.file) {
-    return;
+    return
   }
 
-  let uploadResult: Result<UploadFileResult> = await fileService.uploadImage(uploadFileInfo.file!);
+  let uploadResult: Result<UploadFileResult> = await fileService.uploadImage(
+    uploadFileInfo.file!
+  )
 
   if (!uploadResult.status) {
-    showToast("网络异常，请重试");
-    return;
+    showToast("网络异常，请重试")
+    return
   }
-  const fileUrl: string = uploadResult.data.fileUrl;
+  const fileUrl: string = uploadResult.data.fileUrl
 
-  imgState.banner.push({ url: fileUrl });
+  imgState.banner.push({ url: fileUrl })
 
-  let value: Array<string> = [];
-  imgState.banner.forEach((item) => value.push(item.url as string));
+  let value: Array<string> = []
+  imgState.banner.forEach((item) => value.push(item.url as string))
 
   emits("handleConfirm", {
     key: props.data.id,
     value: value.join(","),
-  });
-};
+  })
+}
 
-const handleRemoveBanner = (event: { file: File }, detail: { index: number }) => {
-  imgState.tempUploadImages = imgState.tempUploadImages?.filter((item, index) => index !== detail.index);
-  imgState.banner = imgState.banner.filter((_: any, index: number) => index !== detail.index);
+const handleRemoveBanner = (
+  event: { file: File },
+  detail: { index: number }
+) => {
+  imgState.tempUploadImages = imgState.tempUploadImages?.filter(
+    (item, index) => index !== detail.index
+  )
+  imgState.banner = imgState.banner.filter(
+    (_: any, index: number) => index !== detail.index
+  )
   emits("handleConfirm", {
     key: props.data.id,
     value: imgState.banner?.join(","),
-  });
-};
+  })
+}
 </script>
 
 <style scoped lang="scss">

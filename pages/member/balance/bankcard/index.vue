@@ -8,10 +8,21 @@
             <SwipeCell>
               <div class="card-item">
                 <div>
-                  <img class="cs-percent-w-100 cs-display-flex" :src="item.bankLogo" alt="" />
+                  <img
+                    class="cs-percent-w-100 cs-display-flex"
+                    :src="item.bankLogo"
+                    alt=""
+                  />
                 </div>
-                <div class="cs-font-size-12" style="text-align: left;width: 100%;">
-                  <p style="text-align: left;"><b>{{ item.accountName }}</b> &nbsp;&nbsp;&nbsp;{{ item.cardNumber }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ item.accountBank }}</p>
+                <div
+                  class="cs-font-size-12"
+                  style="text-align: left; width: 100%"
+                >
+                  <p style="text-align: left">
+                    <b>{{ item.accountName }}</b> &nbsp;&nbsp;&nbsp;{{
+                      item.cardNumber
+                    }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ item.accountBank }}
+                  </p>
                 </div>
                 <div class="isdefault cs-font-size-14" v-if="item.isdefault">
                   <CoreshopLanguage text="默认" />
@@ -20,8 +31,12 @@
 
               <template #right>
                 <div class="actions">
-                  <div class="set-default" @click="handleSetDefault(item)">{{$t('设为默认')}}</div>
-                  <div class="delete" @click="handleDeleteCard(item.id!)">{{$t('删除')}}</div>
+                  <div class="set-default" @click="handleSetDefault(item)">
+                    {{ $t("设为默认") }}
+                  </div>
+                  <div class="delete" @click="handleDeleteCard(item.id!)">
+                    {{ $t("删除") }}
+                  </div>
                 </div>
               </template>
             </SwipeCell>
@@ -36,10 +51,13 @@
             >
               <CoreshopLanguage :text="$t('点我添加金融卡')" />
             </CoreshopButton>
-        </div>
+          </div>
         </ul>
-        <div v-else class="empty-content cs-m-t-10 ">
-          <CoreshopNoData :text="$t('暂无金融卡')" class="van-empty"></CoreshopNoData>
+        <div v-else class="empty-content cs-m-t-10">
+          <CoreshopNoData
+            :text="$t('暂无金融卡')"
+            class="van-empty"
+          ></CoreshopNoData>
           <div class="add-btn">
             <CoreshopButton
               class="cs-display-flex cs-p-t-15 cs-p-b-15 cs-percent-w-100"
@@ -64,14 +82,25 @@
         :style="{ height: '70%' }"
       >
         <div class="cs-p-20">
-          <p class="cs-display-flex cs-align-items-center cs-justify-content-space-between cs-font-size-16 cs-m-b-15">
+          <p
+            class="cs-display-flex cs-align-items-center cs-justify-content-space-between cs-font-size-16 cs-m-b-15"
+          >
             <span class="add-card-tip">{{ $t("添加金融卡") }}</span>
-            <Icon class="close-icon" name="close" :size="20" @click="handleAddCardCancel" />
+            <Icon
+              class="close-icon"
+              name="close"
+              :size="20"
+              @click="handleAddCardCancel"
+            />
           </p>
 
           <CellGroup>
-            <Field :border="false" v-model="cardListData.form.accountName" :label="$t('持卡人戶名')" 
-            :placeholder="$t('請輸入持卡人戶名')"></Field>
+            <Field
+              :border="false"
+              v-model="cardListData.form.accountName"
+              :label="$t('持卡人戶名')"
+              :placeholder="$t('請輸入持卡人戶名')"
+            ></Field>
             <Field
               :border="false"
               v-model="cardListData.form.cardNumber"
@@ -79,7 +108,7 @@
               :label="$t('持卡人帳號')"
               :placeholder="$t('請輸入持卡人帳號')"
             ></Field>
-           
+
             <Field
               :border="false"
               v-model="cardListData.form.cardTypeName"
@@ -92,7 +121,12 @@
               :label="$t('金融卡类型')"
               :placeholder="$t('请输入金融卡类型')"
             ></Field> -->
-            <Field :border="false" v-model="cardListData.form.accountBank" :label="$t('開戶支行')" :placeholder="$t('請輸入開戶支行')"></Field>
+            <Field
+              :border="false"
+              v-model="cardListData.form.accountBank"
+              :label="$t('開戶支行')"
+              :placeholder="$t('請輸入開戶支行')"
+            ></Field>
             <!-- <CoreshopCascaderAddress
               :areaId="cardListData.form.areaId"
               :areaName="cardListData.areaName"
@@ -100,19 +134,23 @@
             >
             </CoreshopCascaderAddress> -->
             <div class="default">
-              <Checkbox :border="false" v-model="cardListData.form.isDefault" checked-color="#D33123">{{$t('勾选将设为默认提现用户')}}</Checkbox>
+              <Checkbox
+                :border="false"
+                v-model="cardListData.form.isDefault"
+                checked-color="#D33123"
+                >{{ $t("勾选将设为默认提现用户") }}</Checkbox
+              >
             </div>
           </CellGroup>
-          <div  class="confirm">
+          <div class="confirm">
             <coreshop-button
               :text="$t('保存')"
               @click="handleAddCardOk"
               :size="btnSize.medium"
               :bordered="true"
               bg-color="#D33123"
-          />
+            />
           </div>
-         
         </div>
       </Popup>
     </div>
@@ -120,16 +158,16 @@
 </template>
 
 <script setup lang="ts">
-import { Result } from "@/model/result";
-import { UnwrapRef } from "vue";
+import type { Result } from "@/model/result"
+import type { UnwrapRef } from "vue"
 import {
   queryRemoveBankCard,
   queryBankCardOrganization,
   querySetDefaultBankCard,
   queryBankCardList,
   queryAddBankCard,
-} from "@/composables/balance";
-import { DefaultBankCard, BankCardOrganization } from "@/model/member";
+} from "@/composables/balance"
+import { DefaultBankCard, BankCardOrganization } from "@/model/member"
 import {
   Popup,
   showConfirmDialog,
@@ -140,32 +178,32 @@ import {
   showToast,
   Icon,
   showSuccessToast,
-} from "vant";
-import { btnSize } from "@/enum";
-import { useI18n } from "vue-i18n";
-const { t: coreShopLang } = useI18n();
+} from "vant"
+import { btnSize } from "@/enum"
+import { useI18n } from "vue-i18n"
+const { t: coreShopLang } = useI18n()
 definePageMeta({
   layout: false,
-});
+})
 
 interface Ifrom {
-  cardNumber?: string; // 金融卡号
-  accountName: string; // 开户人姓名
-  bankName: string; // 银行名称
- // bankCode: string; // 银行缩写码
-  accountBank: string; // 开户行
- //cardType: number; // 卡类型
-  cardTypeName: string; // 卡片类型
-  isDefault: number;
+  cardNumber?: string // 金融卡号
+  accountName: string // 开户人姓名
+  bankName: string // 银行名称
+  // bankCode: string; // 银行缩写码
+  accountBank: string // 开户行
+  //cardType: number; // 卡类型
+  cardTypeName: string // 卡片类型
+  isDefault: number
   //areaId?: number;
 }
 
 const cardListData: UnwrapRef<{
-  list: Array<DefaultBankCard>;
-  addShowModalRef: boolean;
-  cardId?: number;
-  form: Ifrom;
-  areaName?: string;
+  list: Array<DefaultBankCard>
+  addShowModalRef: boolean
+  cardId?: number
+  form: Ifrom
+  areaName?: string
 }> = reactive({
   list: [],
   addShowModalRef: false,
@@ -177,18 +215,18 @@ const cardListData: UnwrapRef<{
     bankName: "",
     //bankCode: "",
     accountBank: "",
-   // cardType: 1,
+    // cardType: 1,
     cardTypeName: "",
     isDefault: 0,
-   // areaId: undefined,
+    // areaId: undefined,
   },
-});
+})
 
 const query = async () => {
-  const cardList: Result<Array<DefaultBankCard>> = await queryBankCardList();
-  cardListData.list = cardList.data;
-};
-query();
+  const cardList: Result<Array<DefaultBankCard>> = await queryBankCardList()
+  cardListData.list = cardList.data
+}
+query()
 
 // 弹框获取区域ID
 // const handleChangeValue = async (val: number, area: string) => {
@@ -200,10 +238,10 @@ query();
 const handleSetDefault = async (item: any) => {
   const setDefault: Result<any> = await querySetDefaultBankCard({
     id: item.id,
-  });
-  showSuccessToast(setDefault.msg);
-  query();
-};
+  })
+  showSuccessToast(setDefault.msg)
+  query()
+}
 
 // const handleModalOk = async () => {
 //   const removeBankCard: Result<any> = await queryRemoveBankCard({
@@ -215,43 +253,47 @@ const handleSetDefault = async (item: any) => {
 
 // 删除金融卡
 const handleDeleteCard = (item: any) => {
-  cardListData.cardId = item.id;
+  cardListData.cardId = item.id
 
   showConfirmDialog({
     title: coreShopLang("提示"),
     message: coreShopLang("确定删除该金融卡"),
-    confirmButtonColor:'#f56c6c',
+    confirmButtonColor: "#f56c6c",
     confirmButtonText: coreShopLang("确认"),
     cancelButtonText: coreShopLang("取消"),
   })
     .then(() => {
-     // handleModalOk();
+      // handleModalOk();
     })
     .catch(() => {
       // on cancel
-    });
-};
+    })
+}
 
 // 添加金融卡
 const handleAddCard = () => {
-  cardListData.addShowModalRef = true;
-};
+  cardListData.addShowModalRef = true
+}
 const handleAddCardCancel = () => {
-  cardListData.addShowModalRef = false;
-  reastCard();
-};
+  cardListData.addShowModalRef = false
+  reastCard()
+}
 const handleAddCardOk = async () => {
   if (!cardListData.form.cardNumber) {
-    showToast(coreShopLang("請輸入持卡人金融卡號"));
-    return;
+    showToast(coreShopLang("請輸入持卡人金融卡號"))
+    return
   }
-  if (!/^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,30}$/.test(cardListData.form.accountName)) {
-    showToast(coreShopLang("請輸入持卡人戶名"));
-    return;
+  if (
+    !/^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,30}$/.test(
+      cardListData.form.accountName
+    )
+  ) {
+    showToast(coreShopLang("請輸入持卡人戶名"))
+    return
   }
   if (!cardListData.form.accountBank) {
-    showToast(coreShopLang("請輸入開戶支行"));
-    return;
+    showToast(coreShopLang("請輸入開戶支行"))
+    return
   }
   // if (!cardListData.form.areaId) {
   //   showToast(coreShopLang("请选择开户行所在地区"));
@@ -263,24 +305,25 @@ const handleAddCardOk = async () => {
   }*/
 
   const addBankCard: Result<any> = await queryAddBankCard({
-    bankAreaId:0,...cardListData.form,
-  });
-  showSuccessToast(addBankCard.msg);
-  handleAddCardCancel();
-  query();
-};
+    bankAreaId: 0,
+    ...cardListData.form,
+  })
+  showSuccessToast(addBankCard.msg)
+  handleAddCardCancel()
+  query()
+}
 const reastCard = () => {
-  cardListData.form.cardNumber = undefined;
-  cardListData.form.accountName = "";
-  cardListData.form.bankName = "";
+  cardListData.form.cardNumber = undefined
+  cardListData.form.accountName = ""
+  cardListData.form.bankName = ""
   // cardListData.form.bankCode = "";
   // cardListData.form.accountBank = "";
   // cardListData.form.cardType = 1;
-   cardListData.form.cardTypeName = "";
-  cardListData.form.isDefault = 0;
+  cardListData.form.cardTypeName = ""
+  cardListData.form.isDefault = 0
   // cardListData.form.areaId = undefined;
   // cardListData.areaName = undefined;
-};
+}
 // 判断获取金融卡类型
 // const handleCheckCard = async () => {
 //   cardListData.form.cardNumber = cardListData.form.cardNumber?.replace(/\s+/g, "");
@@ -294,10 +337,10 @@ const reastCard = () => {
 //     return;
 //   }
 
-  //cardListData.form.bankName = checkCardRes.data.name;
-  //cardListData.form.cardType = checkCardRes.data.type;
-  //cardListData.form.bankCode = checkCardRes.data.bankCode;
- // cardListData.form.cardTypeName = checkCardRes.data.typeName;
+//cardListData.form.bankName = checkCardRes.data.name;
+//cardListData.form.cardType = checkCardRes.data.type;
+//cardListData.form.bankCode = checkCardRes.data.bankCode;
+// cardListData.form.cardTypeName = checkCardRes.data.typeName;
 //};
 </script>
 
@@ -308,15 +351,13 @@ const reastCard = () => {
 }
 
 .confirm {
-
-  .n-button{
+  .n-button {
     position: fixed;
     bottom: 20px;
     width: 90%;
     height: 36px !important;
   }
 }
-
 
 .default {
   // border-top: 0.5px solid #dedede;
@@ -394,12 +435,12 @@ const reastCard = () => {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  padding: 0.25rem 0.25rem 0.8rem  0.25rem;
+  padding: 0.25rem 0.25rem 0.8rem 0.25rem;
   width: 4.75rem;
   font-size: 0.4rem;
   text-align: center;
   color: #fff;
-  .n-button{
+  .n-button {
     height: 1.1rem;
     border-radius: 0.55rem;
   }
@@ -437,26 +478,26 @@ const reastCard = () => {
     border-bottom-right-radius: 8px;
   }
 }
-.balance-detail-box{
-  
+.balance-detail-box {
   position: relative;
   // background: #fff;
   margin: 0 12px;
   border-radius: 8px;
-  .van-empty{
+  .van-empty {
     padding: 34px 0 10px 0 !important;
   }
 }
-.empty-content{
+.empty-content {
   background: #fff;
   position: relative;
   // margin: 0 12px;
   border-radius: 8px;
-  .van-empty{
+  .van-empty {
     padding: 34px 0 10px 0 !important;
   }
 }
-.van-hairline--top-bottom:after, .van-hairline-unset--top-bottom:after{
+.van-hairline--top-bottom:after,
+.van-hairline-unset--top-bottom:after {
   border: none !important;
 }
 </style>

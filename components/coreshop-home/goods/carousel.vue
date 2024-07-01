@@ -79,7 +79,7 @@ import { } from "vue";
 import { NCarousel, NCarouselItem, NGrid, NGi, NImage } from "naive-ui";
 import { NavLinkTypeEnum } from "@/enum";
 import { useConfigStore } from "@/store";
-import { GoodConfig, GoodItem } from "@/model";
+import type { GoodConfig, GoodItem } from "@/model";
 
 const props = withDefaults(defineProps<{ coreshopData?: GoodConfig }>(), {});
 const state = useConfigStore().getConfig;

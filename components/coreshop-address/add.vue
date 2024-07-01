@@ -10,7 +10,9 @@
     class="pop-up"
   >
     <div class="cs-p-20">
-      <p class="cs-display-flex cs-align-items-center cs-justify-content-space-between cs-font-size-16 cs-m-b-15">
+      <p
+        class="cs-display-flex cs-align-items-center cs-justify-content-space-between cs-font-size-16 cs-m-b-15"
+      >
         <span>{{ props.title }}</span>
         <NIcon :size="25" class="close-icon" @click="handleCancelClick">
           <CoreshopIconClose />
@@ -18,25 +20,45 @@
       </p>
 
       <CellGroup>
-        <Field :border="false" v-model="addressData.name" :label="$t('姓名')" :placeholder="$t('请输入姓名')"></Field>
-        <Field :border="false" type="number" v-model="addressData.phone" :label="$t('手机号')" :placeholder="$t('请输入手机号')"></Field>
+        <Field
+          :border="false"
+          v-model="addressData.name"
+          :label="$t('姓名')"
+          :placeholder="$t('请输入姓名')"
+        ></Field>
+        <Field
+          :border="false"
+          type="number"
+          v-model="addressData.phone"
+          :label="$t('手机号')"
+          :placeholder="$t('请输入手机号')"
+        ></Field>
         <CoreshopCascaderAddress
           :areaName="addressData.areaName"
           :areaId="addressData.areaId"
           @handleChangeValue="handleChangeValue"
         >
         </CoreshopCascaderAddress>
-        <Field :border="false" v-model="addressData.detailedAddress" :label="$t('详细地址')" :placeholder="$t('请输入详细地址')"></Field>
-        <Field :border="false" :label="$t('是否默认')+'：'">
+        <Field
+          :border="false"
+          v-model="addressData.detailedAddress"
+          :label="$t('详细地址')"
+          :placeholder="$t('请输入详细地址')"
+        ></Field>
+        <Field :border="false" :label="$t('是否默认') + '：'">
           <template #input>
             <RadioGroup v-model="addressData.isDefault" direction="horizontal">
-              <Radio :name="true" checked-color="#D33123">{{$t('是')}}</Radio>
-              <Radio :name="false" checked-color="#D33123">{{$t('否')}}</Radio>
+              <Radio :name="true" checked-color="#D33123">{{ $t("是") }}</Radio>
+              <Radio :name="false" checked-color="#D33123">{{
+                $t("否")
+              }}</Radio>
             </RadioGroup>
           </template>
         </Field>
       </CellGroup>
-      <div class="cs-display-flex cs-align-items-center cs-justify-content-space-between cs-m-t-20 addrsss-actions">
+      <div
+        class="cs-display-flex cs-align-items-center cs-justify-content-space-between cs-m-t-20 addrsss-actions"
+      >
         <coreshop-button
           :text="$t('取消')"
           round
@@ -61,38 +83,46 @@
 </template>
 
 <script setup lang="ts">
-import { UnwrapRef } from "vue";
-import {  NIcon } from "naive-ui";
-import { Result } from "@/model/result";
-import { Address } from "@/model/address";
-import { editShip, addUserShip } from "@/composables/address";
-import { Popup, CellGroup, Field, RadioGroup, Radio, showToast, showSuccessToast } from "vant";
-import { btnSize } from "@/enum";
-import { mobileReg } from "@/consts";
-import { useI18n } from "vue-i18n";
-const { t: coreShopLang } = useI18n();
+import type { UnwrapRef } from "vue"
+import { NIcon } from "naive-ui"
+import type { Result } from "@/model/result"
+import { Address } from "@/model/address"
+import { editShip, addUserShip } from "@/composables/address"
+import {
+  Popup,
+  CellGroup,
+  Field,
+  RadioGroup,
+  Radio,
+  showToast,
+  showSuccessToast,
+} from "vant"
+import { btnSize } from "@/enum"
+import { mobileReg } from "@/consts"
+import { useI18n } from "vue-i18n"
+const { t: coreShopLang } = useI18n()
 export interface AddressType {
-  show?: boolean;
-  title?: string;
-  addressId?: number;
-  areaName?: string;
-  name?: string;
-  phone?: string;
-  areaId?: number;
-  detailedAddress?: string;
-  isDefault?: boolean;
+  show?: boolean
+  title?: string
+  addressId?: number
+  areaName?: string
+  name?: string
+  phone?: string
+  areaId?: number
+  detailedAddress?: string
+  isDefault?: boolean
 }
 
 const props = withDefaults(defineProps<AddressType>(), {
   show: false,
-  title: '新增收货地址',
+  title: "新增收货地址",
   addressId: 0,
   name: "",
   phone: "",
   areaId: 0,
   detailedAddress: "",
   isDefault: false,
-});
+})
 
 const addressData: UnwrapRef<AddressType> = reactive({
   name: "",
@@ -101,45 +131,45 @@ const addressData: UnwrapRef<AddressType> = reactive({
   detailedAddress: "",
   isDefault: false,
   areaName: "",
-});
+})
 
 watch(
   () => props,
   (newVal, oldVal) => {
-    addressData.name = newVal.name;
-    addressData.phone = newVal.phone;
-    addressData.detailedAddress = newVal.detailedAddress;
-    addressData.isDefault = newVal.isDefault;
-    addressData.areaId = newVal.areaId;
-    addressData.areaName = newVal.areaName;
+    addressData.name = newVal.name
+    addressData.phone = newVal.phone
+    addressData.detailedAddress = newVal.detailedAddress
+    addressData.isDefault = newVal.isDefault
+    addressData.areaId = newVal.areaId
+    addressData.areaName = newVal.areaName
   },
   {
     deep: true,
     immediate: true,
   }
-);
+)
 
-const handleChangeValue = (areaId: number,areaName:string) => {
-  addressData.areaId = areaId;
-  addressData.areaName = areaName;
-};
+const handleChangeValue = (areaId: number, areaName: string) => {
+  addressData.areaId = areaId
+  addressData.areaName = areaName
+}
 
-const emits = defineEmits(["handleModalCancel", "handleModalOk"]);
+const emits = defineEmits(["handleModalCancel", "handleModalOk"])
 
 const handleCancelClick = () => {
-  emits("handleModalCancel");
-};
+  emits("handleModalCancel")
+}
 
 // 确认添加地址
 const handleConfirmClick = async () => {
   if (!addressData.name) {
-    showToast(coreShopLang('请输入收货人姓名'));
-    return;
+    showToast(coreShopLang("请输入收货人姓名"))
+    return
   }
 
   if (!addressData.phone) {
-    showToast(coreShopLang('请输入收货人手机号'));
-    return;
+    showToast(coreShopLang("请输入收货人手机号"))
+    return
   }
   /*if (!mobileReg.test(addressData.phone)) {
     showToast(coreShopLang("收货人手机号格式不正确"));
@@ -151,8 +181,8 @@ const handleConfirmClick = async () => {
   // }
 
   if (!addressData.detailedAddress) {
-    showToast(coreShopLang("请输入详细地址"));
-    return;
+    showToast(coreShopLang("请输入详细地址"))
+    return
   }
   let data = {
     name: addressData.name,
@@ -163,30 +193,30 @@ const handleConfirmClick = async () => {
     longitude: 0,
     latitude: 0,
     street: "",
-  };
+  }
   if (props.addressId === 0) {
     // 添加
-    const editShip: Result<Address> = await addUserShip(data);
+    const editShip: Result<Address> = await addUserShip(data)
     if (!editShip.status) {
-      showToast(editShip.msg as string);
-      return;
+      showToast(editShip.msg as string)
+      return
     }
-    showSuccessToast(coreShopLang("新增成功"));
+    showSuccessToast(coreShopLang("新增成功"))
   } else {
     // 编辑
     const editShipRes: Result<Address> = await editShip({
       id: props.addressId,
       ...data,
-    });
+    })
 
-    if(!editShipRes.status){
-        showToast(editShipRes.msg as string);
-        return
+    if (!editShipRes.status) {
+      showToast(editShipRes.msg as string)
+      return
     }
-     showSuccessToast(coreShopLang("编辑成功"));
+    showSuccessToast(coreShopLang("编辑成功"))
   }
-  emits("handleModalOk");
-};
+  emits("handleModalOk")
+}
 </script>
 
 <style lang="scss" scoped>

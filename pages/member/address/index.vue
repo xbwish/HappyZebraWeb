@@ -2,8 +2,15 @@
   <div class="address-container">
     <coreshop-title :title="$t('地址管理')"></coreshop-title>
     <section>
-      <ul class="cs-display-flex address-box cs-flex-wrap cs-percent-w-95" v-if="addressData.list.length > 0">
-        <li class="cs-m-b-10" v-for="(item, index) in addressData.list" :key="index">
+      <ul
+        class="cs-display-flex address-box cs-flex-wrap cs-percent-w-95"
+        v-if="addressData.list.length > 0"
+      >
+        <li
+          class="cs-m-b-10"
+          v-for="(item, index) in addressData.list"
+          :key="index"
+        >
           <SwipeCell :before-close="onBeforeClose" :name="item.id!">
             <div class="address-main-item">
               <coreshop-address
@@ -21,8 +28,12 @@
             </div>
             <template #right>
               <div class="actions">
-                <div class="set-default" @click="onSetDefaultAddress(item.id!)">{{$t('设为默认')}}</div>
-                <div class="delete" @click="onDeleteAddress(item.id!)">{{$t('删除')}}</div>
+                <div class="set-default" @click="onSetDefaultAddress(item.id!)">
+                  {{ $t("设为默认") }}
+                </div>
+                <div class="delete" @click="onDeleteAddress(item.id!)">
+                  {{ $t("删除") }}
+                </div>
               </div>
             </template>
           </SwipeCell>
@@ -60,35 +71,46 @@
 </template>
 
 <script setup lang="ts">
-import { UnwrapRef } from "vue";
-import { queryUserShip, setDefaultShip, queryRemoveShip, queryShipDetail } from "@/composables/address";
-import { Result } from "@/model/result";
-import { Address } from "@/model/address";
-import { SwipeCell, showToast, showSuccessToast, showConfirmDialog, Icon } from "vant";
-import { useI18n } from "vue-i18n";
-const { t: coreShopLang } = useI18n();
+import type { UnwrapRef } from "vue"
+import {
+  queryUserShip,
+  setDefaultShip,
+  queryRemoveShip,
+  queryShipDetail,
+} from "@/composables/address"
+import type { Result } from "@/model/result"
+import { Address } from "@/model/address"
+import {
+  SwipeCell,
+  showToast,
+  showSuccessToast,
+  showConfirmDialog,
+  Icon,
+} from "vant"
+import { useI18n } from "vue-i18n"
+const { t: coreShopLang } = useI18n()
 const addressData: UnwrapRef<{
-  list: Array<Address>;
-  showModalRef: boolean;
-  addressId: number;
-  title: string;
-  loading: boolean;
+  list: Array<Address>
+  showModalRef: boolean
+  addressId: number
+  title: string
+  loading: boolean
 }> = reactive({
   list: [],
   showModalRef: false,
   addressId: 0,
   title: coreShopLang("新增收货地址"),
   loading: false,
-});
+})
 
 const modalState = reactive<{
-  showModal: boolean;
-  name?: string;
-  phone?: string;
-  detailedAddress?: string;
-  isDefault?: boolean;
-  areaId?: number;
-  areaName?: string;
+  showModal: boolean
+  name?: string
+  phone?: string
+  detailedAddress?: string
+  isDefault?: boolean
+  areaId?: number
+  areaName?: string
 }>({
   showModal: false,
   name: undefined,
@@ -97,49 +119,49 @@ const modalState = reactive<{
   isDefault: false,
   areaId: undefined,
   areaName: "",
-});
+})
 
 // 查询地址列表
 const queryShip = async () => {
-  addressData.loading = true;
-  const userShip: Result<Array<Address>> = await queryUserShip();
-  addressData.list = userShip.data as Array<Address>;
-  addressData.loading = false;
-};
-queryShip();
+  addressData.loading = true
+  const userShip: Result<Array<Address>> = await queryUserShip()
+  addressData.list = userShip.data as Array<Address>
+  addressData.loading = false
+}
+queryShip()
 
 const onAddAddressModalShow = () => {
-  addressData.title = coreShopLang("新增收货地址");
-  modalState.showModal = !modalState.showModal;
-  modalState.areaId = undefined;
-  addressData.addressId = 0;
-  modalState.areaName = "";
-};
+  addressData.title = coreShopLang("新增收货地址")
+  modalState.showModal = !modalState.showModal
+  modalState.areaId = undefined
+  addressData.addressId = 0
+  modalState.areaName = ""
+}
 
 const onSetDefaultAddress = async (id: number) => {
-  const res: Result = await setDefaultShip({ id });
+  const res: Result = await setDefaultShip({ id })
   if (!res.status) {
-    showToast(res.msg as string);
-    return;
+    showToast(res.msg as string)
+    return
   }
-  showSuccessToast(coreShopLang("设置成功"));
-  queryShip();
-};
+  showSuccessToast(coreShopLang("设置成功"))
+  queryShip()
+}
 
 // 编辑地址
 const handleEditAddress = async (id: number) => {
-  addressData.title = coreShopLang("编辑收货地址");
-  addressData.addressId = id;
-  modalState.showModal = true;
+  addressData.title = coreShopLang("编辑收货地址")
+  addressData.addressId = id
+  modalState.showModal = true
 
-  const data: Result<Address> = await queryShipDetail({ id });
-  modalState.name = data.data.name;
-  modalState.areaName = data.data.areaName;
-  modalState.phone = data.data.mobile;
-  modalState.detailedAddress = data.data.address || "" + data.data.street;
-  modalState.isDefault = data.data.isDefault;
-  modalState.areaId = data.data.areaId;
-};
+  const data: Result<Address> = await queryShipDetail({ id })
+  modalState.name = data.data.name
+  modalState.areaName = data.data.areaName
+  modalState.phone = data.data.mobile
+  modalState.detailedAddress = data.data.address || "" + data.data.street
+  modalState.isDefault = data.data.isDefault
+  modalState.areaId = data.data.areaId
+}
 
 // 删除地址
 const onDeleteAddress = (id: number) => {
@@ -151,39 +173,39 @@ const onDeleteAddress = (id: number) => {
     cancelButtonText: coreShopLang("取消"),
   })
     .then(async () => {
-      const removeRes: Result = await queryRemoveShip({ id });
+      const removeRes: Result = await queryRemoveShip({ id })
       if (!removeRes.status) {
-        showToast(removeRes.msg || coreShopLang("删除失败"));
-        return;
+        showToast(removeRes.msg || coreShopLang("删除失败"))
+        return
       }
-      showSuccessToast(coreShopLang("删除成功"));
-      queryShip();
+      showSuccessToast(coreShopLang("删除成功"))
+      queryShip()
     })
-    .catch(() => {});
-};
+    .catch(() => {})
+}
 
 const handleModalCancel = () => {
-  addressData.showModalRef = false;
-};
+  addressData.showModalRef = false
+}
 
 const handleAddressAddModalCancel = () => {
-  modalState.showModal = false;
-  addressData.addressId = 0;
-  modalState.name = undefined;
-  modalState.phone = undefined;
-  modalState.detailedAddress = undefined;
-  modalState.areaId = undefined;
-  modalState.isDefault = false;
-};
+  modalState.showModal = false
+  addressData.addressId = 0
+  modalState.name = undefined
+  modalState.phone = undefined
+  modalState.detailedAddress = undefined
+  modalState.areaId = undefined
+  modalState.isDefault = false
+}
 
 const handleAddressAddModalOk = () => {
-  queryShip();
-  handleAddressAddModalCancel();
-};
+  queryShip()
+  handleAddressAddModalCancel()
+}
 
 const onBeforeClose = (event: { name: number; position: string }): boolean => {
-  return true;
-};
+  return true
+}
 </script>
 
 <style scoped lang="scss">
@@ -198,7 +220,7 @@ const onBeforeClose = (event: { name: number; position: string }): boolean => {
   width: 9.4rem;
   padding: 0 0.3rem;
   z-index: 9;
-  .n-button{
+  .n-button {
     height: 1.1rem;
   }
 }
@@ -232,8 +254,8 @@ const onBeforeClose = (event: { name: number; position: string }): boolean => {
   }
 }
 :deep(.address) {
-    margin-top: 4px !important;
-  }
+  margin-top: 4px !important;
+}
 .actions {
   display: flex;
   height: 100%;
@@ -252,7 +274,7 @@ const onBeforeClose = (event: { name: number; position: string }): boolean => {
   }
 
   .delete {
-    background-color: #D33123;
+    background-color: #d33123;
     color: #ffffff;
     height: 100%;
     padding: 0 10px;
@@ -260,7 +282,7 @@ const onBeforeClose = (event: { name: number; position: string }): boolean => {
     border-bottom-right-radius: 8px;
   }
 }
-:deep(.van-empty){
+:deep(.van-empty) {
   background: #fff;
   border-radius: 8px;
   margin: 10px;

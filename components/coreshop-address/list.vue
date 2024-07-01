@@ -1,7 +1,14 @@
 <template>
-  <div class="store-list cs-background-color-white cs-cursor-pointer" id="storeList">
+  <div
+    class="store-list cs-background-color-white cs-cursor-pointer"
+    id="storeList"
+  >
     <ul>
-      <li v-for="item in addressState" :key="item.id" @click="handleChooseStore(item)">
+      <li
+        v-for="item in addressState"
+        :key="item.id"
+        @click="handleChooseStore(item)"
+      >
         <Checkbox v-model="item.checked" checked-color="#dc2828"></Checkbox>
         <div class="info-container">
           <div class="info">
@@ -19,13 +26,13 @@
 </template>
 
 <script setup lang="ts">
-import { Result } from "@/model/result";
-import { queryUserShip } from "@/composables/address";
-import { Address } from "@/model/address";
-import { Tag, Checkbox } from "vant";
+import type { Result } from "@/model/result"
+import { queryUserShip } from "@/composables/address"
+import { Address } from "@/model/address"
+import { Tag, Checkbox } from "vant"
 
 interface AddressExt extends Address {
-  checked?: boolean;
+  checked?: boolean
 }
 
 const props = defineProps({
@@ -33,25 +40,34 @@ const props = defineProps({
     type: Number,
     default: null,
   },
-});
+})
 
-const addressState = ref<Array<AddressExt>>([]);
-const loading = ref<boolean>(true);
+const addressState = ref<Array<AddressExt>>([])
+const loading = ref<boolean>(true)
 
-const result: Result<Array<AddressExt>> = await queryUserShip({ limit: 99999, page: 1 });
-addressState.value = result.data;
+const result: Result<Array<AddressExt>> = await queryUserShip({
+  limit: 99999,
+  page: 1,
+})
+addressState.value = result.data
 
 if (props.addressId) {
-  addressState.value = addressState.value.map((item) => ({ ...item, checked: item.id === props.addressId }));
+  addressState.value = addressState.value.map((item) => ({
+    ...item,
+    checked: item.id === props.addressId,
+  }))
 }
-loading.value = false;
+loading.value = false
 
-const emits = defineEmits(["onChooseAddress"]);
+const emits = defineEmits(["onChooseAddress"])
 
 const handleChooseStore = (address: Address) => {
-  addressState.value = addressState.value.map((item) => ({ ...item, checked: item.id === address.id }));
-  emits("onChooseAddress", address);
-};
+  addressState.value = addressState.value.map((item) => ({
+    ...item,
+    checked: item.id === address.id,
+  }))
+  emits("onChooseAddress", address)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -64,7 +80,7 @@ const handleChooseStore = (address: Address) => {
       border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
       display: flex;
       align-items: center;
-      .info-container{
+      .info-container {
         margin-left: 10px;
       }
       .info {

@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { GoodConfig } from '@/model';
+import type { GoodConfig } from '@/model';
 const props = withDefaults(defineProps<{ coreshopData?: GoodConfig }>(), {});
 </script>
 

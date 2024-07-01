@@ -2,34 +2,37 @@
   <NuxtLayout name="coreshop-shop-header-back">
     <CoreshopTitle :title="$t('门店列表')"></CoreshopTitle>
     <div class="store-box">
-      <CoreshopStore @on-choose-store="handleChooseStore" :choose="false"></CoreshopStore>
+      <CoreshopStore
+        @on-choose-store="handleChooseStore"
+        :choose="false"
+      ></CoreshopStore>
     </div>
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-import { UnwrapRef } from "vue";
-import { queryStoreList } from "@/composables/store";
-import { Result } from "@/model/result";
-import { useConfigStore } from "@/store";
-import { Store } from "@/model/store";
-import { Config } from "@/model/config";
+import type { UnwrapRef } from "vue"
+import { queryStoreList } from "@/composables/store"
+import type { Result } from "@/model/result"
+import { useConfigStore } from "@/store"
+import { Store } from "@/model/store"
+import { Config } from "@/model/config"
 
-definePageMeta({layout: false})
+definePageMeta({ layout: false })
 
 const storeData: UnwrapRef<{
-  list: Array<any>;
+  list: Array<any>
 }> = reactive({
   list: [],
-});
+})
 
 const getStoreList: Result<Array<Store>> = await queryStoreList({
   limit: 99999,
   page: 1,
-});
-storeData.list = getStoreList.data;
+})
+storeData.list = getStoreList.data
 
-const config: Config = useConfigStore().getConfig;
+const config: Config = useConfigStore().getConfig
 
 useHead({
   script: [
@@ -38,22 +41,22 @@ useHead({
       type: "text/javascript",
     },
   ],
-});
+})
 
 const getLatLng = (item: string) => {
-  return item.split(",").map((p) => Number(p));
-};
-let map = null;
+  return item.split(",").map((p) => Number(p))
+}
+let map = null
 const initMap = () => {
   if (process.client) {
     let center = new window.TMap.LatLng(
       getLatLng(storeData.list[0].coordinate)[0],
       getLatLng(storeData.list[0].coordinate)[1]
-    );
+    )
     //初始化地图
     map = new window.TMap.Map(document.getElementById("container"), {
       center: center, //设置地图中心点坐标
-    });
+    })
 
     let markerLayer = new window.TMap.MultiMarker({
       map: map, //指定地图容器
@@ -81,9 +84,9 @@ const initMap = () => {
             //自定义属性
             title: item.storeName,
           },
-        };
+        }
       }),
-    });
+    })
     //初始化infoWindow
     let infoWindow = new window.TMap.InfoWindow({
       map: map,
@@ -92,17 +95,17 @@ const initMap = () => {
         getLatLng(storeData.list[0].coordinate)[1]
       ),
       offset: { x: 20, y: -32 }, //设置信息窗相对position偏移像素
-    });
-    infoWindow.close(); //初始关闭信息窗关闭
+    })
+    infoWindow.close() //初始关闭信息窗关闭
     //监听标注点击事件
     markerLayer.on("click", function (evt) {
       //设置infoWindow
-      infoWindow.open(); //打开信息窗
-      infoWindow.setPosition(evt.geometry.position); //设置信息窗位置
-      infoWindow.setContent(evt.geometry.properties.title); //设置信息窗内容
-    });
+      infoWindow.open() //打开信息窗
+      infoWindow.setPosition(evt.geometry.position) //设置信息窗位置
+      infoWindow.setContent(evt.geometry.properties.title) //设置信息窗内容
+    })
   }
-};
+}
 
 // initMap();
 
@@ -110,7 +113,7 @@ const handleChooseStore = (item: any) => {
   // map.setContent(new window.TMap.LatLng(
   //     getLatLng(item.coordinate)[0],
   //     getLatLng(item.coordinate)[1]))
-};
+}
 </script>
 
 <style lang="scss" scoped>

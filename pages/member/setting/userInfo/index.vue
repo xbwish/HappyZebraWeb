@@ -2,7 +2,7 @@
   <NuxtLayout name="personal-center">
     <coreshop-title :title="$t('个人资料')"></coreshop-title>
     <div class="progress-box">
-      <span class="title">{{$t("完善度")}}</span>
+      <span class="title">{{ $t("完善度") }}</span>
       <Progress
         class="progress"
         :percentage="userInfo.progress"
@@ -11,7 +11,7 @@
         stroke-width="10"
       />
     </div>
-    <div class="form-title">{{$t("基本资料")}}</div>
+    <div class="form-title">{{ $t("基本资料") }}</div>
     <div class="userInfo-box cs-box-shadow-gray">
       <CellGroup :border="false">
         <Field v-model="userInfo.name" :label="$t('头像')" :border="false">
@@ -86,18 +86,18 @@
 </template>
 
 <script setup lang="ts">
-import { UnwrapRef } from "vue";
-import * as fileService from "@/composables/file";
-import { UploadFileResult } from "@/model/file";
-import { Result } from "@/model/result";
-import { useMemberStore } from "@/store";
-import { IAccountInfo } from "@/model/account";
+import type { UnwrapRef } from "vue"
+import * as fileService from "@/composables/file"
+import { UploadFileResult } from "@/model/file"
+import type { Result } from "@/model/result"
+import { useMemberStore } from "@/store"
+import type { IAccountInfo } from "@/model/account"
 import {
   editAccountInfo,
   editAccountAvatar,
   queryUserInfo,
-} from "@/composables/member";
-import { showToast, showSuccessToast, UploaderFileListItem } from "vant";
+} from "@/composables/member"
+import { showToast, showSuccessToast, UploaderFileListItem } from "vant"
 import {
   Field,
   CellGroup,
@@ -107,12 +107,12 @@ import {
   Progress,
   DatePicker,
   Overlay,
-} from "vant";
-import { useI18n } from "vue-i18n";
-const { t: coreShopLang } = useI18n();
+} from "vant"
+import { useI18n } from "vue-i18n"
+const { t: coreShopLang } = useI18n()
 definePageMeta({
   layout: false,
-});
+})
 const actionSheetList = [
   {
     label: coreShopLang("男"),
@@ -126,18 +126,18 @@ const actionSheetList = [
     label: coreShopLang("保密"),
     value: 3,
   },
-];
+]
 
 const userInfo: UnwrapRef<{
-  progress: number;
-  headPortrait: Array<any>;
-  sex: number;
-  date?: string;
-  name: string;
-  showDatePicker: boolean;
-  minDate: Date;
-  maxDate: Date;
-  birthdayDate: Array<string>;
+  progress: number
+  headPortrait: Array<any>
+  sex: number
+  date?: string
+  name: string
+  showDatePicker: boolean
+  minDate: Date
+  maxDate: Date
+  birthdayDate: Array<string>
 }> = reactive({
   progress: 0,
   headPortrait: [],
@@ -148,51 +148,51 @@ const userInfo: UnwrapRef<{
   minDate: new Date(1980, 0, 1),
   maxDate: new Date(),
   birthdayDate: [],
-});
+})
 
 /** 获取用户信息 */
 const queryInfo = async () => {
-  const data: IAccountInfo = await useMemberStore().getUserData;
+  const data: IAccountInfo = await useMemberStore().getUserData
   if (data.birthday) {
-    userInfo.progress += 25;
-    userInfo.date = timeFormat(data.birthday);
-    userInfo.birthdayDate = timeFormat(data.birthday).split("-") ?? "";
+    userInfo.progress += 25
+    userInfo.date = timeFormat(data.birthday)
+    userInfo.birthdayDate = timeFormat(data.birthday).split("-") ?? ""
   }
   if (data.nickName) {
-    userInfo.name = data.nickName;
-    userInfo.progress += 25;
+    userInfo.name = data.nickName
+    userInfo.progress += 25
   }
   if (data.mobile) {
-    userInfo.progress += 25;
+    userInfo.progress += 25
   }
   if (data.avatarImage) {
-    userInfo.progress += 25;
-    userInfo.headPortrait = [{ url: data.avatarImage, isImage: true }];
+    userInfo.progress += 25
+    userInfo.headPortrait = [{ url: data.avatarImage, isImage: true }]
   }
   if (data.sex && data.sex == 0) {
-    userInfo.sex = actionSheetList[2].value;
+    userInfo.sex = actionSheetList[2].value
   } else {
-    userInfo.sex = actionSheetList[(data.sex as number) - 1].value;
+    userInfo.sex = actionSheetList[(data.sex as number) - 1].value
   }
-};
-queryInfo();
+}
+queryInfo()
 
 /** 上传头像 */
 const handleAfterRead = async (event: UploaderFileListItem) => {
   const uploadResult: Result<UploadFileResult> = await fileService.uploadImage(
     event.file!
-  );
-  const url: string = uploadResult.data.fileUrl;
-  const editAvatar = await editAccountAvatar({ id: url });
+  )
+  const url: string = uploadResult.data.fileUrl
+  const editAvatar = await editAccountAvatar({ id: url })
   if (editAvatar.status) {
-    const data: IAccountInfo = await useMemberStore().getUserData;
-    data.avatarImage = editAvatar.data;
-    useMemberStore().setAccountInfo(data);
-    showSuccessToast(editAvatar.msg);
+    const data: IAccountInfo = await useMemberStore().getUserData
+    data.avatarImage = editAvatar.data
+    useMemberStore().setAccountInfo(data)
+    showSuccessToast(editAvatar.msg)
   } else {
-    showToast(editAvatar.msg);
+    showToast(editAvatar.msg)
   }
-};
+}
 
 /** 保存用户信息 */
 const hanldeSubmit = async () => {
@@ -200,32 +200,32 @@ const hanldeSubmit = async () => {
     sex: userInfo.sex,
     nickname: userInfo.name,
     birthday: "",
-  };
+  }
 
   if (userInfo.date) {
-    data.birthday = timeFormat(userInfo.date);
+    data.birthday = timeFormat(userInfo.date)
   }
 
-  const result: Result = await editAccountInfo(data);
+  const result: Result = await editAccountInfo(data)
 
   if (!result.status) {
-    showToast(result.msg || coreShopLang("网络异常请重试"));
-    return;
+    showToast(result.msg || coreShopLang("网络异常请重试"))
+    return
   }
   // 查询个人资料
-  const userInfoResult: Result<IAccountInfo> = await queryUserInfo();
-  useMemberStore().setAccountInfo(userInfoResult.data);
-  showSuccessToast(result.msg);
-};
+  const userInfoResult: Result<IAccountInfo> = await queryUserInfo()
+  useMemberStore().setAccountInfo(userInfoResult.data)
+  showSuccessToast(result.msg)
+}
 
 const onCancelDatePicker = () => {
-  userInfo.showDatePicker = false;
-};
+  userInfo.showDatePicker = false
+}
 const onConfirmChooseDatePicker = (date: any) => {
-  userInfo.birthdayDate = date.selectedValues;
-  userInfo.date = `${date.selectedValues[0]}-${date.selectedValues[1]}-${date.selectedValues[2]}`;
-  userInfo.showDatePicker = false;
-};
+  userInfo.birthdayDate = date.selectedValues
+  userInfo.date = `${date.selectedValues[0]}-${date.selectedValues[1]}-${date.selectedValues[2]}`
+  userInfo.showDatePicker = false
+}
 </script>
 
 <style scoped lang="scss">
@@ -256,15 +256,14 @@ const onConfirmChooseDatePicker = (date: any) => {
   background-color: #fff;
   margin: 10px;
   padding: 20px 0.3rem;
-  :deep(.van-image){
+  :deep(.van-image) {
     border-radius: 4px !important;
-    background: #F0F0F0;
+    background: #f0f0f0;
   }
-  :deep(.van-uploader__upload){
+  :deep(.van-uploader__upload) {
     border-radius: 4px !important;
-    background: #F0F0F0;
+    background: #f0f0f0;
   }
-  
 }
 .btn-box {
   // position: fixed;
@@ -274,7 +273,7 @@ const onConfirmChooseDatePicker = (date: any) => {
   width: 9.4rem;
   padding: 0.3rem;
   height: 1.1rem;
-  .cs-percent-w-100{
+  .cs-percent-w-100 {
     height: 100%;
   }
 }

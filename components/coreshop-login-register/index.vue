@@ -71,66 +71,75 @@
 </template>
 
 <script setup lang="ts">
-import { Ref } from "vue";
-import { sendSmsCode, smsCodeLogin, queryGetLineToken, queryGetLineProfile, queryLineLogin } from "@/composables/smsService";
-import { CountdownProps, CountdownInst } from "naive-ui";
-import { ILogin, IAuth } from "@/model/login";
-import { Result } from "@/model/result";
-import { useAccountStore } from "@/store";
-import { showToast, Image, Field, CountDown, showLoadingToast } from "vant";
-import { btnSize } from "@/enum";
-import { invitecode } from "@/consts";
+import type { Ref } from "vue"
+import {
+  sendSmsCode,
+  smsCodeLogin,
+  queryGetLineToken,
+  queryGetLineProfile,
+  queryLineLogin,
+} from "@/composables/smsService"
+import type { CountdownProps } from "naive-ui"
+import type { CountdownInst } from "naive-ui"
+import type { ILogin, IAuth } from "@/model/login"
+import type { Result } from "@/model/result"
+import { useAccountStore } from "@/store"
+import { showToast, Image, Field, CountDown, showLoadingToast } from "vant"
+import { btnSize } from "@/enum"
+import { invitecode } from "@/consts"
 
-const rotue = useRoute();
+const rotue = useRoute()
 
 const props = withDefaults(
   defineProps<{
-    title?: string;
-    buttonTitile?: string;
+    title?: string
+    buttonTitile?: string
   }>(),
   {
     title: "用户登录",
     buttonTitile: "立即登录",
   }
-);
+)
 
-const countdown = ref<CountdownInst | null>();
-const sendSmsCodeDisabled: Ref<boolean> = ref<boolean>(false);
-const accountStore = useAccountStore();
-let mobile = ref<number>();
-let code = ref<number>();
+const countdown = ref<CountdownInst | null>()
+const sendSmsCodeDisabled: Ref<boolean> = ref<boolean>(false)
+const accountStore = useAccountStore()
+let mobile = ref<number>()
+let code = ref<number>()
 
 const loginState = reactive<ILogin>({
   loginType: 2,
   platform: 1,
-});
+})
 
 if (rotue.query.sessionAuthId) {
-  loginState["sessionAuthId"] = rotue.query?.sessionAuthId as string;
+  loginState["sessionAuthId"] = rotue.query?.sessionAuthId as string
 }
 
 const renderCountdown: CountdownProps["render"] = ({ seconds }) => {
-  return `${String(seconds).padStart(2, "0")}s`;
-};
+  return `${String(seconds).padStart(2, "0")}s`
+}
 
 const lineCallbackLogin = async () => {
   const loading = showLoadingToast({
-    message: '加载中...',
+    message: "加载中...",
     forbidClick: true,
-    loadingType: 'spinner',
+    loadingType: "spinner",
     overlay: true,
     duration: 0,
-  });
+  })
   const { data: tokenInfo } = await queryGetLineToken({
-    grant_type: 'authorization_code', // 固定值
+    grant_type: "authorization_code", // 固定值
     code: rotue.query.code as string, // 从 LINE 平台收到的授权码
-    client_id: '2004706479',
-    client_secret: 'ca01e5ba49b52750c49adaca1edc9c51',
-    redirect_uri: location.origin + '/login' // 与授权请求redirect_uri中指定的值相同
+    client_id: "2004706479",
+    client_secret: "ca01e5ba49b52750c49adaca1edc9c51",
+    redirect_uri: location.origin + "/login", // 与授权请求redirect_uri中指定的值相同
   })
 
   const { data: userinfo } = await queryGetLineProfile({
-    'Authorization': `${(tokenInfo as any).value?.token_type} ${(tokenInfo as any).value?.access_token}`
+    Authorization: `${(tokenInfo as any).value?.token_type} ${
+      (tokenInfo as any).value?.access_token
+    }`,
   })
 
   let data: any = {
@@ -139,21 +148,21 @@ const lineCallbackLogin = async () => {
     avatar: (userinfo as any).value?.pictureUrl,
     platform: 4,
     invitecode: useCookie(invitecode).value || undefined,
-  };
+  }
   try {
-    const loginResult: Result<any> = await queryLineLogin(data);
+    const loginResult: Result<any> = await queryLineLogin(data)
     if (!loginResult.status || !loginResult.data?.success) {
       loading && loading.close()
-      showToast(loginResult.msg || "网络异常，登录失败");
-      return;
+      showToast(loginResult.msg || "网络异常，登录失败")
+      return
     }
     loading && loading.close()
-    accountStore.setAccountInfo(loginResult.data);
+    accountStore.setAccountInfo(loginResult.data)
     return navigateTo(
       rotue.query?.backUrl ? (rotue.query.backUrl as string) : "/"
-    );
+    )
   } catch (error) {
-    showToast("登录失败，请稍后重试");
+    showToast("登录失败，请稍后重试")
     loading && loading.close()
     console.log(error)
   }
@@ -166,21 +175,21 @@ onMounted(() => {
 })
 
 const onFinish = () => {
-  sendSmsCodeDisabled.value = false;
-};
+  sendSmsCodeDisabled.value = false
+}
 
 const onPhoneChange = (phone: number) => {
-  mobile.value = phone;
-};
+  mobile.value = phone
+}
 
 const onVerifyCode = (verifyCode: number) => {
-  code.value = verifyCode;
-};
+  code.value = verifyCode
+}
 
 const handleSendCode = async () => {
   if (!mobile.value) {
-    showToast("请输入手机号码");
-    return;
+    showToast("请输入手机号码")
+    return
   }
   /* 
 	if (!mobileReg.test(`${mobile.value}`)) {
@@ -191,48 +200,48 @@ const handleSendCode = async () => {
   const sendResult: Result = await sendSmsCode({
     mobile: mobile.value,
     code: "login",
-  });
+  })
   if (sendResult.code !== 0) {
-    showToast(sendResult.msg || "发送验证码失败");
-    return;
+    showToast(sendResult.msg || "发送验证码失败")
+    return
   }
-  sendSmsCodeDisabled.value = true;
-};
+  sendSmsCodeDisabled.value = true
+}
 
 const handleLogin = async () => {
   if (!mobile.value) {
-    showToast("请输入手机号码");
-    return;
+    showToast("请输入手机号码")
+    return
   }
 
   if (!code.value) {
-    showToast("请输入验证码");
-    return;
+    showToast("请输入验证码")
+    return
   }
 
   if (`${code.value}`.length !== 6) {
-    showToast("验证码错误");
-    return;
+    showToast("验证码错误")
+    return
   }
   let data: any = {
     ...loginState,
     mobile: mobile.value,
     code: code.value,
-  };
+  }
   if (useCookie(invitecode).value != "") {
-    data[invitecode] = useCookie(invitecode).value;
+    data[invitecode] = useCookie(invitecode).value
   }
 
-  const loginResult: Result<IAuth> = await smsCodeLogin(data);
+  const loginResult: Result<IAuth> = await smsCodeLogin(data)
   if (!loginResult.status || !loginResult.data?.success) {
-    showToast(loginResult.msg || "网络异常，登录失败");
-    return;
+    showToast(loginResult.msg || "网络异常，登录失败")
+    return
   }
-  accountStore.setAccountInfo(loginResult.data);
+  accountStore.setAccountInfo(loginResult.data)
   return navigateTo(
     rotue.query?.backUrl ? (rotue.query.backUrl as string) : "/"
-  );
-};
+  )
+}
 </script>
 
 <style lang="scss" scoped>

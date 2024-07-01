@@ -16,7 +16,9 @@
           <div class="widget-categories__row">
             <NuxtLink :to="'/article?id=' + item.id">
               <svg class="widget-categories__arrow" width="6px" height="9px">
-                <use xlink:href="/images/sprite.svg#arrow-rounded-right-6x9"></use>
+                <use
+                  xlink:href="/images/sprite.svg#arrow-rounded-right-6x9"
+                ></use>
               </svg>
               {{ item.name }}
             </NuxtLink>
@@ -28,12 +30,13 @@
 </template>
 
 <script setup lang="ts">
-import { queryArticleClassify } from "@/composables/articleService";
-import { ArticleClassify } from "@/model/article";
-import { Result } from "@/model/result";
+import { queryArticleClassify } from "@/composables/articleService"
+import { ArticleClassify } from "@/model/article"
+import type { Result } from "@/model/result"
 
-const articleResult: Result<Array<ArticleClassify>> = await queryArticleClassify();
-const classifies: Array<ArticleClassify> = articleResult.data || [];
+const articleResult: Result<Array<ArticleClassify>> =
+  await queryArticleClassify()
+const classifies: Array<ArticleClassify> = articleResult.data || []
 </script>
 
 <style scoped></style>

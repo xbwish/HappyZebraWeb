@@ -3,12 +3,15 @@
     <section>
       <CoreshopTitle :title="$t('我的积分')"></CoreshopTitle>
       <div class="integral-box">
-        <p class="cs-font-size-14">{{ $t("可用") }}{{ $t(getConfig.pointShowName) }}</p>
+        <p class="cs-font-size-14">
+          {{ $t("可用") }}{{ $t(getConfig.pointShowName) }}
+        </p>
         <p class="cs-p-5 integral">
           {{ pointData.balance }}
         </p>
         <p class="cs-font-size-14">
-          {{ $t("截止") }} {{ timeFormat(Math.round(new Date().getTime() / 1000)) }}
+          {{ $t("截止") }}
+          {{ timeFormat(Math.round(new Date().getTime() / 1000)) }}
           {{ $t("可用") }} {{ $t(getConfig.pointShowName) }}
         </p>
       </div>
@@ -19,39 +22,48 @@
             <p class="cs-color-gray">{{ $t(item.remarks) }}</p>
           </div>
           <div class="">
-            <p class="cs-font-size-14 cs-color-red cs-p-b-5">{{ item.num > 0 ? "+" + item.num : item.num }}</p>
-            <p class="cs-color-gray">{{ timeFormat(item.createTime, "yyyy.mm.dd") }}</p>
+            <p class="cs-font-size-14 cs-color-red cs-p-b-5">
+              {{ item.num > 0 ? "+" + item.num : item.num }}
+            </p>
+            <p class="cs-color-gray">
+              {{ timeFormat(item.createTime, "yyyy.mm.dd") }}
+            </p>
           </div>
         </li>
       </ul>
-      <p class="no-more" v-if="pointData.list.length > 0 && !pointData.haveData">{{$t('没有更多了')}}</p>
+      <p
+        class="no-more"
+        v-if="pointData.list.length > 0 && !pointData.haveData"
+      >
+        {{ $t("没有更多了") }}
+      </p>
       <CoreshopLoading v-if="pointData.isLoading" />
     </section>
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-import { UnwrapRef } from "vue";
-import { useConfigStore } from "@/store";
-import { queryPointLog } from "@/composables/member";
-import { Result } from "@/model/result";
-import { PointLog } from "@/model/member";
-import { Config } from "@/model/config";
+import type { UnwrapRef } from "vue"
+import { useConfigStore } from "@/store"
+import { queryPointLog } from "@/composables/member"
+import type { Result } from "@/model/result"
+import { PointLog } from "@/model/member"
+import { Config } from "@/model/config"
 
 definePageMeta({
   layout: false,
-});
+})
 
-const getConfig: Config = useConfigStore().getConfig;
+const getConfig: Config = useConfigStore().getConfig
 
 const pointData: UnwrapRef<{
-  limit: number;
-  page: number;
-  list: Array<PointLog>;
-  balance: number;
-  totalPages: number;
-  haveData: boolean;
-  isLoading: boolean;
+  limit: number
+  page: number
+  list: Array<PointLog>
+  balance: number
+  totalPages: number
+  haveData: boolean
+  isLoading: boolean
 }> = reactive({
   limit: 10,
   page: 1,
@@ -60,51 +72,52 @@ const pointData: UnwrapRef<{
   totalPages: 0,
   haveData: true,
   isLoading: false,
-});
+})
 
 const query = async () => {
-  pointData.isLoading = true;
+  pointData.isLoading = true
 
   const getPointLog: Result<Array<PointLog>> = await queryPointLog({
     limit: pointData.limit,
     page: pointData.page,
-  });
+  })
   if (pointData.page === 1) {
-    pointData.balance = getPointLog.data[0]?.balance || 0;
+    pointData.balance = getPointLog.data[0]?.balance || 0
   }
 
-  pointData.totalPages = getPointLog.otherData.totalPages;
+  pointData.totalPages = getPointLog.otherData.totalPages
 
   if (getPointLog.data.length > 0) {
-    pointData.list = pointData.list.concat(getPointLog.data || []);
+    pointData.list = pointData.list.concat(getPointLog.data || [])
   } else {
-    pointData.haveData = false;
+    pointData.haveData = false
   }
-  pointData.isLoading = false;
-};
-query();
+  pointData.isLoading = false
+}
+query()
 
 onMounted(() => {
   window.addEventListener(
     "scroll",
     throttle(() => {
-      const scrollH = document.documentElement.scrollHeight; // 文档的完整高度
-      const scrollT = document.documentElement.scrollTop || document.body.scrollTop; // 当前滚动条的垂直偏移
-      const screenH = window.screen.height; // 屏幕可视高度
+      const scrollH = document.documentElement.scrollHeight // 文档的完整高度
+      const scrollT =
+        document.documentElement.scrollTop || document.body.scrollTop // 当前滚动条的垂直偏移
+      const screenH = window.screen.height // 屏幕可视高度
       if (scrollH - scrollT - screenH < 60 && pointData.haveData) {
-        pointData.page++;
-        query();
+        pointData.page++
+        query()
       }
     }, 500)
-  );
-});
+  )
+})
 </script>
 
 <style lang="scss" scoped>
 .integral-box {
   position: relative;
   padding: 0.7rem 0.5rem;
-  background-color: #D33123;
+  background-color: #d33123;
   margin: 10px;
   border-radius: 8px;
   color: #fff;

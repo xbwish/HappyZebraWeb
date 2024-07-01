@@ -80,7 +80,7 @@
 <script setup lang="ts">
 import { NImage } from "naive-ui";
 import { NavLinkTypeEnum } from "@/enum";
-import { GoodConfig } from '@/model/home-config';
+import type { GoodConfig } from '@/model/home-config';
 import { useConfigStore } from "@/store";
 
 const state = useConfigStore().getConfig;

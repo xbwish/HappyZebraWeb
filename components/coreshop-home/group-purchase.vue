@@ -54,7 +54,8 @@
 </template>
 
 <script setup lang="ts">
-import { CountdownProps, NImage,NCountdown } from 'naive-ui';
+import type { CountdownProps } from 'naive-ui';
+import { NImage, NCountdown } from 'naive-ui';
 import { NavLinkTypeEnum } from '@/enum';
   
 interface GroupPurchase{

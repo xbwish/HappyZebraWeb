@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build --mode pro",
-    "dev": " cross-env PORT=3000 nuxt dev --mode dev",
+    "dev": " cross-env PORT=3000 nuxt dev --mode dev --host",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
