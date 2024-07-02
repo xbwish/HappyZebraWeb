@@ -5,6 +5,7 @@ import { fileURLToPath } from "url"
 import VueI18nVitePlugin from "@intlify/unplugin-vue-i18n/vite"
 interface VITE_ENV_CONFIG {
   VITE_API_HOST: string
+  [key: string]: string
 }
 
 const envScript = process.env.npm_lifecycle_script?.split(" ")
@@ -51,6 +52,7 @@ export default defineNuxtConfig({
             "vueuc",
             "@css-render/vue3-ssr",
             "@juggle/resize-observer",
+            "vue-i18n",
           ]
         : ["@juggle/resize-observer"],
   },
@@ -71,7 +73,7 @@ export default defineNuxtConfig({
       include:
         process.env.NODE_ENV === "development"
           ? ["naive-ui", "vueuc", "date-fns-tz"]
-          : [],
+          : ["vue-i18n"],
     },
     server: {},
     envDir: "~/env",

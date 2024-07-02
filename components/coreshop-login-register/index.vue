@@ -78,6 +78,7 @@ import {
   queryGetLineToken,
   queryGetLineProfile,
   queryLineLogin,
+  queryFacebookLogin,
 } from "@/composables/smsService"
 import type { CountdownProps } from "naive-ui"
 import type { CountdownInst } from "naive-ui"
@@ -88,7 +89,7 @@ import { showToast, Image, Field, CountDown, showLoadingToast } from "vant"
 import { btnSize } from "@/enum"
 import { invitecode } from "@/consts"
 
-const rotue = useRoute()
+const route = useRoute()
 
 const props = withDefaults(
   defineProps<{
@@ -112,8 +113,8 @@ const loginState = reactive<ILogin>({
   platform: 1,
 })
 
-if (rotue.query.sessionAuthId) {
-  loginState["sessionAuthId"] = rotue.query?.sessionAuthId as string
+if (route.query.sessionAuthId) {
+  loginState["sessionAuthId"] = route.query?.sessionAuthId as string
 }
 
 const renderCountdown: CountdownProps["render"] = ({ seconds }) => {
@@ -130,7 +131,7 @@ const lineCallbackLogin = async () => {
   })
   const { data: tokenInfo } = await queryGetLineToken({
     grant_type: "authorization_code", // 固定值
-    code: rotue.query.code as string, // 从 LINE 平台收到的授权码
+    code: route.query.code as string, // 从 LINE 平台收到的授权码
     client_id: "2004706479",
     client_secret: "ca01e5ba49b52750c49adaca1edc9c51",
     redirect_uri: location.origin + "/login", // 与授权请求redirect_uri中指定的值相同
@@ -149,9 +150,10 @@ const lineCallbackLogin = async () => {
     platform: 4,
     invitecode: useCookie(invitecode).value || undefined,
   }
+
   try {
     const loginResult: Result<any> = await queryLineLogin(data)
-    if (!loginResult.status || !loginResult.data?.success) {
+    if (!loginResult.status) {
       loading && loading.close()
       showToast(loginResult.msg || "网络异常，登录失败")
       return
@@ -159,7 +161,7 @@ const lineCallbackLogin = async () => {
     loading && loading.close()
     accountStore.setAccountInfo(loginResult.data)
     return navigateTo(
-      rotue.query?.backUrl ? (rotue.query.backUrl as string) : "/"
+      route.query?.backUrl ? (route.query.backUrl as string) : "/"
     )
   } catch (error) {
     showToast("登录失败，请稍后重试")
@@ -168,9 +170,50 @@ const lineCallbackLogin = async () => {
   }
 }
 
+const facebookCallbackLogin = async () => {
+  const loading = showLoadingToast({
+    message: "加载中...",
+    forbidClick: true,
+    loadingType: "spinner",
+    overlay: true,
+    duration: 0,
+  })
+  try {
+    const { id, name, avatar } = route.query
+    let data: any = {
+      nickname: name,
+      sessionAuthId: id,
+      avatar,
+      platform: 6,
+      invitecode: useCookie(invitecode).value || undefined,
+    }
+    console.log("data: ", data)
+    const loginResult: Result<any> = await queryFacebookLogin(data)
+    console.log("loginResult: ", loginResult)
+    if (!loginResult.status) {
+      loading && loading.close()
+      showToast(loginResult.msg || "网络异常，登录失败")
+      return
+    }
+    loading && loading.close()
+    accountStore.setAccountInfo(loginResult.data)
+    console.log("navigateTo: ", route.query)
+    return navigateTo(
+      route.query.backUrl ? (route.query.backUrl as string) : "/"
+    )
+  } catch (error) {
+    showToast("登录失败，请稍后重试")
+    loading && loading.close()
+    console.error("fb登录失败", error)
+  }
+}
+
 onMounted(() => {
-  if (rotue.query.code && rotue.query.state) {
+  if (route.query.code && route.query.state) {
     lineCallbackLogin()
+  }
+  if (route.query.source === "fb") {
+    facebookCallbackLogin()
   }
 })
 
@@ -191,7 +234,7 @@ const handleSendCode = async () => {
     showToast("请输入手机号码")
     return
   }
-  /* 
+  /*
 	if (!mobileReg.test(`${mobile.value}`)) {
 		showToast("请输入正确手机号码");
 		return;
@@ -239,7 +282,7 @@ const handleLogin = async () => {
   }
   accountStore.setAccountInfo(loginResult.data)
   return navigateTo(
-    rotue.query?.backUrl ? (rotue.query.backUrl as string) : "/"
+    route.query?.backUrl ? (route.query.backUrl as string) : "/"
   )
 }
 </script>

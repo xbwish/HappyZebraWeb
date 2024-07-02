@@ -1,5 +1,3 @@
-import { Plugin } from "@nuxt/types"
-
 declare global {
   interface Window {
     fbAsyncInit: () => void
@@ -7,18 +5,17 @@ declare global {
   }
 }
 
-const facebookSDKPlugin: Plugin = (context, inject) => {
-  console.log("inject: ", inject)
+export default defineNuxtPlugin((nuxtApp) => {
   if (process.client) {
     window.fbAsyncInit = function () {
       window.FB.init({
         appId: "1104419370665861",
-        cookie: true, // Enable cookies to allow the server to access the session.
-        xfbml: true, // Parse social plugins on this webpage.
-        version: "v20.0", // Use this Graph API version for this call.
+        cookie: true,
+        xfbml: true,
+        version: "v20.0",
       })
 
-      inject?.("FB", window.FB)
+      nuxtApp.provide("FB", window.FB)
     }
 
     const script = document.createElement("script")
@@ -27,6 +24,31 @@ const facebookSDKPlugin: Plugin = (context, inject) => {
     script.defer = true
     document.head.appendChild(script)
   }
-}
+})
 
-export default facebookSDKPlugin
+// import type { Plugin } from "@nuxt/types"
+
+// const facebookSDKPlugin: Plugin = (context, inject) => {
+//   console.log("context: ", context)
+//   console.log("inject: ", inject)
+//   if (process.client) {
+//     window.fbAsyncInit = function () {
+//       window.FB.init({
+//         appId: "1104419370665861",
+//         cookie: true, // Enable cookies to allow the server to access the session.
+//         xfbml: true, // Parse social plugins on this webpage.
+//         version: "v20.0", // Use this Graph API version for this call.
+//       })
+
+//       inject("FB", window.FB)
+//     }
+
+//     const script = document.createElement("script")
+//     script.src = "https://connect.facebook.net/en_US/sdk.js"
+//     script.async = true
+//     script.defer = true
+//     document.head.appendChild(script)
+//   }
+// }
+
+// export default facebookSDKPlugin

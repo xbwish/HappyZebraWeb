@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { IAuth } from '@/model/login';
+import type { IAuth } from '@/model/login';
 import { coreShopAuthCookie } from '@/consts'
 
 export const useAccountStore = defineStore('accountInfoStore', {

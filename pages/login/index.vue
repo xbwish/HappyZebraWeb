@@ -13,7 +13,9 @@
                   alt=""
                 />
               </li>
-              <li class="other-login-item" @click="handleToFacebookLogin"><img src="/images/login/facebook_icon.png" alt=""></li>
+              <li class="other-login-item" @click="handleToFacebookLogin">
+                <img src="/images/login/facebook_icon.png" alt="" />
+              </li>
             </ul>
           </div>
         </CoreshopLoginRegister>
@@ -24,6 +26,8 @@
 </template>
 
 <script setup lang="ts">
+const route = useRoute()
+
 definePageMeta({
   layout: false,
 })
@@ -43,6 +47,7 @@ function objectToQuery(obj: any) {
 const handleToLineLogin = () => {
   const line_auth = "https://access.line.me/oauth2/v2.1/authorize"
   const auth_params = {
+    backUrl: route.query.backUrl || '/',
     response_type: "code",
     client_id: "2004706479",
     redirect_uri: location.origin + "/login", // 在LINE Developers Console上注册的回调 URL 的 URL 编码字符串。您可以添加任何查询参数。
@@ -55,11 +60,22 @@ const handleToLineLogin = () => {
 }
 
 const handleToFacebookLogin = () => {
+  const { backUrl } = route.query
   window.FB.login((response: any) => {
     if (response.authResponse) {
       console.log("Welcome! Fetching your information.... ")
-      window.FB.api("/me", (response: any) => {
-        console.log("Good to see you, " + response)
+      window.FB.api("/me", { fields: "id,name,picture" }, (response: any) => {
+        console.log("Good to see you ", response)
+        const { id, name, picture } = response
+        const avatar = (picture as any)?.data?.url || ""
+        const paramsString = objectToQuery({
+          id,
+          name,
+          avatar,
+          source: "fb",
+          backUrl,
+        })
+        window.location.href = `/login?${paramsString}`
       })
     } else {
       console.log("User cancelled login or did not fully authorize.")
