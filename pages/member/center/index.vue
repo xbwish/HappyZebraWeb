@@ -463,6 +463,7 @@ const userData: UnwrapRef<{
 const memberStore = useMemberStore()
 const config = useConfigStore().getConfig
 const accountStore = useAccountStore()
+console.log("accountStore: ", accountStore.auth)
 
 usePageConfig().set_show_back(false)
 

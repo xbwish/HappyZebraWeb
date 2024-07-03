@@ -28,6 +28,37 @@ export const queryGetLineToken = (params: IGetLineTokenReq) =>
     },
   })
 
+export const fetchLineToken = async (
+  params: IGetLineTokenReq
+): Promise<any> => {
+  // 将参数转换为URLSearchParams
+  const body = new URLSearchParams(params)
+
+  try {
+    // 发起POST请求
+    const response = await fetch("https://api.line.me/oauth2/v2.1/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: body.toString(),
+    })
+
+    // 检查响应是否成功
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`)
+    }
+
+    // 将响应解析为JSON
+    const data = await response.json()
+    return data
+  } catch (error) {
+    // 捕获并处理错误
+    console.error("There has been a problem with your fetch operation:", error)
+    throw error
+  }
+}
+
 /** LINE 获取用户信息 */
 export const queryGetLineUserInfo = (headers: { [key: string]: string }) =>
   useFetch("https://api.line.me/oauth2/v2.1/userinfo", {

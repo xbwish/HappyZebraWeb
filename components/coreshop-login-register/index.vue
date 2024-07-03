@@ -76,6 +76,7 @@ import {
   sendSmsCode,
   smsCodeLogin,
   queryGetLineToken,
+  fetchLineToken,
   queryGetLineProfile,
   queryLineLogin,
   queryFacebookLogin,
@@ -129,6 +130,19 @@ const lineCallbackLogin = async () => {
     overlay: true,
     duration: 0,
   })
+
+  try {
+    const { data: tokenInfo } = await queryGetLineToken({
+      grant_type: "authorization_code", // 固定值
+      code: route.query.code as string, // 从 LINE 平台收到的授权码
+      client_id: "2004706479",
+      client_secret: "ca01e5ba49b52750c49adaca1edc9c51",
+      redirect_uri: location.origin + "/login", // 与授权请求redirect_uri中指定的值相同
+    })
+  } catch (error) {
+    console.error("get token error: ", error)
+  }
+
   const { data: tokenInfo } = await queryGetLineToken({
     grant_type: "authorization_code", // 固定值
     code: route.query.code as string, // 从 LINE 平台收到的授权码
