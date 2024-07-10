@@ -1,4 +1,4 @@
-import { Config } from '@/model/config';
+import type { Config } from '@/model/config';
 import { defineStore } from 'pinia';
 import { coreshopNT, coreshopZH, coreshopLanguage, coreshopSystemConfig } from '@/consts';
 import { setSessionStorage } from '@/utils';

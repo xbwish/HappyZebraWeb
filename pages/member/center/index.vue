@@ -302,6 +302,8 @@ import CoreshopIconHelpCenter from "@/components/coreshop-icon/helpCenter.vue"
 import CoreshopIconInviteFriends from "@/components/coreshop-icon/inviteFriends.vue"
 import CoreshopIconSearch from "@/components/coreshop-icon/search.vue"
 import CoreshopIconSystemSetting from "@/components/coreshop-icon/systemSetting.vue"
+import CoreshopIconTermsOfService from "@/components/coreshop-icon/TermsOfService.vue"
+import CoreshopIconPrivacyPolicy from "@/components/coreshop-icon/PrivacyPolicy.vue"
 import { PullRefresh, Badge } from "vant"
 import { redirectLogin } from "@/utils"
 import { coreshopLanguage } from "~/consts"
@@ -433,6 +435,16 @@ const othenService = [
     title: coreShopLang("系统设置"),
     link: "/member/setting",
     icon: CoreshopIconSystemSetting,
+  },
+  {
+    title: coreShopLang("服务条款"),
+    link: "/agreement",
+    icon: CoreshopIconTermsOfService,
+  },
+  {
+    title: coreShopLang("隐私政策"),
+    link: "/privacyPolicy",
+    icon: CoreshopIconPrivacyPolicy,
   },
 ]
 

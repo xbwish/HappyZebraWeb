@@ -13,6 +13,7 @@
 <script setup lang="ts">
 import { queryPageConfig } from "@/composables/config"
 import { PullRefresh } from "vant"
+import { sleep } from "@/utils/common"
 
 definePageMeta({ layout: false })
 const state = reactive<{
@@ -27,6 +28,7 @@ const state = reactive<{
 
 const getPageConfig = async () => {
   state.loading = true
+  await sleep(50)
   state.pageConfig = await queryPageConfig("mobile_home")
   state.loading = false
 }

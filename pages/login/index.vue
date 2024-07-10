@@ -21,6 +21,10 @@
         </CoreshopLoginRegister>
       </div>
       <!-- <div class="shop-desc">{{$t('快乐搬馬管理专家')}}</div> -->
+      <div class="shop-desc">
+        <a href="/agreement">{{ $t("服务条款") }}</a>
+        <a href="/privacyPolicy">{{ $t("隐私政策") }}</a>
+      </div>
     </div>
   </NuxtLayout>
 </template>
@@ -47,7 +51,7 @@ function objectToQuery(obj: any) {
 const handleToLineLogin = () => {
   const line_auth = "https://access.line.me/oauth2/v2.1/authorize"
   const auth_params = {
-    backUrl: route.query.backUrl || '/',
+    backUrl: route.query.backUrl || "/",
     response_type: "code",
     client_id: "2004706479",
     redirect_uri: location.origin + "/login", // 在LINE Developers Console上注册的回调 URL 的 URL 编码字符串。您可以添加任何查询参数。
@@ -103,6 +107,12 @@ const handleToFacebookLogin = () => {
   position: fixed;
   bottom: 20px;
   width: 100%;
+  a {
+    color: #000;
+  }
+  a:first-child {
+    margin-right: 12px;
+  }
 }
 .other-login {
   margin-top: 46px;
