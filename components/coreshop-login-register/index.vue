@@ -78,12 +78,12 @@ import {
   queryGetLineToken,
   fetchLineToken,
   queryGetLineProfile,
-  queryLineLogin,
+  goLogin,
   queryFacebookLogin,
 } from "@/composables/smsService"
 import type { CountdownProps } from "naive-ui"
 import type { CountdownInst } from "naive-ui"
-import type { ILogin, IAuth } from "@/model/login"
+import type { ILogin, IAuth, TkUserInfo } from "@/model/login"
 import type { Result } from "@/model/result"
 import { useAccountStore } from "@/store"
 import { showToast, Image, Field, CountDown, showLoadingToast } from "vant"
@@ -166,7 +166,7 @@ const lineCallbackLogin = async () => {
   }
 
   try {
-    const loginResult: Result<any> = await queryLineLogin(data)
+    const loginResult: Result<any> = await goLogin(data)
     if (!loginResult.status) {
       loading && loading.close()
       showToast(loginResult.msg || "网络异常，登录失败")
@@ -222,11 +222,68 @@ const facebookCallbackLogin = async () => {
   }
 }
 
-onMounted(() => {
-  if (route.query.code && route.query.state) {
-    lineCallbackLogin()
+const getTkUserInfo = async (): Promise<TkUserInfo> => {
+  const d =
+    "9o9hZNVjJDdc7Eh04HXZfoZz-SPSyuVw5B2w6SaxZ6hyZX8b1NV0b1oPZBPyPlCVv3TYWitjiELqQqZMXmklMW6rvlzF_DSQ-7T6NV-gErMrZLC3y-cuaTdaYRW6mBxu5fLcl755ckGi9kBV4nvR2qnfXP1YhpaEpZPi-ZIu3WeV5aGoju51PY535Y9gP6O2*0!6454.u1"
+
+  const { code = d } = route.query
+  const invitecode = useCookie("invitecode").value || undefined
+  const url = `api/User/TikeTokLogin?code=${code}&invitecode=${invitecode}`
+  const { data, error } = await useFetch(url)
+
+  if (error.value) {
+    throw new Error(error.value.message)
   }
-  if (route.query.source === "fb") {
+
+  return data.value as TkUserInfo
+}
+
+const tiktokCallbackLogin = async () => {
+  const loading = showLoadingToast({
+    message: "加载中...",
+    forbidClick: true,
+    loadingType: "spinner",
+    overlay: true,
+    duration: 0,
+  })
+
+  const backUrl = (route.query.state as string).split(",").at(-1)
+  const userInfo = await getTkUserInfo()
+  const { id, name, avatar } = userInfo
+
+  try {
+    let data: any = {
+      nickname: name,
+      sessionAuthId: id,
+      avatar,
+      platform: 5,
+      invitecode: useCookie(invitecode).value || undefined,
+    }
+    console.log("data: ", data)
+    const loginResult: Result<any> = await goLogin(data)
+    console.log("loginResult: ", loginResult)
+    if (!loginResult.status) {
+      loading && loading.close()
+      showToast(loginResult.msg || "网络异常，登录失败")
+      return
+    }
+    loading && loading.close()
+    accountStore.setAccountInfo(loginResult.data)
+    return navigateTo(backUrl)
+  } catch (error) {
+    showToast("登录失败，请稍后重试")
+    loading && loading.close()
+    console.error("tk登录失败", error)
+  }
+}
+
+onMounted(() => {
+  const { state } = route.query
+  if (state && (state as string).startsWith("tk")) {
+    tiktokCallbackLogin()
+  } else if (route.query.code && route.query.state) {
+    lineCallbackLogin()
+  } else if (route.query.source === "fb") {
     facebookCallbackLogin()
   }
 })

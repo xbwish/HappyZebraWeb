@@ -74,7 +74,7 @@ export const queryGetLineProfile = (headers: { [key: string]: string }) =>
   })
 
 /** 授权后，Line登录 */
-export const queryLineLogin = (params: ILineLoginReq) =>
+export const goLogin = (params: ILineLoginReq) =>
   post("api/User/LineLogin", params)
 
 export const myPost = async (

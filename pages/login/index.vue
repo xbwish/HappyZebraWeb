@@ -16,6 +16,9 @@
               <li class="other-login-item" @click="handleToFacebookLogin">
                 <img src="/images/login/facebook_icon.png" alt="" />
               </li>
+              <li class="other-login-item" @click="handleToTikTokLogin">
+                <img :src="tkLogo" alt="" />
+              </li>
             </ul>
           </div>
         </CoreshopLoginRegister>
@@ -30,6 +33,8 @@
 </template>
 
 <script setup lang="ts">
+import tkLogo from "@/assets/img/tk_logo.png"
+
 const route = useRoute()
 
 definePageMeta({
@@ -85,6 +90,24 @@ const handleToFacebookLogin = () => {
       console.log("User cancelled login or did not fully authorize.")
     }
   })
+}
+
+const handleToTikTokLogin = async () => {
+  const csrfState = Math.random().toString(36).substring(2)
+  document.cookie = `csrfState=${csrfState}; max-age=60000`
+  const CLIENT_KEY = "awj8nesc3fusnahx"
+  const REDIRECT_URI = "https://h5.happyzebra.com.tw/login/"
+  const tkAuth = "https://www.tiktok.com/v2/auth/authorize/"
+  const source = "tk"
+  const { backUrl } = route.query
+  const authParams = new URLSearchParams({
+    client_key: CLIENT_KEY,
+    scope: "user.info.basic",
+    response_type: "code",
+    redirect_uri: REDIRECT_URI,
+    state: [source, backUrl || "/"].join(),
+  })
+  window.location.href = `${tkAuth}?${authParams.toString()}`
 }
 </script>
 
