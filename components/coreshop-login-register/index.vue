@@ -80,6 +80,7 @@ import {
   queryGetLineProfile,
   goLogin,
   queryFacebookLogin,
+  tkLogin,
 } from "@/composables/smsService"
 import type { CountdownProps } from "naive-ui"
 import type { CountdownInst } from "naive-ui"
@@ -223,13 +224,11 @@ const facebookCallbackLogin = async () => {
 }
 
 const getTkUserInfo = async (): Promise<TkUserInfo> => {
-  const d =
-    "9o9hZNVjJDdc7Eh04HXZfoZz-SPSyuVw5B2w6SaxZ6hyZX8b1NV0b1oPZBPyPlCVv3TYWitjiELqQqZMXmklMW6rvlzF_DSQ-7T6NV-gErMrZLC3y-cuaTdaYRW6mBxu5fLcl755ckGi9kBV4nvR2qnfXP1YhpaEpZPi-ZIu3WeV5aGoju51PY535Y9gP6O2*0!6454.u1"
-
-  const { code = d } = route.query
+  const { code } = route.query
   const invitecode = useCookie("invitecode").value || undefined
-  const url = `api/User/TikeTokLogin?code=${code}&invitecode=${invitecode}`
-  const { data, error } = await useFetch(url)
+  // const url = `api/User/TikeTokLogin?code=${code}&invitecode=${invitecode}`
+  const { data, error } = await tkLogin({ code, invitecode })
+  console.log("data: ", data)
 
   if (error.value) {
     throw new Error(error.value.message)
@@ -239,6 +238,7 @@ const getTkUserInfo = async (): Promise<TkUserInfo> => {
 }
 
 const tiktokCallbackLogin = async () => {
+  console.log("tiktokCallbackLogin: ")
   const loading = showLoadingToast({
     message: "加载中...",
     forbidClick: true,
@@ -249,6 +249,7 @@ const tiktokCallbackLogin = async () => {
 
   const backUrl = (route.query.state as string).split(",").at(-1)
   const userInfo = await getTkUserInfo()
+  console.log("userInfo: ", userInfo)
   const { id, name, avatar } = userInfo
 
   try {

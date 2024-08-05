@@ -108,3 +108,10 @@ export const myPost = async (
 // 使用封装的 POST 方法进行登录请求
 export const queryFacebookLogin = (params: ILineLoginReq) =>
   myPost("https://api.happyzebra.com.tw/api/User/LineLogin", params)
+
+type TkLoginReq = {
+  [key: string]: any
+}
+
+export const tkLogin = (params: TkLoginReq) =>
+  post("api/User/TikeTokLogin", params)
