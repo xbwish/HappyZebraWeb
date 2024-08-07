@@ -223,22 +223,7 @@ const facebookCallbackLogin = async () => {
   }
 }
 
-const getTkUserInfo = async (): Promise<TkUserInfo> => {
-  const { code } = route.query
-  const invitecode = useCookie("invitecode").value || undefined
-  // const url = `api/User/TikeTokLogin?code=${code}&invitecode=${invitecode}`
-  const { data, error } = await tkLogin({ code, invitecode })
-  console.log("data: ", data)
-
-  if (error.value) {
-    throw new Error(error.value.message)
-  }
-
-  return data.value as TkUserInfo
-}
-
 const tiktokCallbackLogin = async () => {
-  console.log("tiktokCallbackLogin: ")
   const loading = showLoadingToast({
     message: "加载中...",
     forbidClick: true,
@@ -247,21 +232,12 @@ const tiktokCallbackLogin = async () => {
     duration: 0,
   })
 
-  const backUrl = (route.query.state as string).split(",").at(-1)
-  const userInfo = await getTkUserInfo()
-  console.log("userInfo: ", userInfo)
-  const { id, name, avatar } = userInfo
-
   try {
-    let data: any = {
-      nickname: name,
-      sessionAuthId: id,
-      avatar,
-      platform: 5,
+    const payload = {
+      code: route.query.code,
       invitecode: useCookie(invitecode).value || undefined,
     }
-    console.log("data: ", data)
-    const loginResult: Result<any> = await goLogin(data)
+    const loginResult: Result<any> = await tkLogin(payload)
     console.log("loginResult: ", loginResult)
     if (!loginResult.status) {
       loading && loading.close()
@@ -270,6 +246,7 @@ const tiktokCallbackLogin = async () => {
     }
     loading && loading.close()
     accountStore.setAccountInfo(loginResult.data)
+    const backUrl = (route.query.state as string).split(",").at(-1)
     return navigateTo(backUrl)
   } catch (error) {
     showToast("登录失败，请稍后重试")

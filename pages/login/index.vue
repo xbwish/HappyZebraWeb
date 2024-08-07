@@ -102,7 +102,7 @@ const handleToTikTokLogin = async () => {
   const { backUrl } = route.query
   const authParams = new URLSearchParams({
     client_key: CLIENT_KEY,
-    scope: "user.info.basic",
+    scope: "user.info.basic,user.info.profile",
     response_type: "code",
     redirect_uri: REDIRECT_URI,
     state: [source, backUrl || "/"].join(),

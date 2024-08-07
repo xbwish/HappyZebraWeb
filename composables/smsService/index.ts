@@ -114,4 +114,4 @@ type TkLoginReq = {
 }
 
 export const tkLogin = (params: TkLoginReq) =>
-  post("api/User/TikeTokLogin", params)
+  myPost("https://api.happyzebra.com.tw/api/User/TikeTokLogin", params)
